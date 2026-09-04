@@ -75,7 +75,7 @@ Security Warning: Open only after verifying tamper seal.
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-md p-0 sm:p-4">
-      <div className="w-full max-w-lg bg-stone-900 border border-amber-500/40 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+      <div className="w-full max-w-lg rg-sheet border border-amber-500/40 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
         
         {/* Top Header */}
         <div className="bg-gradient-to-r from-stone-950 via-amber-950/40 to-stone-950 px-5 py-5 border-b border-stone-800 flex items-center justify-between text-center relative overflow-hidden">
@@ -125,7 +125,7 @@ Security Warning: Open only after verifying tamper seal.
           </div>
 
           {/* Doorstep Concierge Live Tracking Status */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-3">
+          <div className="rg-sheet border border-stone-800 rounded-2xl p-4 space-y-3">
             <div className="flex items-center justify-between">
               <span className="font-bold text-stone-200 text-xs flex items-center gap-1.5 uppercase tracking-wider">
                 <Truck className="w-4 h-4 text-amber-400" />
@@ -171,7 +171,7 @@ Security Warning: Open only after verifying tamper seal.
           </div>
 
           {/* Items Summary in this Booking */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2.5">
+          <div className="rg-sheet border border-stone-800 rounded-2xl p-4 space-y-2.5">
             <span className="font-bold text-stone-300 text-xs uppercase tracking-wider block">
               Items in Package ({order.items.reduce((sum, i) => sum + i.quantity, 0)})
             </span>
@@ -193,7 +193,7 @@ Security Warning: Open only after verifying tamper seal.
           </div>
 
           {/* Payment & Deductions Breakdown */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2">
+          <div className="rg-sheet border border-stone-800 rounded-2xl p-4 space-y-2">
             <span className="font-bold text-stone-400 text-[10.5px] uppercase tracking-wider block">
               PAYMENT BREAKDOWN
             </span>
@@ -218,7 +218,7 @@ Security Warning: Open only after verifying tamper seal.
           </div>
 
           {/* Delivery Address */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-3.5 flex items-center gap-2.5 text-stone-300">
+          <div className="rg-sheet border border-stone-800 rounded-2xl p-3.5 flex items-center gap-2.5 text-stone-300">
             <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
             <div className="text-[11px] leading-snug">
               <strong className="text-stone-200 block">Delivery Address:</strong>
@@ -232,7 +232,7 @@ Security Warning: Open only after verifying tamper seal.
         <div className="bg-stone-950 px-5 py-4 border-t border-stone-800 grid grid-cols-2 gap-2">
           <button
             onClick={handleDownloadInvoice}
-            className="bg-stone-900 hover:bg-stone-800 text-stone-200 font-bold text-xs py-3 rounded-xl border border-stone-700 flex items-center justify-center gap-1.5 transition-all"
+            className="rg-sheet hover:bg-stone-800 text-stone-200 font-bold text-xs py-3 rounded-xl border border-stone-700 flex items-center justify-center gap-1.5 transition-all"
           >
             <Download className="w-3.5 h-3.5 text-amber-400" />
             <span>Tax Invoice</span>

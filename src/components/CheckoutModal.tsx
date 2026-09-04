@@ -119,10 +119,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-lg bg-stone-900 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+      <div className="w-full max-w-lg rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
-        <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-glass px-5 py-4 border-b border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center font-bold">
               <ShieldCheck className="w-5 h-5" />
@@ -141,10 +141,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-stone-950/60 text-xs">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 rg-page text-xs">
           
           {/* Order Items Breakdown */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-3.5 space-y-2.5">
+          <div className="rg-surface rounded-2xl p-3.5 space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="font-bold text-stone-300 text-xs flex items-center gap-1.5 uppercase tracking-wider">
                 <ShoppingBag className="w-3.5 h-3.5 text-amber-400" />
@@ -277,7 +277,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           </div>
 
           {/* Delivery Address */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2">
+          <div className="rg-surface rounded-2xl p-4 space-y-2">
             <div className="flex items-center justify-between">
               <span className="font-bold text-stone-300 text-xs flex items-center gap-1.5 uppercase tracking-wider">
                 <MapPin className="w-3.5 h-3.5 text-amber-400" />
@@ -386,7 +386,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           </div>
 
           {/* Detailed Price & Deductions Breakdown */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2.5">
+          <div className="rg-surface rounded-2xl p-4 space-y-2.5">
             <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block">
               BILL SUMMARY
             </span>

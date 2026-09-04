@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - premium-rebuild
+      - main
   pull_request:
     branches:
       - premium-rebuild

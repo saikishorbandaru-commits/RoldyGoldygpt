@@ -17,7 +17,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
     const t2 = setTimeout(() => setStage(2), 800);
     // Stage 2: Subtitle & heritage badge
     const t3 = setTimeout(() => setStage(3), 1400);
-    // Stage 3: Smooth fade-out and transition into home
+    // Stage 3: Smooth fade-out and transition into the mandatory app-features tour
     const t4 = setTimeout(() => {
       setIsFadingOut(true);
       setTimeout(onComplete, 500);
@@ -123,7 +123,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           />
         </div>
         <p className="text-[11px] text-stone-400">
-          Opening your jewellery experience...
+          Preparing your RoldyGoldy experience...
         </p>
       </div>
     </div>

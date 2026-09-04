@@ -143,21 +143,17 @@ export const BargainModal: React.FC<BargainModalProps> = ({
         setBidAmount(safeCounter);
       }
     } catch (err: any) {
-      console.warn('Bargain fallback negotiation engaged:', err?.message || err);
-      // Smart offline fallback
-      const counter = Math.min(product.price, Math.max(Math.round(product.price * 0.82), bidAmount));
-      const fallbackMsg: BargainMessage = {
+      console.warn('Bargain service unavailable:', err?.message || err);
+      // Never fabricate a successful jeweller negotiation when the live service fails.
+      const retryMsg: BargainMessage = {
         id: `jwl-${Date.now()}`,
         sender: 'jeweller',
-        text: `You have an eye for fine craftsmanship! I can offer this special festive price of ₹${counter.toLocaleString('en-IN')} with doorstep express handling. Deal locked!`,
+        text: 'Our jeweller is temporarily unavailable. Your offer has not been accepted or locked. Please try again in a moment.',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        proposedPrice: counter,
-        isAccepted: true,
+        proposedPrice: undefined,
+        isAccepted: false,
       };
-      setMessages((prev) => [...prev, fallbackMsg]);
-      setFinalLockedPrice(counter);
-      triggerHaptic('success');
-      setSavingsPercent(Math.round(((product.originalPrice - counter) / product.originalPrice) * 100));
+      setMessages((prev) => [...prev, retryMsg]);
     } finally {
       clearTimeout(timeoutId);
       setIsLoading(false);

@@ -42,19 +42,21 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Prepare Android Gradle wrapper
-        run: |
-          if [ ! -f android/gradlew ]; then
-            npx cap sync android
-          fi
-          test -f android/gradlew
-          chmod +x android/gradlew
-
       - name: Sync Android project
         run: npm run android:sync
 
+      - name: Install Gradle for CI
+        run: |
+          GRADLE_VERSION=8.10.2
+          curl -fsSL "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" -o /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp
+          echo "/tmp/gradle-${GRADLE_VERSION}/bin" >> $GITHUB_PATH
+
       - name: Assemble Android debug APK
-        run: cd android && ./gradlew assembleDebug
+        run: |
+          cd android
+          gradle --version
+          gradle assembleDebug
 
       - name: Upload Android debug APK
         uses: actions/upload-artifact@v4

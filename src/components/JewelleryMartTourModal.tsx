@@ -95,7 +95,7 @@ export const JewelleryMartTourModal: React.FC<JewelleryMartTourModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-md p-0 sm:p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-4xl bg-stone-900 border border-amber-500/40 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col h-[94vh] sm:h-[88vh] overflow-hidden">
+      <div className="w-full max-w-4xl bg-stone-900 border border-amber-500/40 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col h-[94vh] sm:h-[88vh] overflow-hidden">
         
         {/* Top Header */}
         <div className="bg-stone-950 px-5 py-3.5 border-b border-stone-800 flex items-center justify-between z-20">

@@ -5,7 +5,7 @@ workflows:
     max_build_duration: 60
 
     environment:
-      node: 20
+      node: v22.11.0
       java: 17
 
     scripts:

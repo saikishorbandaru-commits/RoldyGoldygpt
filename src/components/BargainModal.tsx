@@ -68,7 +68,6 @@ export const BargainModal: React.FC<BargainModalProps> = ({
     { label: '5% OFF', pct: 0.05, amount: Math.round(product.price * 0.95) },
     { label: '10% OFF', pct: 0.10, amount: Math.round(product.price * 0.90) },
     { label: '15% OFF', pct: 0.15, amount: Math.round(product.price * 0.85) },
-    { label: '20% OFF (Artisan Floor)', pct: 0.20, amount: Math.round(product.price * 0.80) },
   ];
 
   const bargainingTactics = [

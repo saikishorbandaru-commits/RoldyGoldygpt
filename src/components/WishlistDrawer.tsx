@@ -312,7 +312,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
 
         {/* Drawer Footer */}
         {wishlist.length > 0 && (
-          <div className="bg-stone-950 p-4 border-t border-stone-800 space-y-2">
+          <div className="rg-glass p-4 border-t border-stone-800 space-y-2">
             <div className="flex items-center justify-between text-xs text-stone-400">
               <span>{wishlist.length} saved {wishlist.length === 1 ? 'piece' : 'pieces'}</span>
               <span className="font-medium text-stone-500">Choose what you want to buy</span>

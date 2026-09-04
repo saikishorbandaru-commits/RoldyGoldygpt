@@ -154,7 +154,7 @@ export const TrialConciergeModal: React.FC<TrialConciergeModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-lg rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+      <div className="w-full max-w-lg rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
         <div className="rg-glass px-5 py-4 border-b border-stone-800 flex items-center justify-between">
@@ -179,7 +179,7 @@ export const TrialConciergeModal: React.FC<TrialConciergeModalProps> = ({
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-stone-950/60 text-xs">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 rg-page text-xs">
           
           {/* Pincode & Hub Geofencing & Partner Routing Status */}
           <div className={`p-3.5 rounded-2xl border flex items-start gap-3 ${
@@ -212,7 +212,7 @@ export const TrialConciergeModal: React.FC<TrialConciergeModalProps> = ({
           {activeStep === 'schedule' ? (
             <>
               {/* Tryout Pricing Details */}
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2.5">
+              <div className="rg-surface rounded-2xl p-4 space-y-2.5">
                 <div className="flex items-baseline justify-between">
                   <div>
                     <span className="text-stone-300 font-semibold text-xs block">Trial@Home Concierge Fee:</span>

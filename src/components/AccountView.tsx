@@ -28,7 +28,6 @@ import {
   Eye,
   ChevronDown,
   ChevronUp,
-  LogIn,
   LogOut
 } from 'lucide-react';
 import { Order, TrialBooking, ExchangeScrapData, UserProfile } from '../types';
@@ -44,9 +43,7 @@ interface AccountViewProps {
   exchangeSlips: ExchangeScrapData[];
   bargainHistory: { item: string; offer: number; counter: number; date: string }[];
   onOpenLiveScrapUpload?: () => void;
-  onOpenAuth?: () => void;
   onLogout?: () => void;
-  onReplayBanners?: () => void;
 }
 
 const AVATAR_PRESETS = [
@@ -65,9 +62,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
   exchangeSlips,
   bargainHistory,
   onOpenLiveScrapUpload,
-  onOpenAuth,
   onLogout,
-  onReplayBanners,
 }) => {
   const [activeSection, setActiveSection] = useState<'main' | 'profile' | 'orders' | 'trials' | 'exchanges' | 'bargains' | 'policies'>('main');
   const [isEditingProfile, setIsEditingProfile] = useState<boolean>(false);
@@ -244,21 +239,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0 flex-wrap justify-end">
-                  {onOpenAuth && (
-                    <button
-                      onClick={() => {
-                        triggerHaptic('light');
-                        onOpenAuth();
-                      }}
-                      className="bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 px-2.5 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-colors shadow-sm"
-                      title="Customer Sign In / Switch Account"
-                    >
-                      <LogIn className="w-3.5 h-3.5 text-amber-400" />
-                      <span>Sign In</span>
-                    </button>
-                  )}
-                  <button
+                <div className="flex items-center gap-2 shrink-0 flex-wrap justify-end"><button
                     onClick={() => handleNavClick('profile')}
                     className="bg-stone-800 hover:bg-stone-700 text-amber-400 border border-amber-500/30 px-2.5 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-colors shadow-sm"
                   >
@@ -399,25 +380,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                   <span className="font-semibold text-stone-200">Boutique Policies &amp; Trial@Home Terms (Starts ₹49/-)</span>
                 </div>
                 <ChevronRight className="w-4 h-4 text-stone-500" />
-              </div>
-
-              {onReplayBanners && (
-                <div
-                  onClick={() => {
-                    triggerHaptic('light');
-                    onReplayBanners();
-                  }}
-                  className="bg-stone-900/80 border border-stone-800 hover:border-amber-500/40 rounded-2xl p-3.5 cursor-pointer flex items-center justify-between text-xs text-stone-300"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                    <span className="font-semibold text-amber-300">View App Features &amp; Intro Tour</span>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-stone-500" />
-                </div>
-              )}
-
-              {onOpenLiveScrapUpload && (
+              </div>{onOpenLiveScrapUpload && (
                 <div
                   onClick={() => {
                     triggerHaptic('light');

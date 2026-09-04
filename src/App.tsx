@@ -19,7 +19,9 @@ import {
   Clock,
   Layers,
   X,
-  Navigation
+  Navigation,
+  House,
+  Gem
 } from 'lucide-react';
 import { INITIAL_PRODUCTS } from './data/products';
 import { Product, CartItem, ExchangeScrapData, TrialBooking, Order, UserProfile, AdBanner, SellerAdBooking } from './types';
@@ -854,78 +856,26 @@ export default function App() {
           </main>
         )}
 
-        {/* Persistent Bottom 5-Tab Navigation */}
+        {/* Persistent premium app navigation */}
         {!selectedProduct && (
-          <nav className="fixed bottom-0 inset-x-0 z-30 rg-glass rg-bottom-nav border-t border-amber-500/15 max-w-5xl mx-auto flex justify-around py-2 px-2 sm:px-4 shadow-2xl">
-            <button
-              onClick={() => {
-                setSelectedProduct(null);
-                setActiveTab('home');
-              }}
-              className={`flex flex-col items-center gap-1 text-[11px] font-semibold transition-colors ${
-                activeTab === 'home' ? 'text-amber-400 font-bold' : 'text-stone-400 hover:text-stone-200'
-              }`}
-            >
-              <span className="text-base">🏠</span>
-              <span>Home</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedProduct(null);
-                setActiveTab('boutique');
-              }}
-              className={`flex flex-col items-center gap-1 text-[11px] font-semibold transition-colors ${
-                activeTab === 'boutique' ? 'text-amber-400 font-bold' : 'text-stone-400 hover:text-stone-200'
-              }`}
-            >
-              <span className="text-base">💎</span>
-              <span>Studio</span>
-            </button>
-
-            {/* Wishlist Bottom Tab */}
-            <button
-              onClick={() => setIsWishlistOpen(true)}
-              className="flex flex-col items-center gap-1 text-[11px] font-semibold text-stone-400 hover:text-rose-400 relative transition-colors"
-            >
-              <div className="relative">
-                <span className="text-base">💖</span>
-                {wishlist.length > 0 && (
-                  <span className="absolute -top-1 -right-2 bg-rose-500 text-white font-extrabold text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
-                    {wishlist.length}
-                  </span>
-                )}
-              </div>
-              <span>Wishlist</span>
-            </button>
-
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="flex flex-col items-center gap-1 text-[11px] font-semibold text-stone-400 hover:text-amber-300 relative transition-colors"
-            >
-              <div className="relative">
-                <span className="text-base">🛒</span>
-                {cartItemsCount > 0 && (
-                  <span className="absolute -top-1 -right-2 bg-amber-500 text-stone-950 font-extrabold text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
-                    {cartItemsCount}
-                  </span>
-                )}
-              </div>
-              <span>Cart</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedProduct(null);
-                setActiveTab('account');
-              }}
-              className={`flex flex-col items-center gap-1 text-[11px] font-semibold transition-colors ${
-                activeTab === 'account' ? 'text-amber-400 font-bold' : 'text-stone-400 hover:text-stone-200'
-              }`}
-            >
-              <span className="text-base">👤</span>
-              <span>Account</span>
-            </button>
+          <nav className="fixed bottom-0 inset-x-0 z-30 mx-auto max-w-5xl px-3 pb-[max(10px,env(safe-area-inset-bottom))] pt-2">
+            <div className="rg-glass rg-bottom-nav border border-amber-500/15 rounded-[26px] shadow-2xl flex items-center justify-around px-1 py-2">
+              <button onClick={() => { setSelectedProduct(null); setActiveTab('home'); }} className={`rg-nav-item ${activeTab === 'home' ? 'rg-nav-active' : ''}`} aria-label="Home">
+                <House className="w-5 h-5" strokeWidth={activeTab === 'home' ? 2.6 : 2} /><span>Home</span>
+              </button>
+              <button onClick={() => { setSelectedProduct(null); setActiveTab('boutique'); }} className={`rg-nav-item ${activeTab === 'boutique' ? 'rg-nav-active' : ''}`} aria-label="Boutique">
+                <Gem className="w-5 h-5" strokeWidth={activeTab === 'boutique' ? 2.6 : 2} /><span>Boutique</span>
+              </button>
+              <button onClick={() => setIsWishlistOpen(true)} className="rg-nav-item" aria-label="Saved">
+                <span className="relative"><Heart className="w-5 h-5" />{wishlist.length > 0 && <span className="rg-nav-count">{wishlist.length}</span>}</span><span>Saved</span>
+              </button>
+              <button onClick={() => setIsCartOpen(true)} className="rg-nav-item" aria-label="Cart">
+                <span className="relative"><ShoppingBag className="w-5 h-5" />{cartItemsCount > 0 && <span className="rg-nav-count">{cartItemsCount}</span>}</span><span>Cart</span>
+              </button>
+              <button onClick={() => { setSelectedProduct(null); setActiveTab('account'); }} className={`rg-nav-item ${activeTab === 'account' ? 'rg-nav-active' : ''}`} aria-label="Account">
+                <User className="w-5 h-5" strokeWidth={activeTab === 'account' ? 2.6 : 2} /><span>Account</span>
+              </button>
+            </div>
           </nav>
         )}
 

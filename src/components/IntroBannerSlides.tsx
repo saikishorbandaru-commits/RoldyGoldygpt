@@ -92,7 +92,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
   const IconComponent = slide.icon;
 
   return (
-    <div className="fixed inset-0 z-[95] bg-stone-950 flex flex-col justify-between p-5 select-none overflow-hidden animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-[95] rg-page flex flex-col justify-between p-5 select-none overflow-hidden animate-in fade-in duration-300">
       
       {/* Background Opulent Gradients */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -134,7 +134,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
           
           {/* Slide Top Badge */}
           <div className="absolute top-4 left-4 z-10">
-            <span className="inline-flex items-center gap-1.5 bg-stone-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-amber-500/40 text-[11px] text-amber-300 font-bold shadow-lg">
+            <span className="inline-flex items-center gap-1.5 rg-glass px-3 py-1 rounded-full border border-amber-500/40 text-[11px] text-amber-300 font-bold shadow-lg">
               <IconComponent className="w-3.5 h-3.5 text-amber-400" />
               <span>{slide.badge}</span>
             </span>
@@ -152,7 +152,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
         </div>
 
         {/* Slide Detailed Copy */}
-        <div className="bg-stone-900/90 border border-stone-800 rounded-2xl p-4 space-y-2 text-center backdrop-blur-md">
+        <div className="rg-surface rounded-2xl p-4 space-y-2 text-center backdrop-blur-md">
           <p className="text-stone-300 text-xs sm:text-sm leading-relaxed">
             {slide.description}
           </p>
@@ -196,7 +196,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
           onClick={handleNext}
           className="w-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-stone-950 font-bold text-sm py-3.5 rounded-2xl shadow-[0_4px_20px_rgba(245,158,11,0.4)] hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
         >
-          <span>{currentSlide === SLIDES.length - 1 ? 'Continue to Sign In & Registration' : 'Next Step'}</span>
+          <span>{currentSlide === SLIDES.length - 1 ? 'Continue' : 'Explore next'}</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>

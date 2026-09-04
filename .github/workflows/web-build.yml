@@ -5,10 +5,13 @@ on:
     branches:
       - premium-rebuild
       - main
+    paths:
+      - '**'
   pull_request:
     branches:
       - premium-rebuild
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   build:

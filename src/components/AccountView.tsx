@@ -140,7 +140,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-stone-950 min-h-[calc(100vh-60px)] pb-24 animate-in fade-in duration-200">
+    <div className="flex-1 flex flex-col bg-stone-950 min-h-[calc(100vh-60px)] pb-24 animate-in fade-in duration-300">
       {/* Top Header */}
       <div className="sticky top-0 z-30 bg-stone-950/95 backdrop-blur-md px-4 py-3.5 border-b border-stone-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -285,7 +285,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                 {/* 1. Orders Card */}
                 <div
                   onClick={() => handleNavClick('orders')}
-                  className="bg-stone-900 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-4 cursor-pointer transition-all hover:bg-stone-850 flex items-center justify-between group shadow-sm"
+                  className="rg-surface border hover:border-amber-500/50 rounded-2xl p-4 cursor-pointer transition-all hover:bg-stone-850 flex items-center justify-between group shadow-sm"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold text-lg">
@@ -306,7 +306,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                 {/* 2. Trial @Home Appointments Card */}
                 <div
                   onClick={() => handleNavClick('trials')}
-                  className="bg-stone-900 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-4 cursor-pointer transition-all hover:bg-stone-850 flex items-center justify-between group shadow-sm"
+                  className="rg-surface border hover:border-amber-500/50 rounded-2xl p-4 cursor-pointer transition-all hover:bg-stone-850 flex items-center justify-between group shadow-sm"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-lg">
@@ -327,7 +327,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                 {/* 3. Scrap Exchange Slips Card */}
                 <div
                   onClick={() => handleNavClick('exchanges')}
-                  className="bg-stone-900 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-4 cursor-pointer transition-all hover:bg-stone-850 flex items-center justify-between group shadow-sm"
+                  className="rg-surface border hover:border-amber-500/50 rounded-2xl p-4 cursor-pointer transition-all hover:bg-stone-850 flex items-center justify-between group shadow-sm"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center font-bold text-lg">
@@ -348,7 +348,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                 {/* 4. Bargaining Deals Card */}
                 <div
                   onClick={() => handleNavClick('bargains')}
-                  className="bg-stone-900 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-4 cursor-pointer transition-all hover:bg-stone-850 flex items-center justify-between group shadow-sm"
+                  className="rg-surface border hover:border-amber-500/50 rounded-2xl p-4 cursor-pointer transition-all hover:bg-stone-850 flex items-center justify-between group shadow-sm"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center font-bold text-lg">
@@ -422,7 +422,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
             </div>
 
             {isEditingProfile ? (
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 sm:p-5 space-y-4">
+              <div className="rg-surface border rounded-2xl p-4 sm:p-5 space-y-4">
                 <div className="flex items-center justify-between border-b border-stone-800 pb-2">
                   <h4 className="font-bold text-stone-200 text-sm">Edit Personal Profile &amp; Picture</h4>
                   <span className="text-[10px] text-amber-400 font-medium">Synchronizes with Orders</span>
@@ -560,7 +560,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                 </div>
               </div>
             ) : (
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 sm:p-5 space-y-4">
+              <div className="rg-surface border rounded-2xl p-4 sm:p-5 space-y-4">
                 <div className="flex items-center gap-4 border-b border-stone-800 pb-4">
                   {userProfile.avatarUrl ? (
                     <img src={userProfile.avatarUrl} alt={userProfile.name} className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shadow-md" />
@@ -656,7 +656,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
             )}
 
             {orders.length === 0 ? (
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-10 text-center space-y-2">
+              <div className="rg-surface border rounded-2xl p-10 text-center space-y-2">
                 <Package className="w-10 h-10 text-stone-600 mx-auto" />
                 <h4 className="font-bold text-stone-300 text-sm">No Orders Placed Yet</h4>
                 <p className="text-xs text-stone-500">Your purchased jewellery items and formal tax invoices will appear here.</p>
@@ -677,7 +677,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                   return (
                     <div 
                       key={order.id} 
-                      className="bg-stone-900 border border-stone-800/90 hover:border-stone-700 rounded-2xl p-4 sm:p-5 space-y-3 shadow-xl transition-all"
+                      className="rg-surface border/90 hover:border-stone-700 rounded-2xl p-4 sm:p-5 space-y-3 shadow-xl transition-all"
                     >
                       {/* Moderate Details Header (Always Visible & Tap to Toggle) */}
                       <div 
@@ -750,7 +750,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
 
                       {/* Expanded Full Order Dossier & Bill Breakdown */}
                       {isExpanded && (
-                        <div className="space-y-4 pt-2 border-t border-stone-800/70 animate-in fade-in duration-200">
+                        <div className="space-y-4 pt-2 border-t border-stone-800/70 animate-in fade-in duration-300">
 
                       {/* Live GPS Logistics & Rider Tracking Preview Card */}
                       <div className="bg-gradient-to-r from-stone-950 via-stone-900 to-stone-950 border border-amber-500/30 rounded-xl p-3.5 space-y-2.5">
@@ -993,14 +993,14 @@ export const AccountView: React.FC<AccountViewProps> = ({
             </button>
 
             {trialBookings.length === 0 ? (
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-10 text-center space-y-2">
+              <div className="rg-surface border rounded-2xl p-10 text-center space-y-2">
                 <Sparkles className="w-10 h-10 text-stone-600 mx-auto" />
                 <h4 className="font-bold text-stone-300 text-sm">No Trial Appointments Scheduled</h4>
                 <p className="text-xs text-stone-500">Book a 20-min doorstep trial to try jewellery before buying.</p>
               </div>
             ) : (
               trialBookings.map((trial) => (
-                <div key={trial.id} className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-3 shadow-sm">
+                <div key={trial.id} className="rg-surface border rounded-2xl p-4 space-y-3 shadow-sm">
                   <div className="flex items-center justify-between border-b border-stone-800 pb-2">
                     <div>
                       <span className="font-bold text-stone-100 font-mono text-xs">{trial.id}</span>
@@ -1047,7 +1047,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
             </button>
 
             {exchangeSlips.length === 0 ? (
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-10 text-center space-y-2">
+              <div className="rg-surface border rounded-2xl p-10 text-center space-y-2">
                 <RefreshCw className="w-10 h-10 text-stone-600 mx-auto" />
                 <h4 className="font-bold text-stone-300 text-sm">No Scrap Exchange Slips</h4>
                 <p className="text-xs text-stone-500">Snap a live photo of your old rold gold/imitation pieces to get instant cashback.</p>
@@ -1132,14 +1132,14 @@ export const AccountView: React.FC<AccountViewProps> = ({
             </button>
 
             {bargainHistory.length === 0 ? (
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-10 text-center space-y-2">
+              <div className="rg-surface border rounded-2xl p-10 text-center space-y-2">
                 <MessageSquare className="w-10 h-10 text-stone-600 mx-auto" />
                 <h4 className="font-bold text-stone-300 text-sm">No Bargaining History Yet</h4>
                 <p className="text-xs text-stone-500">Tap "Bargain with Jeweller" on any piece to negotiate custom pricing.</p>
               </div>
             ) : (
               bargainHistory.map((b, idx) => (
-                <div key={idx} className="bg-stone-900 border border-stone-800 rounded-2xl p-3.5 space-y-1.5">
+                <div key={idx} className="rg-surface border rounded-2xl p-3.5 space-y-1.5">
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-stone-200 text-xs">{b.item}</span>
                     <span className="text-[10px] text-stone-400">{b.date}</span>
@@ -1168,7 +1168,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
               <span>Back to Account Overview</span>
             </button>
 
-            <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2">
+            <div className="rg-surface border rounded-2xl p-4 space-y-2">
               <h5 className="font-bold text-amber-400 text-xs flex items-center gap-1.5">
                 <Crown className="w-3.5 h-3.5" />
                 <span>Terms &amp; Conditions (Trial @Home)</span>
@@ -1179,7 +1179,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
               <p>4. Delivery OTP is verified on doorstep arrival; Return OTP unlocks strictly upon trial completion / timeout for return handover.</p>
             </div>
 
-            <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2">
+            <div className="rg-surface border rounded-2xl p-4 space-y-2">
               <h5 className="font-bold text-amber-400 text-xs flex items-center gap-1.5">
                 <RefreshCw className="w-3.5 h-3.5" />
                 <span>Imitation / Rold Gold Scrap Exchange Policy</span>

@@ -264,7 +264,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                             <span className="font-bold text-xs">~₹{Math.round((item.product.price) * 0.85).toLocaleString('en-IN')} Trade Value</span>
                           </div>
                           <p className="text-[9.5px] text-emerald-400/80">
-                            Snap live photo of old jewellery to get instant cashback credit against this item.
+                            Upload a clear jewellery image for verification before an exchange estimate can be created.
                           </p>
                           <div className="flex items-center gap-1.5 pt-0.5">
                             <button
@@ -275,7 +275,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                               className="flex-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center gap-1 transition-colors"
                             >
                               <Camera className="w-3 h-3" />
-                              <span>Live Snap Scrap Exchange</span>
+                              <span>Start Jewellery Exchange</span>
                             </button>
                             <button
                               onClick={() => handleProductClick(item.product)}
@@ -366,7 +366,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <span>Have Old Scrap Jewellery?</span>
                     </div>
                     <p className="text-[11px] text-stone-400">
-                      Snap live photo of old ornaments for instant doorstep cashback.
+                      Get an exchange estimate after a jewellery image is successfully verified. Random or unrelated images are not eligible for valuation.
                     </p>
                   </div>
                   <button

@@ -179,14 +179,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               <span className="hidden sm:inline">360° Mart</span>
             </button>
           )}
-          <button
-            onClick={() => onOpenTrial(product)}
-            className="bg-stone-900 hover:bg-stone-800 text-amber-300 border border-amber-500/40 px-2.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-md"
-            title="Trial@Home Starts from Rs.49/- only"
-          >
-            <Crown className="w-3.5 h-3.5 text-amber-400" />
-            <span className="hidden sm:inline">Trial @Home</span>
-          </button>
+          {product.trialEligible && (
+            <button
+              onClick={() => onOpenTrial(product)}
+              className="bg-stone-900 hover:bg-stone-800 text-amber-300 border border-amber-500/40 px-2.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-md"
+              title="Trial@Home starts from ₹49"
+            >
+              <Crown className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden sm:inline">Trial @Home</span>
+            </button>
+          )}
           {/* Direct Cart Button with live Badge */}
           <button
             onClick={onOpenCart}
@@ -349,14 +351,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             </button>
           </div>
 
-          {/* Floating Trial@Home Action Badge */}
-          <button
-            onClick={() => onOpenTrial(product)}
-            className="absolute bottom-3 right-3 bg-stone-950/90 hover:bg-stone-900 backdrop-blur-md border border-amber-500/50 text-amber-300 text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-2 shadow-xl active:scale-95 transition-all"
-          >
-            <Crown className="w-3.5 h-3.5 text-amber-400" />
-            <span>Trial @Home · Starts ₹49/-</span>
-          </button>
+          {/* Trial is shown only when this product is eligible. */}
+          {product.trialEligible && (
+            <button
+              onClick={() => onOpenTrial(product)}
+              className="absolute bottom-3 right-3 bg-stone-950/90 hover:bg-stone-900 backdrop-blur-md border border-amber-500/50 text-amber-300 text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-2 shadow-xl active:scale-95 transition-all"
+            >
+              <Crown className="w-3.5 h-3.5 text-amber-400" />
+              <span>Trial @Home · Starts ₹49/-</span>
+            </button>
+          )}
         </div>
 
         {/* Active Angle Craftsmanship Explanation Banner */}

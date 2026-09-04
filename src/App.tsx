@@ -643,14 +643,12 @@ export default function App() {
               localStorage.setItem('roldygoldy_auth_user', JSON.stringify(updated));
               showToast('Profile updated successfully!');
             }}
-            onOpenAuth={() => setShowLoginScreen(true)}
             onLogout={() => {
               localStorage.removeItem('roldygoldy_auth_user');
               setIsAuthenticated(false);
               setShowLoginScreen(true);
               showToast('Logged out of boutique session');
             }}
-            onReplayBanners={() => setShowIntroSlides(true)}
             orders={orders}
             trialBookings={trialBookings}
             exchangeSlips={exchangeSlips}

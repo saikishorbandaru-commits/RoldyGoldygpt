@@ -89,3 +89,65 @@ button, input, select, textarea { font: inherit; }
 @media (prefers-reduced-motion: no-preference) {
   .rg-product-card, .rg-service-card, .rg-primary-btn, .rg-secondary-btn { will-change: transform; }
 }
+
+
+/* Final app-wide premium completion layer.
+   Covers legacy feature screens without changing their feature logic. */
+.rg-page {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 88% 0%, rgba(240,195,90,.10), transparent 24rem),
+    radial-gradient(circle at 8% 18%, rgba(122,18,43,.34), transparent 26rem),
+    var(--rg-wine);
+}
+button { touch-action: manipulation; }
+.fixed.inset-0.z-\[100\] > div,
+.fixed.inset-0.z-\[90\] > div,
+.fixed.inset-0.z-\[80\] > div {
+  border-color: rgba(240,195,90,.22);
+}
+.rounded-t-3xl, .rounded-3xl { border-radius: 28px; }
+.rounded-2xl { border-radius: 20px; }
+.rounded-xl { border-radius: 16px; }
+input, select, textarea {
+  color: var(--rg-cream);
+  background-color: rgba(24,5,10,.58);
+  border-color: rgba(240,195,90,.18);
+}
+input::placeholder, textarea::placeholder { color: rgba(203,181,174,.72); }
+input:focus, select:focus, textarea:focus {
+  border-color: rgba(240,195,90,.72) !important;
+  box-shadow: 0 0 0 3px rgba(240,195,90,.09);
+  outline: none;
+}
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--rg-gold);
+  outline-offset: 3px;
+}
+.overflow-y-auto::-webkit-scrollbar { width: 5px; }
+.overflow-y-auto::-webkit-scrollbar-thumb { background: rgba(240,195,90,.25); border-radius: 999px; }
+
+/* Make every feature drawer and sheet feel like one product. */
+[class*="bg-stone-900"].shadow-2xl,
+[class*="bg-stone-950"].shadow-2xl {
+  box-shadow: 0 28px 90px rgba(0,0,0,.48);
+}
+.bg-gradient-to-tr.from-amber-500,
+.bg-gradient-to-br.from-amber-500 {
+  box-shadow: 0 12px 28px rgba(240,195,90,.16);
+}
+.hover\:bg-stone-800:hover,
+.hover\:bg-stone-900:hover {
+  border-color: rgba(240,195,90,.26) !important;
+}
+.font-serif {
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: -.015em;
+}
+
+/* Responsive native-app rhythm. */
+@media (max-width: 640px) {
+  main { padding-bottom: 88px; }
+  .fixed.bottom-0 { padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+  .rg-product-card { border-radius: 20px; }
+}

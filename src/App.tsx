@@ -586,17 +586,22 @@ export default function App() {
                 )}
               </button>
 
-              {/* User Sign In / Account Header Button */}
+              {/* Account action: authenticated users go to Account; guests are invited to sign in. */}
               <button
                 onClick={() => {
                   triggerHaptic('light');
-                  setShowLoginScreen(true);
+                  if (isAuthenticated) {
+                    setSelectedProduct(null);
+                    setActiveTab('account');
+                  } else {
+                    setShowLoginScreen(true);
+                  }
                 }}
                 className="bg-stone-900 hover:bg-stone-800 text-stone-200 px-2.5 py-1.5 rounded-xl border border-stone-800 hover:border-amber-500/40 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm active:scale-95"
-                title="Sign In or Register"
+                title={isAuthenticated ? "Open Account" : "Sign In or Register"}
               >
                 <User className="w-3.5 h-3.5 text-amber-400" />
-                <span className="hidden sm:inline">{userProfile.name ? userProfile.name.split(' ')[0] : 'Sign In'}</span>
+                <span className="hidden sm:inline">{isAuthenticated ? (userProfile.name ? userProfile.name.split(' ')[0] : 'Account') : 'Sign In'}</span>
               </button>
             </div>
           </header>

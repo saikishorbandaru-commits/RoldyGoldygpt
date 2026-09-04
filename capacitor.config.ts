@@ -4,7 +4,6 @@ const config: CapacitorConfig = {
   appId: 'com.roldygoldy.app',
   appName: 'RoldyGoldy',
   webDir: 'dist',
-  bundledWebRuntime: false,
   server: {
     androidScheme: 'https',
     allowNavigation: [

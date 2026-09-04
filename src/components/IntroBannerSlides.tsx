@@ -124,7 +124,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
       {/* Center Slide Card */}
       <div className="my-auto z-10 w-full max-w-md mx-auto space-y-5">
         {/* Slide Visual Presentation */}
-        <div className="relative rounded-3xl overflow-hidden border border-amber-500/40 bg-stone-900 shadow-2xl aspect-[4/3] group">
+        <div className="relative rounded-[28px] overflow-hidden border border-amber-500/40 bg-stone-900 shadow-2xl aspect-[4/3] group">
           <img
             src={slide.image}
             alt={slide.title}

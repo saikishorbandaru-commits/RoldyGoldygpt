@@ -239,159 +239,104 @@ STRICT CONSTRAINTS:
     }
   });
 
-  // AI Scrap & Old Imitation Jewellery Photo Appraisal Endpoint
+  // AI Scrap & Old Imitation Jewellery Photo Verification Endpoint
+  // Security rule: this route must fail closed. Random images must never unlock valuation.
   app.post("/api/appraise-scrap", async (req, res) => {
-    try {
-      const { 
-        imageBase64, 
-        grams = 50, 
-        metalType = "Rold Gold / 1-Gram Polish Scrap", 
-        description = "" 
-      } = req.body;
-      
-      const weightNum = Math.max(1, Number(grams) || 50);
-      const ratePerGram = calculateMetalRate(metalType); // strictly 0.30 - 0.35 rs/gram
-      const grossEstimatedCredit = Math.round(weightNum * ratePerGram * 100) / 100;
-      
-      // 10% wastage value deduction
-      const wastageValue = Math.round(grossEstimatedCredit * 0.10 * 100) / 100;
-      const netEstimatedCredit = Math.max(1, Math.round(grossEstimatedCredit - wastageValue));
+    const reject = (message: string, reason: string) => res.status(422).json({
+      verified: false,
+      isJewellery: false,
+      isJewelleryDetected: false,
+      isRejected: true,
+      message,
+      rejectionReason: reason,
+    });
 
-      if (!imageBase64 || imageBase64.trim() === "") {
-        return res.json({
-          isJewelleryDetected: true,
-          rejectionReason: "",
-          identifiedItem: description || "Imitation Scrap Jewellery",
-          estimatedPurity: metalType,
-          estimatedWeightGrams: weightNum,
-          netCreditValue: netEstimatedCredit,
-          ratePerGram,
-          stoneDeductionPercent: 10,
-          appraisalNotes: "Photo registered. Doorstep calibrated scale verification approved.",
-          voucherCode: `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
-        });
+    try {
+      const { imageBase64, metalType = "Rold Gold / 1-Gram Polish Scrap", description = "" } = req.body;
+
+      if (!imageBase64 || typeof imageBase64 !== "string" || !imageBase64.startsWith("data:image/")) {
+        return reject("Please upload a clear jewellery photo before verification.", "No valid jewellery image was supplied.");
       }
 
       const ai = getGeminiClient();
-
+      // Do not estimate or approve when the verification engine is unavailable.
       if (!ai) {
-        return res.json({
-          isJewelleryDetected: true,
-          rejectionReason: "",
-          identifiedItem: description || "Old Imitation & Rold Gold Scrap Ornaments",
-          estimatedPurity: metalType,
-          estimatedWeightGrams: weightNum,
-          netCreditValue: netEstimatedCredit,
-          ratePerGram,
-          stoneDeductionPercent: 10,
-          appraisalNotes: "Domestic photo registered for doorstep verification. Weight calibrated on physical digital scale.",
-          voucherCode: `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
+        return res.status(503).json({
+          verified: false,
+          isJewellery: false,
+          isJewelleryDetected: false,
+          isRejected: true,
+          message: "Jewellery verification is temporarily unavailable. Please try again later.",
+          rejectionReason: "Verification service unavailable.",
         });
       }
 
-      // Multimodal Gemini analysis of the uploaded photo
       let mimeType = "image/jpeg";
-      if (imageBase64.includes("image/png")) mimeType = "image/png";
-      else if (imageBase64.includes("image/webp")) mimeType = "image/webp";
+      if (imageBase64.includes("data:image/png")) mimeType = "image/png";
+      else if (imageBase64.includes("data:image/webp")) mimeType = "image/webp";
 
       const cleanBase64 = imageBase64.replace(/^data:image\/\w+;base64,/, "");
-      const imagePart = {
-        inlineData: {
-          mimeType,
-          data: cleanBase64,
-        },
-      };
+      const imagePart = { inlineData: { mimeType, data: cleanBase64 } };
 
-      const prompt = `You are a certified Senior Gemmologist and Assayer at RoldyGoldy appraising old broken imitation, rold gold, 1-gram gold, or fashion jewellery scrap for exchange cashback calculation.
-Customers photograph their scrap jewellery at home under normal domestic ambient room lighting or camera exposure.
-ALWAYS ACCEPT domestic photo submissions as genuine scrap jewellery ornaments submitted for exchange.
-Declared weight: ${weightNum} grams.
-Rate per gram: ₹${ratePerGram}.
-Gross value: ₹${grossEstimatedCredit}.
-Net cash discount after 10% wastage: ₹${netEstimatedCredit}.
+      const prompt = `You are the STRICT first-stage image verifier for RoldyGoldy's imitation jewellery exchange feature.
 
-Return STRICT JSON adhering to schema:
-{
-  "isJewelleryDetected": true,
-  "rejectionReason": "",
-  "identifiedItem": "Old Imitation & Rold Gold Scrap Ornaments",
-  "estimatedPurity": "${metalType}",
-  "estimatedWeightGrams": ${weightNum},
-  "netCreditValue": ${netEstimatedCredit},
-  "ratePerGram": ${ratePerGram},
-  "stoneDeductionPercent": 10,
-  "appraisalNotes": "Live photo appraisal confirmed. Purity and digital scale calibration will be completed at doorstep collection.",
-  "voucherCode": "RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}"
-}`;
+Your ONLY job is to decide whether the image clearly contains an eligible physical jewellery ornament or broken jewellery scrap.
 
-      try {
-        const response = await generateContentWithFallback(ai, {
-          contents: { parts: [imagePart, { text: prompt }] },
-          config: {
-            responseMimeType: "application/json",
-            responseSchema: {
-              type: Type.OBJECT,
-              properties: {
-                isJewelleryDetected: { type: Type.BOOLEAN },
-                rejectionReason: { type: Type.STRING },
-                identifiedItem: { type: Type.STRING },
-                estimatedPurity: { type: Type.STRING },
-                estimatedWeightGrams: { type: Type.NUMBER },
-                netCreditValue: { type: Type.NUMBER },
-                ratePerGram: { type: Type.NUMBER },
-                stoneDeductionPercent: { type: Type.NUMBER },
-                appraisalNotes: { type: Type.STRING },
-                voucherCode: { type: Type.STRING },
-              },
-              required: [
-                "isJewelleryDetected",
-                "identifiedItem",
-                "estimatedWeightGrams",
-                "netCreditValue",
-                "ratePerGram",
-                "voucherCode"
-              ],
+Eligible examples: necklaces, chains, pendants, bangles, bracelets, earrings, rings, anklets, temple jewellery, imitation jewellery sets, broken pieces or loose ornament components.
+Reject examples: people, faces, selfies, documents, screenshots, logos, text, packaging, food, electronics, vehicles, furniture, animals, landscapes, empty backgrounds, coins, unrelated metal objects, watches, and any ambiguous image where jewellery cannot be confidently identified.
+
+Do NOT infer jewellery from the user's description. Use the visible image only.
+If the image is blurry, heavily occluded, too dark, or confidence is insufficient, reject it.
+This is NOT a precious-metal purity test and must not claim that the item is gold.
+Return strict JSON only.`;
+
+      const response = await generateContentWithFallback(ai, {
+        contents: { parts: [imagePart, { text: prompt }] },
+        config: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              isJewelleryDetected: { type: Type.BOOLEAN },
+              confidence: { type: Type.NUMBER },
+              identifiedItem: { type: Type.STRING },
+              rejectionReason: { type: Type.STRING },
             },
+            required: ["isJewelleryDetected", "confidence", "identifiedItem", "rejectionReason"],
           },
-        });
+        },
+      });
 
-        const parsed = JSON.parse(response.text.trim());
-        parsed.isJewelleryDetected = true;
-        parsed.estimatedWeightGrams = weightNum;
-        parsed.netCreditValue = netEstimatedCredit;
-        return res.json(parsed);
-      } catch (geminiErr) {
-        console.warn("Gemini scrap appraisal fallback used:", geminiErr);
-        return res.json({
-          isJewelleryDetected: true,
-          rejectionReason: "",
-          identifiedItem: description || "Old Imitation & Rold Gold Scrap Ornaments",
-          estimatedPurity: metalType,
-          estimatedWeightGrams: weightNum,
-          netCreditValue: netEstimatedCredit,
-          ratePerGram,
-          stoneDeductionPercent: 10,
-          appraisalNotes: "Live photo registered. Weight and purity will be verified with calibrated digital scale at doorstep.",
-          voucherCode: `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
-        });
+      const parsed = JSON.parse(response.text.trim());
+      const confidence = Math.max(0, Math.min(1, Number(parsed.confidence) || 0));
+      const isJewellery = parsed.isJewelleryDetected === true && confidence >= 0.8;
+
+      if (!isJewellery) {
+        return reject(
+          parsed.rejectionReason || "The image was not confidently recognised as imitation jewellery.",
+          parsed.rejectionReason || "Image did not meet jewellery verification confidence requirements."
+        );
       }
-    } catch (err: any) {
-      console.error("Scrap appraisal error:", err);
-      const grams = Number(req.body.grams) || 50;
-      const rate = 0.35;
-      const gross = grams * rate;
-      const net = Math.max(1, Math.round(gross * 0.9));
+
       return res.json({
+        verified: true,
+        isJewellery: true,
         isJewelleryDetected: true,
-        rejectionReason: "",
-        identifiedItem: "Old Imitation Jewellery Scrap",
-        estimatedPurity: "1-Gram Rold Gold Scrap",
-        estimatedWeightGrams: grams,
-        netCreditValue: net,
-        ratePerGram: rate,
-        stoneDeductionPercent: 10,
-        appraisalNotes: "Photo registered. Doorstep digital scale calibration approved.",
-        voucherCode: `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
+        isRejected: false,
+        confidence,
+        identifiedItem: parsed.identifiedItem || description || "Imitation jewellery",
+        metalType,
+        message: "Jewellery photo verified. Enter the actual weight to calculate an exchange estimate.",
+      });
+    } catch (err: any) {
+      console.error("Scrap verification error:", err);
+      return res.status(503).json({
+        verified: false,
+        isJewellery: false,
+        isJewelleryDetected: false,
+        isRejected: true,
+        message: "Jewellery verification could not be completed. No valuation has been unlocked.",
+        rejectionReason: "Verification service error.",
       });
     }
   });

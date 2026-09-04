@@ -1,5 +1,11 @@
 // Generated-compatible Capacitor platform settings.
 include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
-include ':capacitor-cordova-android-plugins'
-project(':capacitor-cordova-android-plugins').projectDir = new File('../node_modules/@capacitor/android/capacitor-cordova-android-plugins')
+
+// Capacitor Cordova bridge is optional. Only include it when the installed
+// Capacitor Android package actually contains the generated bridge project.
+def cordovaPluginsDir = new File('../node_modules/@capacitor/android/capacitor-cordova-android-plugins')
+if (cordovaPluginsDir.exists()) {
+    include ':capacitor-cordova-android-plugins'
+    project(':capacitor-cordova-android-plugins').projectDir = cordovaPluginsDir
+}

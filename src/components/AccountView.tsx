@@ -387,7 +387,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
             </div>
 
             {/* Trust Assurance Footer Box */}
-            <div className="bg-stone-900/60 border border-stone-800/80 rounded-2xl p-4 flex items-center gap-3 text-xs text-stone-400">
+            <div className="rg-surface rounded-2xl p-4 flex items-center gap-3 text-xs text-stone-400">
               <ShieldCheck className="w-6 h-6 text-amber-400 shrink-0" />
               <p>
                 All doorstep trials, live bargains, and scrap exchange vouchers are backed by the RoldyGoldy artisan guarantee.

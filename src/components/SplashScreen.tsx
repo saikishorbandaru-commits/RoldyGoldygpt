@@ -39,7 +39,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] bg-stone-950 flex flex-col items-center justify-between p-6 select-none transition-opacity duration-500 overflow-hidden ${
+      className={`fixed inset-0 z-[100] rg-page flex flex-col items-center justify-between p-6 select-none transition-opacity duration-500 overflow-hidden ${
         isFadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
@@ -92,7 +92,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
             RoldyGoldy
           </h1>
           <p className="text-xs uppercase tracking-[0.25em] text-stone-400 font-semibold">
-            Her Pride · Her Choice · Her Trust
+            Premium imitation jewellery, your way
           </p>
         </div>
 
@@ -123,7 +123,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           />
         </div>
         <p className="text-[11px] text-stone-400">
-          Preparing your RoldyGoldy experience...
+          Curating your RoldyGoldy experience...
         </p>
       </div>
     </div>

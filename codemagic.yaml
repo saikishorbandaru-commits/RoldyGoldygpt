@@ -11,6 +11,8 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
+          node --version
+          npm --version
           npm install
 
       - name: Build web application
@@ -19,6 +21,7 @@ workflows:
 
       - name: Sync Capacitor Android project
         script: |
+          node --version
           npx cap sync android
 
       - name: Build Android Debug APK
@@ -28,4 +31,4 @@ workflows:
           ./gradlew assembleDebug
 
     artifacts:
-      - android/app/build/outputs/**/*.apk
+      - android/app/build/outputs/*/.apk

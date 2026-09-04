@@ -531,19 +531,14 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
               </div>
               <p className={`text-[11.5px] leading-relaxed ${failedAttempts >= 3 ? 'text-amber-200/90' : 'text-red-200/90'}`}>
                 {failedAttempts >= 3 
-                  ? 'Since automatic photo verification was unsuccessful after 3 attempts, you can proceed with your photo upload! Our delivery concierge executive will physically verify the metal purity and calibrate the net weight on a certified digital scale at the time of doorstep collection.'
+                  ? 'Automatic verification was unsuccessful. Please upload a clear image of imitation/rold gold jewellery. Valuation remains locked until the image is successfully verified.'
                   : rejectionError}
               </p>
               <div className="pt-1 flex items-center gap-2 flex-wrap">
                 {failedAttempts >= 3 && (
-                  <button
-                    type="button"
-                    onClick={handleAcceptDoorstepVerification}
-                    className="bg-gradient-to-r from-amber-500 to-yellow-400 hover:brightness-110 text-stone-950 font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md transition-all active:scale-95"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-stone-950" />
-                    <span>Proceed with Doorstep Verification (Unlock ₹{netEstimated.toLocaleString('en-IN')})</span>
-                  </button>
+                  <div className="text-[11px] text-amber-200/80 px-1">
+                    Upload a valid imitation/rold gold jewellery image to continue. Failed AI verification cannot unlock an exchange voucher.
+                  </div>
                 )}
                 <button
                   type="button"

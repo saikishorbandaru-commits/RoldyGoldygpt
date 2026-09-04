@@ -59,11 +59,11 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full max-w-md bg-stone-900 border-l border-amber-500/30 flex flex-col h-full shadow-2xl animate-in slide-in-from-right duration-200 relative">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
+      <div className="w-full max-w-md bg-stone-900 border-l border-amber-500/30 flex flex-col h-full shadow-2xl animate-in slide-in-from-right duration-300 relative">
         
         {/* Drawer Header */}
-        <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-glass px-5 py-4 border-b border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400">
               <Heart className="w-4 h-4 fill-rose-500" />
@@ -80,7 +80,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-stone-900 border border-stone-800 text-stone-400 hover:text-white flex items-center justify-center transition-colors"
+            className="w-8 h-8 rounded-full rg-surface border text-stone-400 hover:text-white flex items-center justify-center transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -124,7 +124,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                         onSelectProduct(product);
                         onClose();
                       }}
-                      className="w-20 h-20 rounded-xl overflow-hidden bg-stone-900 border border-stone-800 shrink-0 cursor-pointer relative"
+                      className="w-20 h-20 rounded-xl overflow-hidden rg-surface border shrink-0 cursor-pointer relative"
                     >
                       <img
                         src={product.image}
@@ -247,7 +247,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
         {/* PROMINENT IN-DRAWER ADDED-TO-CART CONFIRMATION MODAL */}
         {cartAlertProduct && (
           <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-            <div className="w-full max-w-sm bg-stone-900 border border-emerald-500/60 rounded-2xl p-5 shadow-2xl space-y-4 animate-in zoom-in-95 duration-200">
+            <div className="w-full max-w-sm bg-stone-900 border border-emerald-500/60 rounded-2xl p-5 shadow-2xl space-y-4 animate-in zoom-in-95 duration-300">
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">

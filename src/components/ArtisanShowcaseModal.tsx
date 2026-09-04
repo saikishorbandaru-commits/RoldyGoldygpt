@@ -81,7 +81,7 @@ export const ArtisanShowcaseModal: React.FC<ArtisanShowcaseModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-75 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-xl bg-stone-900 border border-amber-500/40 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden">
+      <div className="w-full max-w-xl bg-stone-900 border border-amber-500/40 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden">
         
         {/* Header */}
         <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">

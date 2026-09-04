@@ -753,17 +753,26 @@ export default function App() {
               </div>
             </section>
 
-            {/* Signature service cards */}
-            <section className="px-4 pt-5 sm:px-6 max-w-5xl mx-auto w-full grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <button onClick={() => { setTrialTargetProduct(products.find(p => p.trialEligible) || products[0]); setIsTrialModalOpen(true); }} className="rg-service-card rg-service-trial text-left">
-                <span className="text-2xl">🏠</span><div><p className="font-bold rg-cream">Trial @Home</p><p>Choose, try, decide.</p></div><ArrowRight className="w-4 h-4 ml-auto" />
-              </button>
-              <button onClick={() => setIsLivePhotoModalOpen(true)} className="rg-service-card text-left">
-                <span className="text-2xl">♻️</span><div><p className="font-bold rg-cream">Exchange & Save</p><p>Upload old jewellery.</p></div><ArrowRight className="w-4 h-4 ml-auto" />
-              </button>
-              <button onClick={() => setActiveTab('boutique')} className="rg-service-card text-left">
-                <span className="text-2xl">🎀</span><div><p className="font-bold rg-cream">Bridal Studio</p><p>Curated for your day.</p></div><ArrowRight className="w-4 h-4 ml-auto" />
-              </button>
+            {/* Signature RoldyGoldy experiences */}
+            <section className="px-4 pt-5 sm:px-6 max-w-5xl mx-auto w-full">
+              <div className="flex items-end justify-between mb-3">
+                <div>
+                  <p className="rg-section-eyebrow">MORE THAN SHOPPING</p>
+                  <h3 className="font-serif text-xl font-bold rg-cream">RoldyGoldy signature experiences</h3>
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.14em] rg-muted">Made for you</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button onClick={() => { setTrialTargetProduct(products.find(p => p.trialEligible) || products[0]); setIsTrialModalOpen(true); triggerHaptic('medium'); }} className="rg-service-card rg-service-trial text-left">
+                  <span className="text-2xl">🏠</span><div><p className="font-bold rg-cream">Trial @Home</p><p>Choose, try, decide.</p></div><ArrowRight className="w-4 h-4 ml-auto" />
+                </button>
+                <button onClick={() => { setIsBargainPickerOpen(true); triggerHaptic('light'); }} className="rg-service-card text-left">
+                  <span className="text-2xl">🤝</span><div><p className="font-bold rg-cream">Bargain with Jeweller</p><p>Make your best offer.</p></div><ArrowRight className="w-4 h-4 ml-auto" />
+                </button>
+                <button onClick={() => { setIsLivePhotoModalOpen(true); triggerHaptic('light'); }} className="rg-service-card text-left">
+                  <span className="text-2xl">♻️</span><div><p className="font-bold rg-cream">Exchange & Save</p><p>Value eligible jewellery.</p></div><ArrowRight className="w-4 h-4 ml-auto" />
+                </button>
+              </div>
             </section>
 
             {/* Offers / artisan banner */}

@@ -98,7 +98,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
               <div className="space-y-1">
                 <h3 className="font-serif font-bold text-stone-200 text-base">Your Wishlist is Empty</h3>
                 <p className="text-xs text-stone-400 max-w-xs leading-relaxed">
-                  Tap the heart icon on any jewellery piece in our boutique to save it for later, try it in 3D AR, or bargain with our Master Goldsmith.
+                  Save jewellery you love here for later. Compare pieces, book Trial @Home where eligible, bargain, or move a selection to your cart when you are ready.
                 </p>
               </div>
               <button
@@ -330,7 +330,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
               className="w-full bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs py-3 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
             >
               <ShoppingBag className="w-4 h-4" />
-              <span>Add All ({wishlist.length}) to Cart</span>
+              <span>Move All ({wishlist.length}) to Cart</span>
             </button>
           </div>
         )}

@@ -43,15 +43,15 @@ const SLIDES: SlideItem[] = [
     id: 'scrap-exchange',
     badge: 'Exchange & Save',
     title: 'Turn Old Imitation Jewellery into Savings',
-    subtitle: 'Upload photos, get a quote and apply your exchange value',
-    description: 'Select the material category, upload your old or broken imitation jewellery and receive an estimated exchange value. Pickup and final cashback follow verification.',
+    subtitle: 'Verify eligible jewellery images, receive an estimate and apply exchange value',
+    description: 'Upload a clear image of eligible imitation jewellery. After successful image verification and valuation, you can review the estimated exchange value. Final value follows the applicable verification process.',
     image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=90',
     icon: Scale,
     accent: 'from-emerald-500/30 to-teal-600/10'
   },
   {
     id: 'hallmark-guarantee',
-    badge: 'Premium Imitation Craftsmanship',
+    badge: 'Premium Imitation Jewellery',
     title: 'Made to Look Beautiful. Designed for Real Life.',
     subtitle: 'From daily wear to statement bridal collections',
     description: 'Discover brass, alloy, oxidised and premium fashion jewellery across Kundan, Polki, AD and micro-plated styles — with clear product details and care guidance.',
@@ -62,9 +62,9 @@ const SLIDES: SlideItem[] = [
   {
     id: 'artisan-bargain',
     badge: 'Direct Guild Heritage',
-    title: 'Master Artisan Guild & Live Jeweller Bargain',
-    subtitle: 'Crafted in Eluru, Machilipatnam, Jaipur & Rajkot',
-    description: 'Skip showroom middlemen markups. Negotiate directly with master goldsmiths in real-time, inspect hallmarking certificates, and support generational craft families.',
+    title: 'Boutique Network & Jeweller Bargain',
+    subtitle: 'Discover collections from multiple jewellery craft centres',
+    description: 'Use the Bargain with Jeweller experience to submit an offer on eligible products. Browse collection details and negotiate only when the product and jeweller workflow support it.',
     image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=90',
     icon: Store,
     accent: 'from-purple-500/30 to-amber-600/10'

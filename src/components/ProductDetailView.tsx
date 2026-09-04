@@ -588,9 +588,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           </p>
         </div>
 
-        {/* ========================================================================= */}
+        {/* Section */}
         {/* CUSTOMER REVIEWS & FEEDBACK SECTION (E-COMMERCE STANDARD) */}
-        {/* ========================================================================= */}
+        {/* Section */}
         <div id="reviews-section" className="bg-stone-900 border border-stone-800 rounded-3xl p-5 space-y-5">
           
           <div className="flex items-center justify-between border-b border-stone-800 pb-3">

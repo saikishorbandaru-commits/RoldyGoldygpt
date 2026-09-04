@@ -29,10 +29,28 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+
+      - name: TypeScript check
+        run: npm run lint
 
       - name: Build application
         run: npm run build
+
+      - name: Sync Android project
+        run: npm run android:sync
+
+      - name: Assemble Android debug APK
+        run: cd android && chmod +x gradlew && ./gradlew assembleDebug
+
+      - name: Upload Android debug APK
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: roldygoldy-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Upload web build
         uses: actions/upload-artifact@v4

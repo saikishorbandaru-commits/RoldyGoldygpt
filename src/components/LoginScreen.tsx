@@ -13,7 +13,6 @@ import {
   HelpCircle,
   Truck,
   Gem,
-  Compass
 } from 'lucide-react';
 import { UserProfile } from '../types';
 import { triggerHaptic } from '../utils/haptics';
@@ -21,14 +20,12 @@ import { triggerHaptic } from '../utils/haptics';
 interface LoginScreenProps {
   onLoginSuccess: (user: UserProfile) => void;
   onExploreAsGuest: () => void;
-  onViewBannersAgain?: () => void;
   initialPhone?: string;
 }
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({
   onLoginSuccess,
   onExploreAsGuest,
-  onViewBannersAgain,
   initialPhone = '',
 }) => {
   const [mode, setMode] = useState<'login' | 'register'>('login');
@@ -134,20 +131,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             <p className="text-[10px] text-stone-400 tracking-widest uppercase">Pure 1-Gram & 22K Micro Polish</p>
           </div>
         </div>
-
-        {onViewBannersAgain && (
-          <button
-            onClick={() => {
-              triggerHaptic('light');
-              onViewBannersAgain();
-            }}
-            className="text-xs text-amber-400/90 hover:text-amber-300 bg-stone-900/80 border border-amber-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-colors"
-            title="Review Feature Slides"
-          >
-            <Compass className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-[11px] font-medium">Intro Tour</span>
-          </button>
-        )}
       </header>
 
       {/* Central Login & Registration Form Card */}
@@ -349,7 +332,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 </div>
                 <div className="text-[11px] text-amber-300/90 font-medium flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Demo OTP code: <strong className="font-mono text-amber-200 text-xs">{mockGeneratedOtp}</strong></span>
+                  <span>A verification code has been sent to your registered mobile number.</span>
                 </div>
               </div>
 
@@ -407,11 +390,11 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               }}
               className="text-stone-400 hover:text-stone-200 text-xs font-semibold flex items-center justify-center gap-1.5 mx-auto py-1"
             >
-              <span>Continue as Guest Connoisseur</span>
+              <span>Explore as Guest</span>
               <ArrowRight className="w-3.5 h-3.5 text-stone-500" />
             </button>
             <p className="text-[10px] text-stone-500">
-              You can explore catalogue, calculate scrap exchange, and book trials without upfront payment.
+              Explore the catalogue before signing in. Sign in when a feature requires your mobile verification.
             </p>
           </div>
 

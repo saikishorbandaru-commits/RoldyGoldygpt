@@ -156,7 +156,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-200 hover:text-amber-400 border border-stone-800 transition-all text-xs font-semibold"
           >
             <ArrowLeft className="w-4 h-4 text-amber-400" />
-            <span>{activeSection === 'main' ? 'Back to Boutique' : 'Back to Account'}</span>
+            <span>{activeSection === 'main' ? 'Back' : 'Back to Account'}</span>
           </button>
 
           <div className="flex items-center gap-2">
@@ -165,16 +165,16 @@ export const AccountView: React.FC<AccountViewProps> = ({
             </div>
             <div>
               <h2 className="font-semibold text-stone-100 text-sm">
-                {activeSection === 'main' && 'My Account & Reports'}
+                {activeSection === 'main' && 'My RoldyGoldy'}
                 {activeSection === 'profile' && 'Personal Profile'}
                 {activeSection === 'orders' && 'Orders & Invoices'}
                 {activeSection === 'trials' && 'Trial @Home Appointments'}
-                {activeSection === 'exchanges' && 'Scrap Exchange Slips'}
-                {activeSection === 'bargains' && 'Bargaining History'}
-                {activeSection === 'policies' && 'Boutique Policies & Terms'}
+                {activeSection === 'exchanges' && 'Jewellery Exchange'}
+                {activeSection === 'bargains' && 'My Bargain Deals'}
+                {activeSection === 'policies' && 'Policies & Terms'}
               </h2>
               <p className="text-[10px] text-stone-400">
-                {activeSection === 'main' ? 'Overview & all concierge records' : 'Her Pride · Her Choice · Her Trust'}
+                {activeSection === 'main' ? 'Profile, orders and your RoldyGoldy activity' : 'Your RoldyGoldy experience'}
               </p>
             </div>
           </div>
@@ -231,7 +231,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                     <div className="flex items-center gap-2 flex-wrap">
                       <h3 className="font-bold text-stone-100 text-base truncate">{userProfile.name}</h3>
                       <span className="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-500/40 flex items-center gap-1">
-                        <Crown className="w-3 h-3 text-amber-400" /> Verified Patron
+                        <Crown className="w-3 h-3 text-amber-400" /> Verified Account
                       </span>
                     </div>
                     <p className="text-stone-400 text-xs mt-0.5">{userProfile.phone}</p>
@@ -266,7 +266,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
               <div className="mt-3.5 pt-3 border-t border-stone-800/80 flex items-start gap-2 text-xs text-stone-300">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <div className="min-w-0">
-                  <span className="text-[11px] text-stone-400 font-semibold block">Primary Delivery Hub Address</span>
+                  <span className="text-[11px] text-stone-400 font-semibold block">Primary Delivery Address</span>
                   <p className="text-xs text-stone-200 leading-snug line-clamp-1">{userProfile.address}</p>
                   <p className="text-[11px] text-amber-300 font-medium">PIN: {userProfile.pincode}</p>
                 </div>
@@ -276,7 +276,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
             {/* Quick Metrics & Reports Grid (All 4 Core Reports + Terms) */}
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs text-stone-400 px-1">
-                <span className="font-bold text-stone-200 text-sm font-serif">Reports &amp; Activity Hub</span>
+                <span className="font-bold text-stone-200 text-sm font-serif">Your Activity</span>
                 <span>Select to view details</span>
               </div>
 
@@ -293,7 +293,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                     </div>
                     <div>
                       <div className="font-bold text-stone-200 text-sm group-hover:text-amber-400 transition-colors">
-                        Orders &amp; Bills
+                        My Orders
                       </div>
                       <p className="text-xs text-stone-400">
                         {orders.length} order(s) placed
@@ -314,7 +314,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                     </div>
                     <div>
                       <div className="font-bold text-stone-200 text-sm group-hover:text-amber-400 transition-colors">
-                        Trial @Home Records
+                        Trial @Home
                       </div>
                       <p className="text-xs text-stone-400">
                         {trialBookings.length} booking(s) · OTPs
@@ -335,7 +335,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                     </div>
                     <div>
                       <div className="font-bold text-stone-200 text-sm group-hover:text-amber-400 transition-colors">
-                        Scrap Trade-in Slips
+                        Jewellery Exchange
                       </div>
                       <p className="text-xs text-stone-400">
                         {exchangeSlips.length} appraisal voucher(s)
@@ -356,7 +356,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                     </div>
                     <div>
                       <div className="font-bold text-stone-200 text-sm group-hover:text-amber-400 transition-colors">
-                        Bargaining Negotiations
+                        My Bargain Deals
                       </div>
                       <p className="text-xs text-stone-400">
                         {bargainHistory.length} negotiated deal(s)
@@ -369,34 +369,21 @@ export const AccountView: React.FC<AccountViewProps> = ({
               </div>
             </div>
 
-            {/* Quick Actions & Policies Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            {/* Account utilities: camera is not exposed here; it is requested only inside an exchange/photo flow. */}
+            <div className="pt-1">
               <div
                 onClick={() => handleNavClick('policies')}
-                className="bg-stone-900/80 border border-stone-800 hover:border-stone-700 rounded-2xl p-3.5 cursor-pointer flex items-center justify-between text-xs text-stone-300"
+                className="bg-stone-900/80 border border-stone-800 hover:border-amber-500/30 rounded-2xl p-3.5 cursor-pointer flex items-center justify-between text-xs text-stone-300"
               >
                 <div className="flex items-center gap-2.5">
                   <FileText className="w-4 h-4 text-amber-400" />
-                  <span className="font-semibold text-stone-200">Boutique Policies &amp; Trial@Home Terms (Starts ₹49/-)</span>
+                  <div>
+                    <span className="font-semibold text-stone-200 block">Policies &amp; Terms</span>
+                    <span className="text-[10px] text-stone-500">Trial @Home, exchange and shopping information</span>
+                  </div>
                 </div>
                 <ChevronRight className="w-4 h-4 text-stone-500" />
-              </div>{onOpenLiveScrapUpload && (
-                <div
-                  onClick={() => {
-                    triggerHaptic('light');
-                    onOpenLiveScrapUpload();
-                  }}
-                  className="bg-stone-900/80 border border-stone-800 hover:border-amber-500/40 rounded-2xl p-3.5 cursor-pointer flex items-center justify-between text-xs text-stone-300"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Camera className="w-4 h-4 text-emerald-400" />
-                    <span className="font-semibold text-emerald-300">Live Scrap Photo Appraisal</span>
-                  </div>
-                  <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2 py-0.5 rounded border border-emerald-500/30">
-                    Snap Now
-                  </span>
-                </div>
-              )}
+              </div>
             </div>
 
             {/* Trust Assurance Footer Box */}

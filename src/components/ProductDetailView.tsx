@@ -158,7 +158,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     <div className="rg-page flex-1 flex flex-col bg-stone-950 pb-28 animate-in fade-in slide-in-from-bottom-2 duration-300">
       
       {/* Top Header */}
-      <div className="sticky top-0 z-20 bg-stone-950/90 backdrop-blur-md px-4 py-3 border-b border-stone-800 flex items-center justify-between">
+      <div className="sticky top-0 z-20 rg-glass backdrop-blur-xl px-4 py-3 border-b border-stone-800 flex items-center justify-between">
         <button
           onClick={onBack}
           className="w-9 h-9 rounded-full bg-stone-900 border border-stone-800 text-stone-300 hover:text-white flex items-center justify-center transition-colors"
@@ -558,7 +558,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         </div>
 
         {/* Specifications Grid */}
-        <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-3">
+        <div className="rg-surface rounded-2xl p-4 space-y-3">
           <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-wider">
             <ShieldCheck className="w-4 h-4" />
             <span>Artisanal Specifications &amp; Hallmarks</span>

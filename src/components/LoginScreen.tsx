@@ -111,7 +111,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 min-h-screen w-full bg-stone-950 text-stone-100 flex flex-col justify-between overflow-y-auto font-sans">
+    <div className="fixed inset-0 z-50 min-h-screen w-full rg-page text-stone-100 flex flex-col justify-between overflow-y-auto font-sans">
       {/* Ambient Luxury Background Lights */}
       <div className="absolute top-[-10%] left-[-10%] w-[450px] h-[450px] bg-amber-600/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[450px] h-[450px] bg-yellow-500/10 rounded-full blur-[100px] pointer-events-none" />
@@ -128,23 +128,23 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             <h1 className="text-base font-extrabold tracking-wider bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 bg-clip-text text-transparent font-serif uppercase">
               RoldyGoldy
             </h1>
-            <p className="text-[10px] text-stone-400 tracking-widest uppercase">Pure 1-Gram & 22K Micro Polish</p>
+            <p className="text-[10px] text-stone-400 tracking-widest uppercase">Premium imitation jewellery</p>
           </div>
         </div>
       </header>
 
       {/* Central Login & Registration Form Card */}
       <main className="w-full max-w-md mx-auto px-5 py-4 z-10 flex-1 flex flex-col justify-center">
-        <div className="bg-stone-900/90 border border-amber-500/30 rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-md space-y-5">
+        <div className="rg-surface rounded-[28px] p-6 sm:p-7 shadow-2xl backdrop-blur-xl space-y-5">
           
           {/* Headline & Value Proposition */}
           <div className="text-center space-y-1.5">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-semibold">
               <Sparkles className="w-3 h-3 text-amber-400" />
-              <span>Patron Access Portal</span>
+              <span>Secure Mobile Access</span>
             </div>
             <h2 className="text-2xl font-bold font-serif text-stone-100">
-              {mode === 'login' ? 'Welcome Back' : 'Create Patron Account'}
+              {mode === 'login' ? 'Welcome to RoldyGoldy' : 'Create your account'}
             </h2>
             <p className="text-xs text-stone-400 max-w-xs mx-auto">
               Trial@Home starts from ₹49/- only · Instant Old Gold & Scrap Exchange
@@ -293,7 +293,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                   onClick={handleQuickDemoFill}
                   className="text-amber-400 hover:text-amber-300 underline font-medium"
                 >
-                  Auto-fill demo credentials
+                  Quick demo fill
                 </button>
               </div>
 
@@ -358,7 +358,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                     onClick={() => setOtp(mockGeneratedOtp)}
                     className="text-[11px] text-stone-400 hover:text-amber-300 underline"
                   >
-                    Click here to insert OTP ({mockGeneratedOtp})
+                    Demo OTP ({mockGeneratedOtp})
                   </button>
                 </div>
               </div>
@@ -372,7 +372,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                   <RotateCw className="w-4 h-4 animate-spin" />
                 ) : (
                   <>
-                    <span>Verify &amp; Enter Boutique</span>
+                    <span>Verify &amp; Continue</span>
                     <CheckCircle2 className="w-4 h-4" />
                   </>
                 )}

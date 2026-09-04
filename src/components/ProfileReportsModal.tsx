@@ -107,7 +107,7 @@ export const ProfileReportsModal: React.FC<ProfileReportsModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-2xl bg-stone-900 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+      <div className="w-full max-w-2xl rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
         <div className="bg-stone-950 px-5 py-3.5 border-b border-stone-800 flex items-center justify-between">
@@ -176,7 +176,7 @@ export const ProfileReportsModal: React.FC<ProfileReportsModalProps> = ({
                 orders.map((order) => {
                   const itemsCount = order.items.reduce((acc, i) => acc + i.quantity, 0);
                   return (
-                    <div key={order.id} className="bg-stone-900 border border-stone-800/90 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl">
+                    <div key={order.id} className="rg-surface border/90 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl">
                       
                       {/* Order Header & Status Badge */}
                       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-800 pb-3">
@@ -420,7 +420,7 @@ export const ProfileReportsModal: React.FC<ProfileReportsModalProps> = ({
           {/* 2. USER PROFILE TAB */}
           {activeTab === 'profile' && (
             <div className="space-y-4">
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 sm:p-5 space-y-4">
+              <div className="rg-surface border rounded-2xl p-4 sm:p-5 space-y-4">
                 <div className="flex items-center justify-between border-b border-stone-800 pb-3">
                   <div className="flex items-center gap-3">
                     <img
@@ -550,7 +550,7 @@ export const ProfileReportsModal: React.FC<ProfileReportsModalProps> = ({
                 <div className="text-center py-10 text-stone-400">No trial @home appointments scheduled.</div>
               ) : (
                 trialBookings.map((trial) => (
-                  <div key={trial.id} className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-3">
+                  <div key={trial.id} className="rg-surface border rounded-2xl p-4 space-y-3">
                     <div className="flex items-center justify-between border-b border-stone-800 pb-2">
                       <div>
                         <span className="font-bold text-stone-100 font-mono">{trial.id}</span>
@@ -661,7 +661,7 @@ export const ProfileReportsModal: React.FC<ProfileReportsModalProps> = ({
                 <div className="text-center py-10 text-stone-400">No price negotiations logged yet.</div>
               ) : (
                 bargainHistory.map((b, idx) => (
-                  <div key={idx} className="bg-stone-900 border border-stone-800 rounded-2xl p-3.5 space-y-1.5">
+                  <div key={idx} className="rg-surface border rounded-2xl p-3.5 space-y-1.5">
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-stone-200 text-xs">{b.item}</span>
                       <span className="text-[10px] text-stone-400">{b.date}</span>
@@ -680,7 +680,7 @@ export const ProfileReportsModal: React.FC<ProfileReportsModalProps> = ({
           {/* 6. POLICIES TAB */}
           {activeTab === 'policies' && (
             <div className="space-y-3 text-stone-300 text-xs leading-relaxed">
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-1.5">
+              <div className="rg-surface border rounded-2xl p-4 space-y-1.5">
                 <h5 className="font-bold text-amber-400 text-xs">Terms &amp; Conditions (Trial @Home)</h5>
                 <p>1. Doorstep trials are restricted to 5 km radius from the official boutique hub.</p>
                 <p>2. Trial@Home starts from ₹49/- only and covers 15–20 minutes plus 5 min grace period.</p>
@@ -688,7 +688,7 @@ export const ProfileReportsModal: React.FC<ProfileReportsModalProps> = ({
                 <p>4. Delivery OTP is verified on doorstep arrival; Return OTP unlocks strictly upon trial completion / timeout for return handover.</p>
               </div>
 
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-1.5">
+              <div className="rg-surface border rounded-2xl p-4 space-y-1.5">
                 <h5 className="font-bold text-amber-400 text-xs">Imitation / Rold Gold Scrap Exchange Policy</h5>
                 <p>We accept only imitation, brass, copper, and rold gold jewellery scrap. Exchange value is appraised between ₹0.30 - ₹0.35 per gram with a 10% standard melting and wastage deduction applied as instant cart cashback.</p>
                 <p className="text-amber-300/80">⚠️ Notice: All exchange appraisals are verified physically by certified riders with calibrated scales &amp; acid testing before product handover.</p>

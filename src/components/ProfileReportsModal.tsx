@@ -770,7 +770,7 @@ export const ProfileReportsModal: React.FC<ProfileReportsModalProps> = ({
                       <th className="py-2 px-3 text-right">Total</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-stone-900 bg-stone-950/60">
+                  <tbody className="divide-y divide-stone-900 rg-page">
                     {selectedInvoiceOrder.items.map((it) => (
                       <tr key={it.id} className="text-stone-300">
                         <td className="py-2.5 px-3">

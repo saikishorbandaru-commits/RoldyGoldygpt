@@ -283,7 +283,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
             <img 
               src={activeProduct.image} 
               alt={activeProduct.name} 
-              className="w-10 h-10 rounded-xl object-cover border border-amber-400/60 shadow-md shrink-0 bg-stone-900" 
+              className="w-10 h-10 rounded-xl object-cover border border-amber-400/60 shadow-md shrink-0 rg-sheet" 
             />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
@@ -308,7 +308,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
                 className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1 ${
                   showProductPicker
                     ? 'bg-amber-500 text-stone-950 border-amber-400'
-                    : 'bg-stone-900/80 border-stone-700 text-amber-300 hover:bg-stone-800'
+                    : 'rg-sheet/80 border-stone-700 text-amber-300 hover:bg-stone-800'
                 }`}
                 title="Switch Piece"
               >
@@ -322,7 +322,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
                 triggerHaptic('light');
                 setFacingMode((prev) => (prev === 'user' ? 'environment' : 'user'));
               }}
-              className="w-8 h-8 rounded-full bg-stone-900/80 border border-stone-700 text-stone-200 flex items-center justify-center backdrop-blur-md hover:bg-stone-800"
+              className="w-8 h-8 rounded-full rg-sheet/80 border border-stone-700 text-stone-200 flex items-center justify-center backdrop-blur-md hover:bg-stone-800"
               title="Flip Camera"
             >
               <SwitchCamera className="w-3.5 h-3.5" />
@@ -332,7 +332,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
                 stopCamera();
                 onClose();
               }}
-              className="w-8 h-8 rounded-full bg-stone-900/80 border border-stone-700 text-stone-200 flex items-center justify-center backdrop-blur-md hover:bg-stone-800"
+              className="w-8 h-8 rounded-full rg-sheet/80 border border-stone-700 text-stone-200 flex items-center justify-center backdrop-blur-md hover:bg-stone-800"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -362,7 +362,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
                   className={`flex items-center gap-2 p-1.5 rounded-xl border text-left shrink-0 transition-all ${
                     activeProduct.id === p.id
                       ? 'bg-amber-500/20 border-amber-400 shadow-md'
-                      : 'bg-stone-900 border-stone-800 hover:border-stone-700'
+                      : 'rg-sheet border-stone-800 hover:border-stone-700'
                   }`}
                 >
                   <img src={p.image} alt={p.name} className="w-9 h-9 rounded-lg object-cover bg-stone-950 shrink-0" />
@@ -423,7 +423,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
             <div className="bg-stone-950/80 backdrop-blur-md p-1.5 rounded-2xl border border-stone-800 flex flex-col items-center gap-1 shadow-lg">
               <button
                 onClick={() => nudge(0, -15)}
-                className="w-7 h-7 rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-300 flex items-center justify-center active:scale-90"
+                className="w-7 h-7 rounded-lg rg-sheet hover:bg-stone-800 text-stone-300 flex items-center justify-center active:scale-90"
                 title="Nudge Up"
               >
                 <ChevronUp className="w-4 h-4 text-amber-400" />
@@ -431,7 +431,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
               <div className="flex gap-1">
                 <button
                   onClick={() => nudge(-15, 0)}
-                  className="w-7 h-7 rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-300 flex items-center justify-center active:scale-90"
+                  className="w-7 h-7 rounded-lg rg-sheet hover:bg-stone-800 text-stone-300 flex items-center justify-center active:scale-90"
                   title="Nudge Left"
                 >
                   <ChevronLeft className="w-4 h-4 text-amber-400" />
@@ -445,7 +445,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
                 </button>
                 <button
                   onClick={() => nudge(15, 0)}
-                  className="w-7 h-7 rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-300 flex items-center justify-center active:scale-90"
+                  className="w-7 h-7 rounded-lg rg-sheet hover:bg-stone-800 text-stone-300 flex items-center justify-center active:scale-90"
                   title="Nudge Right"
                 >
                   <ChevronRight className="w-4 h-4 text-amber-400" />
@@ -453,7 +453,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
               </div>
               <button
                 onClick={() => nudge(0, 15)}
-                className="w-7 h-7 rounded-lg bg-stone-900 hover:bg-stone-800 text-stone-300 flex items-center justify-center active:scale-90"
+                className="w-7 h-7 rounded-lg rg-sheet hover:bg-stone-800 text-stone-300 flex items-center justify-center active:scale-90"
                 title="Nudge Down"
               >
                 <ChevronDown className="w-4 h-4 text-amber-400" />
@@ -464,7 +464,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
             <div className="flex gap-1 bg-stone-950/80 backdrop-blur-md p-1 rounded-xl border border-stone-800 shadow-md">
               <button
                 onClick={() => adjustScale(-0.1)}
-                className="w-7 h-7 rounded-lg bg-stone-900 text-stone-300 hover:text-white flex items-center justify-center active:scale-90"
+                className="w-7 h-7 rounded-lg rg-sheet text-stone-300 hover:text-white flex items-center justify-center active:scale-90"
                 title="Decrease Size"
               >
                 <Minus className="w-3.5 h-3.5 text-amber-400" />
@@ -474,7 +474,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
               </span>
               <button
                 onClick={() => adjustScale(0.1)}
-                className="w-7 h-7 rounded-lg bg-stone-900 text-stone-300 hover:text-white flex items-center justify-center active:scale-90"
+                className="w-7 h-7 rounded-lg rg-sheet text-stone-300 hover:text-white flex items-center justify-center active:scale-90"
                 title="Increase Size"
               >
                 <Plus className="w-3.5 h-3.5 text-amber-400" />
@@ -526,7 +526,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
                 className={`px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all ${
                   goldFinish === '22k_yellow'
                     ? 'bg-amber-500 text-stone-950 shadow-sm'
-                    : 'bg-stone-900 text-stone-400 border border-stone-800'
+                    : 'rg-sheet text-stone-400 border border-stone-800'
                 }`}
               >
                 22K Gold
@@ -539,7 +539,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
                 className={`px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all ${
                   goldFinish === 'antique_matte'
                     ? 'bg-amber-500 text-stone-950 shadow-sm'
-                    : 'bg-stone-900 text-stone-400 border border-stone-800'
+                    : 'rg-sheet text-stone-400 border border-stone-800'
                 }`}
               >
                 Antique Matte
@@ -552,7 +552,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
                 className={`px-2.5 py-1 rounded-lg text-[10.5px] font-bold transition-all ${
                   goldFinish === 'rose_gold'
                     ? 'bg-amber-500 text-stone-950 shadow-sm'
-                    : 'bg-stone-900 text-stone-400 border border-stone-800'
+                    : 'rg-sheet text-stone-400 border border-stone-800'
                 }`}
               >
                 Rose Gold
@@ -567,7 +567,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
               className={`px-2.5 py-1 rounded-lg text-[10.5px] font-semibold border transition-all flex items-center gap-1 ${
                 sparkleActive
                   ? 'bg-amber-500/20 border-amber-400 text-amber-300'
-                  : 'bg-stone-900 border-stone-800 text-stone-500'
+                  : 'rg-sheet border-stone-800 text-stone-500'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
@@ -610,7 +610,7 @@ export const VirtualTryOnModal: React.FC<VirtualTryOnModalProps> = ({
                 onClose();
                 onOpenBargain(activeProduct);
               }}
-              className="flex-1 bg-stone-900 hover:bg-stone-800 text-amber-300 font-bold text-xs py-2.5 rounded-xl border border-amber-500/40 flex items-center justify-center gap-1.5 transition-all"
+              className="flex-1 rg-sheet hover:bg-stone-800 text-amber-300 font-bold text-xs py-2.5 rounded-xl border border-amber-500/40 flex items-center justify-center gap-1.5 transition-all"
             >
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Bargain with Jeweller</span>

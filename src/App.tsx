@@ -474,12 +474,8 @@ export default function App() {
         <SplashScreen
           onComplete={() => {
             setShowSplash(false);
-            const hasSeenIntro = localStorage.getItem('roldygoldy_intro_seen');
-            if (!hasSeenIntro) {
-              setShowIntroSlides(true);
-            } else if (!localStorage.getItem('roldygoldy_auth_user')) {
-              setShowLoginScreen(true);
-            }
+            // App Features always follows Splash, as requested. Authentication is checked only after the tour.
+            setShowIntroSlides(true);
           }}
         />
       )}
@@ -490,8 +486,10 @@ export default function App() {
           onComplete={() => {
             localStorage.setItem('roldygoldy_intro_seen', 'true');
             setShowIntroSlides(false);
-            // After Banner slides complete or are skipped, land directly on dedicated Login Screen
-            setShowLoginScreen(true);
+            // Logged-in users continue straight into the app; guests see the OTP/login screen.
+            if (!localStorage.getItem('roldygoldy_auth_user')) {
+              setShowLoginScreen(true);
+            }
           }}
         />
       )}

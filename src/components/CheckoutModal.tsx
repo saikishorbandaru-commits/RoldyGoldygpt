@@ -128,7 +128,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-semibold text-stone-100 text-sm">Insured Checkout &amp; Payment</h3>
+              <h3 className="font-semibold text-stone-100 text-sm">Insured Secure Checkout</h3>
               <p className="text-xs text-stone-400">100% Certified Hallmark &amp; Transit Insurance</p>
             </div>
           </div>

@@ -198,7 +198,7 @@ export const LocationSelectorModal: React.FC<LocationSelectorModalProps> = ({
                   className={`p-3 rounded-2xl border text-left flex flex-col justify-between transition-all ${
                     isSelected
                       ? 'bg-amber-500/15 border-amber-400 ring-1 ring-amber-400/40 text-stone-100'
-                      : 'bg-stone-950/60 border-stone-800 hover:border-amber-500/30 text-stone-300'
+                      : 'rg-page border-stone-800 hover:border-amber-500/30 text-stone-300'
                   }`}
                 >
                   <div className="flex items-start justify-between">

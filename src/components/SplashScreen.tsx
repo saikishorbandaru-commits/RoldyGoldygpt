@@ -70,7 +70,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         {/* Animated Royal Insignia */}
         <div className="relative">
           <div
-            className={`w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-tr from-amber-600 via-yellow-400 to-amber-200 p-[2px] shadow-[0_0_50px_rgba(245,158,11,0.35)] transition-all duration-700 ${
+            className={`w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] bg-gradient-to-tr from-amber-600 via-yellow-400 to-amber-200 p-[2px] shadow-[0_0_50px_rgba(245,158,11,0.35)] transition-all duration-700 ${
               stage >= 1 ? 'scale-100 opacity-100 rotate-0' : 'scale-75 opacity-0 rotate-12'
             }`}
           >

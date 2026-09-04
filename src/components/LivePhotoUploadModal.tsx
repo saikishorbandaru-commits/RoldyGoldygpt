@@ -38,7 +38,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
   onScrapValued,
   targetProductName,
 }) => {
-  const [activeTab, setActiveTab] = useState<'camera' | 'upload'>('camera');
+  const [activeTab, setActiveTab] = useState<'camera' | 'upload'>('upload');
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [facingMode, setFacingMode] = useState<'user' | 'environment'>('environment');
@@ -440,10 +440,10 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-md p-0 sm:p-4 animate-in fade-in">
-      <div className="w-full max-w-lg bg-stone-900 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+      <div className="w-full max-w-lg rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
-        <div className="bg-stone-950 px-5 py-3.5 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-glass px-5 py-3.5 border-b border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
               <Camera className="w-5 h-5" />
@@ -468,13 +468,13 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3.5 no-scrollbar bg-stone-950/40">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3.5 no-scrollbar rg-page">
 
           {/* Verification Process Notice */}
-          <div className="bg-stone-950 border border-stone-800 rounded-2xl p-3 flex items-start gap-2.5 text-xs text-stone-300">
+          <div className="rg-glass rounded-2xl p-3 flex items-start gap-2.5 text-xs text-stone-300">
             <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <div className="leading-relaxed">
-              <strong className="text-amber-300">AI Gemmological Verification: </strong>
+              <strong className="text-amber-300">AI Jewellery Verification: </strong>
               To unlock exchange valuation, attach a clear photo of your old scrap imitation jewellery. Non-jewellery items will be rejected.
             </div>
           </div>

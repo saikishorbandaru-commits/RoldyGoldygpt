@@ -489,25 +489,15 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
               <div className="font-bold flex items-center justify-between gap-1.5">
                 <div className="flex items-center gap-1.5">
                   <AlertCircle className={`w-4 h-4 shrink-0 ${false ? 'text-amber-400' : 'text-red-400'}`} />
-                  <span className={false ? 'text-amber-300 font-bold' : 'text-red-300'}>
-                    {false ? 'Doorstep Executive Verification Unlocked' : 'Jewellery Photo Verification Failed'}
-                  </span>
+                  <span className="text-red-300">Jewellery Photo Verification Failed</span>
                 </div>
                 <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/40 border border-white/10">
-                  Attempt {3/3
+                  Verification required
                 </span>
               </div>
-              <p className={`text-[11.5px] leading-relaxed ${false ? 'text-amber-200/90' : 'text-red-200/90'}`}>
-                {false 
-                  ? 'Automatic verification was unsuccessful. Please upload a clear image of imitation/rold gold jewellery. Valuation remains locked until the image is successfully verified.'
-                  : rejectionError}
-              </p>
+              <p className="text-[11.5px] leading-relaxed text-red-200/90">{rejectionError}</p>
               <div className="pt-1 flex items-center gap-2 flex-wrap">
-                {false && (
-                  <div className="text-[11px] text-amber-200/80 px-1">
-                    Upload a valid imitation/rold gold jewellery image to continue. Failed AI verification cannot unlock an exchange voucher.
-                  </div>
-                )}
+                
                 <button
                   type="button"
                   onClick={handleRetakePhoto}
@@ -525,7 +515,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-stone-300 uppercase tracking-wider flex items-center gap-1.5">
                 <span>1. Scrap Photo (Mandatory Verification)</span>
-                {capturedImage && !rejectionError && valuationResult && (
+                {capturedImage && !rejectionError && isVerified && (
                   <span className="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-1.5 py-0.2 rounded-sm font-bold">✓ Verified</span>
                 )}
               </span>
@@ -583,7 +573,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                     <span className={`text-[11px] font-bold flex items-center gap-1 px-2.5 py-1 rounded-lg backdrop-blur-md ${
                       rejectionError
                         ? 'bg-red-950/80 text-red-300 border border-red-500/50'
-                        : valuationResult
+                        : isVerified
                         ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/50'
                         : 'bg-amber-950/80 text-amber-300 border border-amber-500/50'
                     }`}>
@@ -591,7 +581,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                         <>
                           <AlertCircle className="w-3.5 h-3.5 text-red-400" /> Verification Notice
                         </>
-                      ) : valuationResult ? (
+                      ) : isVerified ? (
                         <>
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Verified Jewellery
                         </>
@@ -795,7 +785,8 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                       if (rejectionError) setRejectionError(null);
                     }
                   }}
-                  placeholder="Enter weight (e.g. 50, 100, 200, 500)"
+                  placeholder={isVerified ? "Enter weight (e.g. 50, 100, 200, 500)" : "Verify jewellery image first"}
+                  disabled={!isVerified}
                   className="w-full bg-transparent text-sm font-bold text-stone-100 placeholder-stone-600 focus:outline-hidden"
                 />
                 <span className="text-amber-400 font-bold text-xs">Grams (g)</span>
@@ -814,13 +805,14 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                 ].map((chip) => (
                   <button
                     key={chip.val}
+                    disabled={!isVerified}
                     type="button"
                     onClick={() => {
                       triggerHaptic('light');
                       setGramsInput(chip.val);
                       setValuationResult(null);
                     }}
-                    className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all ${
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all disabled:opacity-40 disabled:cursor-not-allowed ${
                       gramsInput === chip.val
                         ? 'bg-amber-500 text-stone-950 border-amber-400 font-bold shadow-xs'
                         : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-500/50 hover:text-white'
@@ -854,14 +846,18 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                     <Lock className="w-5 h-5" />
                   </div>
                   <h4 className="font-bold text-stone-200 text-xs">
-                    {rejectionError
+                    {!isVerified
+                      ? 'Verify Jewellery Image to Unlock Weight & Valuation'
+                      : rejectionError
                       ? 'Valuation Locked (Verification Failed)'
                       : !capturedImage
                       ? 'Exchange Valuation Locked: Photo Required'
                       : 'Photo Attached: AI Verification Required'}
                   </h4>
                   <p className="text-[11px] text-stone-400 max-w-xs mx-auto leading-relaxed">
-                    {rejectionError
+                    {!isVerified
+                      ? 'Complete successful AI jewellery verification first. Weight and exchange calculation stay locked until verification passes.'
+                      : rejectionError
                       ? 'The uploaded photo was rejected as non-jewellery. Valuation cannot be generated.'
                       : !capturedImage
                       ? 'Snap or upload a photo of your old scrap jewellery to run AI Gemmological verification and unlock your cart cash discount.'

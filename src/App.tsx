@@ -467,7 +467,7 @@ export default function App() {
   const cartItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col justify-between font-sans selection:bg-amber-400 selection:text-stone-950">
+    <div className="rg-page min-h-screen text-stone-100 flex flex-col justify-between font-sans selection:bg-amber-400 selection:text-stone-950">
       
       {/* Animated Designed Splash Screen */}
       {showSplash && (
@@ -856,7 +856,7 @@ export default function App() {
 
         {/* Persistent Bottom 5-Tab Navigation */}
         {!selectedProduct && (
-          <nav className="fixed bottom-0 inset-x-0 z-30 bg-stone-950/95 backdrop-blur-md border-t border-stone-800 max-w-5xl mx-auto flex justify-around py-2 px-2 sm:px-4 shadow-2xl">
+          <nav className="fixed bottom-0 inset-x-0 z-30 rg-glass rg-bottom-nav border-t border-amber-500/15 max-w-5xl mx-auto flex justify-around py-2 px-2 sm:px-4 shadow-2xl">
             <button
               onClick={() => {
                 setSelectedProduct(null);

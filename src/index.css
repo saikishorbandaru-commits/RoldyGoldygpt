@@ -75,3 +75,17 @@ button, input, select, textarea { font: inherit; }
 @media (max-width: 640px) {
   .rg-hero { min-height:270px; padding:0 18px; }
 }
+
+
+/* Premium app-shell refinement: shared across product, cart, checkout and authentication. */
+.rg-page, .min-h-screen { background-color: var(--rg-wine); }
+.rg-surface { background: linear-gradient(180deg, rgba(87,16,31,.94), rgba(43,8,17,.98)); border: 1px solid rgba(240,195,90,.15); box-shadow: 0 18px 50px rgba(0,0,0,.2); }
+.rg-sheet { background: linear-gradient(180deg, #3b0a16 0%, #25070f 100%); border: 1px solid rgba(240,195,90,.15); }
+.rg-premium-title { font-family: Georgia, 'Times New Roman', serif; color: var(--rg-cream); letter-spacing: -.025em; }
+.rg-glass { background: rgba(35,7,14,.78); backdrop-filter: blur(18px); border: 1px solid rgba(255,226,154,.12); }
+.rg-input { background: rgba(24,5,10,.55); color: var(--rg-cream); border: 1px solid rgba(240,195,90,.18); border-radius: 14px; min-height: 44px; }
+.rg-input:focus { outline: none; border-color: rgba(240,195,90,.65); box-shadow: 0 0 0 3px rgba(240,195,90,.08); }
+.rg-bottom-nav { padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+@media (prefers-reduced-motion: no-preference) {
+  .rg-product-card, .rg-service-card, .rg-primary-btn, .rg-secondary-btn { will-change: transform; }
+}

@@ -53,6 +53,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
   const [isAppraising, setIsAppraising] = useState<boolean>(false);
   const [valuationResult, setValuationResult] = useState<ExchangeScrapData | null>(null);
   const [rejectionError, setRejectionError] = useState<string | null>(null);
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [showExplanation, setShowExplanation] = useState<boolean>(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -251,6 +252,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         setCapturedImage(finalDataUrl);
         setValuationResult(null);
         setRejectionError(null);
+        setIsVerified(false);
         stopCamera();
       }
     }
@@ -266,6 +268,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
       setIsLightingBoosted(false);
       setValuationResult(null);
       setRejectionError(null);
+      setIsVerified(false);
     } else {
       const img = new Image();
       img.onload = () => {
@@ -306,6 +309,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         setIsLightingBoosted(false);
         setValuationResult(null);
         setRejectionError(null);
+        setIsVerified(false);
       };
       reader.readAsDataURL(file);
     }
@@ -325,6 +329,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         setIsLightingBoosted(false);
         setValuationResult(null);
         setRejectionError(null);
+        setIsVerified(false);
       };
       reader.readAsDataURL(file);
     }
@@ -378,7 +383,10 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
   };
 
   const calculateVerifiedValuation = () => {
-    if (!capturedImage || rejectionError) return;
+    if (!capturedImage || rejectionError || !isVerified) {
+      setRejectionError('Please complete successful jewellery image verification before calculating an exchange estimate.');
+      return;
+    }
     if (numericGrams <= 0) {
       setRejectionError('Enter the verified jewellery weight in grams to calculate the exchange estimate.');
       return;
@@ -471,28 +479,28 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
           {/* Rejection Alert Banner if Non-Jewellery Uploaded */}
           {rejectionError && (
             <div className={`rounded-2xl p-4 text-xs space-y-2 animate-in fade-in border ${
-              failedAttempts >= 3 
+              false 
                 ? 'bg-amber-950/90 border-amber-500/80 text-amber-200' 
                 : 'bg-red-950/90 border-red-500/60 text-red-200'
             }`}>
               <div className="font-bold flex items-center justify-between gap-1.5">
                 <div className="flex items-center gap-1.5">
-                  <AlertCircle className={`w-4 h-4 shrink-0 ${failedAttempts >= 3 ? 'text-amber-400' : 'text-red-400'}`} />
-                  <span className={failedAttempts >= 3 ? 'text-amber-300 font-bold' : 'text-red-300'}>
-                    {failedAttempts >= 3 ? 'Doorstep Executive Verification Unlocked' : 'Jewellery Photo Verification Failed'}
+                  <AlertCircle className={`w-4 h-4 shrink-0 ${false ? 'text-amber-400' : 'text-red-400'}`} />
+                  <span className={false ? 'text-amber-300 font-bold' : 'text-red-300'}>
+                    {false ? 'Doorstep Executive Verification Unlocked' : 'Jewellery Photo Verification Failed'}
                   </span>
                 </div>
                 <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/40 border border-white/10">
-                  Attempt {failedAttempts}/3
+                  Attempt {3/3
                 </span>
               </div>
-              <p className={`text-[11.5px] leading-relaxed ${failedAttempts >= 3 ? 'text-amber-200/90' : 'text-red-200/90'}`}>
-                {failedAttempts >= 3 
+              <p className={`text-[11.5px] leading-relaxed ${false ? 'text-amber-200/90' : 'text-red-200/90'}`}>
+                {false 
                   ? 'Automatic verification was unsuccessful. Please upload a clear image of imitation/rold gold jewellery. Valuation remains locked until the image is successfully verified.'
                   : rejectionError}
               </p>
               <div className="pt-1 flex items-center gap-2 flex-wrap">
-                {failedAttempts >= 3 && (
+                {false && (
                   <div className="text-[11px] text-amber-200/80 px-1">
                     Upload a valid imitation/rold gold jewellery image to continue. Failed AI verification cannot unlock an exchange voucher.
                   </div>
@@ -957,11 +965,11 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
               <div className="flex flex-col sm:flex-row gap-2">
                 <button
                   type="button"
-                  onClick={handleAcceptDoorstepVerification}
+                  onClick={() => setRejectionError('Please verify the jewellery image successfully before any exchange value can be calculated.')}
                   className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-md hover:brightness-110"
                 >
                   <CheckCircle2 className="w-4 h-4 text-stone-950" />
-                  <span>Proceed with Doorstep Verification (Unlock ₹{netEstimated.toLocaleString('en-IN')})</span>
+                  <span>Image verification required before exchange</span>
                 </button>
                 <button
                   type="button"
@@ -1004,11 +1012,10 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
               </button>
               <button
                 type="button"
-                onClick={handleAcceptDoorstepVerification}
+                onClick={() => setRejectionError('Doorstep collection cannot unlock an exchange voucher before successful image verification.')}
                 className="text-[11px] text-stone-400 hover:text-amber-300 py-1 transition-colors flex items-center justify-center gap-1"
               >
-                <span>Prefer doorstep scale calibration directly?</span>
-                <span className="underline font-semibold text-amber-400">Lock ₹{netEstimated.toLocaleString('en-IN')} Voucher Now</span>
+                <span>Image verification is required before entering weight or calculating an estimate.</span>
               </button>
             </div>
           ) : (

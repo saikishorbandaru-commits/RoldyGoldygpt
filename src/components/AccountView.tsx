@@ -193,9 +193,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
       {/* Main Content Area */}
       <div className="p-4 max-w-2xl mx-auto w-full space-y-4">
         
-        {/* ======================================================== */}
+        {/* Section */}
         {/* 1. MAIN OVERVIEW HUB (No side-scrolling required!)      */}
-        {/* ======================================================== */}
+        {/* Section */}
         {activeSection === 'main' && (
           <div className="space-y-4">
             
@@ -397,9 +397,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
           </div>
         )}
 
-        {/* ======================================================== */}
+        {/* Section */}
         {/* 2. PROFILE EDIT & DETAILS SECTION                         */}
-        {/* ======================================================== */}
+        {/* Section */}
         {activeSection === 'profile' && (
           <div className="space-y-4">
             
@@ -592,9 +592,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
           </div>
         )}
 
-        {/* ======================================================== */}
+        {/* Section */}
         {/* 3. ORDERS & BILLS SECTION (COMPREHENSIVE TRANSACTION DOSSIER) */}
-        {/* ======================================================== */}
+        {/* Section */}
         {activeSection === 'orders' && (
           <div className="space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
@@ -979,9 +979,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
           </div>
         )}
 
-        {/* ======================================================== */}
+        {/* Section */}
         {/* 4. TRIAL @HOME SECTION                                    */}
-        {/* ======================================================== */}
+        {/* Section */}
         {activeSection === 'trials' && (
           <div className="space-y-3">
             <button
@@ -1033,9 +1033,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
           </div>
         )}
 
-        {/* ======================================================== */}
+        {/* Section */}
         {/* 5. SCRAP EXCHANGE SECTION                                 */}
-        {/* ======================================================== */}
+        {/* Section */}
         {activeSection === 'exchanges' && (
           <div className="space-y-3">
             <button
@@ -1118,9 +1118,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
           </div>
         )}
 
-        {/* ======================================================== */}
+        {/* Section */}
         {/* 6. BARGAINING HISTORY SECTION                             */}
-        {/* ======================================================== */}
+        {/* Section */}
         {activeSection === 'bargains' && (
           <div className="space-y-3">
             <button
@@ -1155,9 +1155,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
           </div>
         )}
 
-        {/* ======================================================== */}
+        {/* Section */}
         {/* 7. POLICIES & TERMS SECTION                               */}
-        {/* ======================================================== */}
+        {/* Section */}
         {activeSection === 'policies' && (
           <div className="space-y-3 text-stone-300 text-xs leading-relaxed">
             <button

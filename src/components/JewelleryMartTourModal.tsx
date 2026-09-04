@@ -94,7 +94,7 @@ export const JewelleryMartTourModal: React.FC<JewelleryMartTourModalProps> = ({
   const currentZone = MART_ZONES[selectedZoneIndex];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-md p-0 sm:p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-md p-0 sm:p-4 animate-in fade-in duration-300">
       <div className="w-full max-w-4xl bg-stone-900 border border-amber-500/40 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col h-[94vh] sm:h-[88vh] overflow-hidden">
         
         {/* Top Header */}
@@ -218,7 +218,7 @@ export const JewelleryMartTourModal: React.FC<JewelleryMartTourModalProps> = ({
 
           {/* Selected Hotspot Drawer / Card */}
           {selectedHotspot && (
-            <div className="absolute top-4 right-4 max-w-xs bg-stone-950/95 border border-amber-500/60 rounded-2xl p-4 shadow-2xl backdrop-blur-lg z-30 animate-in slide-in-from-right duration-200 space-y-3">
+            <div className="absolute top-4 right-4 max-w-xs bg-stone-950/95 border border-amber-500/60 rounded-2xl p-4 shadow-2xl backdrop-blur-lg z-30 animate-in slide-in-from-right duration-300 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] bg-amber-500 text-stone-950 font-extrabold px-2 py-0.5 rounded-full uppercase">
                   Showroom Highlight

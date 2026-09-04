@@ -552,7 +552,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
             </div>
 
             {/* Stage: Live Camera vs Captured Image vs File Upload */}
-            <div className="relative rounded-2xl overflow-hidden border border-stone-800 bg-stone-950 min-h-[160px] max-h-[200px] flex items-center justify-center">
+            <div className="relative rounded-2xl overflow-hidden border border-stone-800 rg-page min-h-[160px] max-h-[200px] flex items-center justify-center">
               {capturedImage ? (
                 <div className="relative w-full h-44 group">
                   <img
@@ -676,7 +676,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full h-44 p-4 border-2 border-dashed border-stone-800 hover:border-amber-500/60 rounded-2xl flex flex-col items-center justify-center text-center cursor-pointer transition-all space-y-1.5 bg-stone-950"
+                  className="w-full h-44 p-4 border-2 border-dashed border-stone-800 hover:border-amber-500/60 rounded-2xl flex flex-col items-center justify-center text-center cursor-pointer transition-all space-y-1.5 rg-page"
                 >
                   <Upload className="w-6 h-6 text-amber-400" />
                   <div className="space-y-0.5">
@@ -750,7 +750,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                   setMetalType(e.target.value);
                   setValuationResult(null);
                 }}
-                className="w-full bg-stone-950 border border-stone-700 rounded-xl px-3 py-2.5 text-xs text-stone-200 focus:outline-hidden focus:border-amber-500 font-medium"
+                className="w-full rg-page border border-stone-700 rounded-xl px-3 py-2.5 text-xs text-stone-200 focus:outline-hidden focus:border-amber-500 font-medium"
               >
                 {Object.keys(METAL_RATES).map((key) => (
                   <option key={key} value={key}>
@@ -775,7 +775,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 bg-stone-950 border border-stone-700 rounded-xl px-3.5 py-2.5 focus-within:border-amber-500 transition-colors">
+              <div className="flex items-center gap-2 rg-page border border-stone-700 rounded-xl px-3.5 py-2.5 focus-within:border-amber-500 transition-colors">
                 <input
                   type="text"
                   inputMode="decimal"
@@ -837,13 +837,13 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                   setValuationResult(null);
                 }}
                 placeholder="e.g. 4 broken bangles, 2 old rold gold necklaces, loose earrings"
-                className="w-full bg-stone-950 border border-stone-700 rounded-xl px-3 py-2 text-xs text-stone-200 focus:outline-hidden focus:border-amber-500"
+                className="w-full rg-page border border-stone-700 rounded-xl px-3 py-2 text-xs text-stone-200 focus:outline-hidden focus:border-amber-500"
               />
             </div>
 
             {/* STRICT VALUATION STATE CONTAINER */}
             {!valuationResult ? (
-              <div className="bg-stone-950/80 rounded-2xl p-4 border border-stone-800 space-y-2.5 text-xs text-center">
+              <div className="rg-page/80 rounded-2xl p-4 border border-stone-800 space-y-2.5 text-xs text-center">
                 <div className="flex flex-col items-center justify-center py-2 space-y-1.5">
                   <div className="w-10 h-10 rounded-full bg-stone-900 border border-stone-700 flex items-center justify-center text-amber-400">
                     <Lock className="w-5 h-5" />
@@ -870,7 +870,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
               </div>
             ) : (
               /* Verified Calculation Breakdown (Only visible when verified) */
-              <div className="bg-stone-950 rounded-2xl p-3.5 border border-emerald-500/40 space-y-2 text-xs animate-in fade-in">
+              <div className="rg-page rounded-2xl p-3.5 border border-emerald-500/40 space-y-2 text-xs animate-in fade-in">
                 <div className="font-bold text-[11px] text-emerald-300 uppercase tracking-wide flex items-center justify-between">
                   <span className="flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -934,7 +934,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         </div>
 
         {/* Footer Actions: Strictly Context-Aware (No unverified discount button) */}
-        <div className="bg-stone-950 px-4 py-3.5 border-t border-stone-800 flex flex-col gap-2.5">
+        <div className="rg-page px-4 py-3.5 border-t border-stone-800 flex flex-col gap-2.5">
           {valuationResult ? (
             /* State 1: Verified - Can Apply */
             <div className="flex flex-col gap-2">

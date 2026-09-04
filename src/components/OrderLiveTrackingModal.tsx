@@ -92,7 +92,7 @@ export const OrderLiveTrackingModal: React.FC<OrderLiveTrackingModalProps> = ({
       <div className="w-full max-w-2xl rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
         
         {/* Header */}
-        <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-glass px-5 py-4 border-b border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-600 to-yellow-400 p-0.5 shadow-md flex items-center justify-center text-stone-950 font-bold shrink-0">
               <Truck className="w-5 h-5" />

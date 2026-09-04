@@ -40,7 +40,7 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
   };
 
   return (
-    <main className="flex-1 p-4 pb-24 space-y-6 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-300">
+    <main className="rg-page flex-1 p-4 pb-28 space-y-6 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-300">
       
       {/* Boutique Hero Showcase */}
       <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#120b0b] via-[#2a1713] to-[#55121d] border border-amber-400/35 p-6 sm:p-8 shadow-2xl shadow-black/50">
@@ -97,7 +97,7 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
           
           {/* Experience cards */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all">
+          <div className="rg-surface rounded-2xl p-4 space-y-2 hover:border-amber-500/50 transition-all">
             <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
               <Truck className="w-5 h-5" />
             </div>
@@ -108,7 +108,7 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
           </div>
 
           {/* Pillar 2 */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all">
+          <div className="rg-surface rounded-2xl p-4 space-y-2 hover:border-amber-500/50 transition-all">
             <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
               <Scale className="w-5 h-5" />
             </div>
@@ -119,7 +119,7 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
           </div>
 
           {/* Pillar 3 */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all">
+          <div className="rg-surface rounded-2xl p-4 space-y-2 hover:border-amber-500/50 transition-all">
             <div className="w-9 h-9 rounded-xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-yellow-400">
               <Scissors className="w-5 h-5" />
             </div>
@@ -130,7 +130,7 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
           </div>
 
           {/* Pillar 4 */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all">
+          <div className="rg-surface rounded-2xl p-4 space-y-2 hover:border-amber-500/50 transition-all">
             <div className="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400">
               <Gem className="w-5 h-5" />
             </div>
@@ -144,7 +144,7 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
       </div>
 
       {/* Flagship Location Details & In-Store Appointment */}
-      <div className="bg-gradient-to-b from-stone-900 to-stone-950 border border-stone-800 rounded-[2rem] p-5 space-y-4 shadow-xl shadow-black/20">
+      <div className="rg-sheet rounded-[2rem] p-5 space-y-4 shadow-xl shadow-black/20">
         
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-800 pb-3">
           <div>

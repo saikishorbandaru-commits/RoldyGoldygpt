@@ -38,6 +38,7 @@ export const BargainModal: React.FC<BargainModalProps> = ({
   const [finalLockedPrice, setFinalLockedPrice] = useState<number | null>(null);
   const [savingsPercent, setSavingsPercent] = useState<number>(0);
   const [specialPerk, setSpecialPerk] = useState<string>('');
+  const [dealApplied, setDealApplied] = useState<boolean>(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   // Initialize conversation when modal opens
@@ -46,6 +47,9 @@ export const BargainModal: React.FC<BargainModalProps> = ({
       const initialPrice = product.bargainedPrice || product.price;
       setBidAmount(Math.round(initialPrice * 0.88));
       setFinalLockedPrice(product.bargainedPrice || null);
+      setDealApplied(false);
+      setSavingsPercent(0);
+      setSpecialPerk('');
       
       const welcomeMsg: BargainMessage = {
         id: 'msg-0',
@@ -160,10 +164,18 @@ export const BargainModal: React.FC<BargainModalProps> = ({
   };
 
   const handleAcceptDeal = (priceToLock: number) => {
-    const safeLockedPrice = Math.min(product.price, priceToLock);
+    const safeLockedPrice = Math.min(product.price, Math.max(Math.round(product.price * 0.78), priceToLock));
     triggerHaptic('success');
     setFinalLockedPrice(safeLockedPrice);
-    onDealLocked(product, safeLockedPrice);
+    setSavingsPercent(Math.max(0, Math.round(((product.price - safeLockedPrice) / product.price) * 100)));
+  };
+
+  const handleApplyLockedDeal = () => {
+    if (!finalLockedPrice || dealApplied) return;
+    triggerHaptic('success');
+    onDealLocked(product, finalLockedPrice);
+    setDealApplied(true);
+    onClose();
   };
 
   return (
@@ -188,7 +200,7 @@ export const BargainModal: React.FC<BargainModalProps> = ({
                 <h3 className="font-semibold text-stone-100 text-sm">Master Jeweller Ramesh</h3>
                 <span className="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-1.5 py-0.5 rounded-sm border border-amber-500/30">Verified</span>
               </div>
-              <p className="text-xs text-stone-400">RoldyGoldy Boutique Concierge · Live AI Negotiation</p>
+              <p className="text-xs text-stone-400">RoldyGoldy Boutique Concierge · Guided negotiation</p>
             </div>
           </div>
           <button 
@@ -219,7 +231,7 @@ export const BargainModal: React.FC<BargainModalProps> = ({
           ) : (
             <div className="text-right shrink-0">
               <span className="text-[9.5px] bg-amber-500/15 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-semibold">
-                🛡️ Seller Floor Price Authorized
+                Offer range protected
               </span>
             </div>
           )}
@@ -230,7 +242,7 @@ export const BargainModal: React.FC<BargainModalProps> = ({
           <ShieldCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
           <span>
             <strong className="text-stone-300">Artisan Floor Price Protected: </strong>
-            Bargains negotiate automatically within pre-authorized discount limits set by the master artisan.
+            Your offer is evaluated within the seller-approved range. A price is applied only after you explicitly accept the final offer.
           </span>
         </div>
 
@@ -296,13 +308,11 @@ export const BargainModal: React.FC<BargainModalProps> = ({
                 <div className="text-[11px] text-emerald-400/90">{specialPerk}</div>
               </div>
               <button
-                onClick={() => {
-                  onDealLocked(product, finalLockedPrice);
-                  onClose();
-                }}
+                onClick={handleApplyLockedDeal}
+                disabled={dealApplied}
                 className="bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all shrink-0"
               >
-                Apply to Cart &rarr;
+                {dealApplied ? 'Applied ✓' : 'Apply Deal &rarr;'}
               </button>
             </div>
           </div>

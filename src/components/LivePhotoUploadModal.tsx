@@ -284,6 +284,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
           setIsLightingBoosted(true);
           setValuationResult(null);
           setRejectionError(null);
+          setIsVerified(false);
         }
       };
       img.src = rawSnappedImage || capturedImage;
@@ -370,6 +371,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
       }
 
       setRejectionError(null);
+      setIsVerified(true);
       triggerHaptic('success');
       return true;
     } catch (err: any) {
@@ -430,6 +432,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
     setIsLightingBoosted(false);
     setValuationResult(null);
     setRejectionError(null);
+    setIsVerified(false);
     if (activeTab === 'camera') {
       startCamera();
     }

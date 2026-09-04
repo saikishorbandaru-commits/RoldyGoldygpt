@@ -40,22 +40,22 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
   };
 
   return (
-    <main className="flex-1 p-4 pb-24 space-y-5 max-w-4xl mx-auto animate-in fade-in duration-200">
+    <main className="flex-1 p-4 pb-24 space-y-6 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-300">
       
       {/* Boutique Hero Showcase */}
-      <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-stone-950 via-[#24170f] to-[#4a1117] border border-amber-400/30 p-6 sm:p-8 shadow-2xl shadow-black/40">
+      <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#120b0b] via-[#2a1713] to-[#55121d] border border-amber-400/35 p-6 sm:p-8 shadow-2xl shadow-black/50">
         <div className="relative z-10 max-w-lg space-y-2.5">
           <div className="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-300 text-[11px] font-bold px-3 py-1 rounded-full">
             <Store className="w-3.5 h-3.5 text-amber-400" />
-            <span>Flagship Atelier &amp; Experience Centre</span>
+            <span>CURATED JEWELLERY EXPERIENCE</span>
           </div>
 
           <h2 className="font-serif text-2xl sm:text-3xl font-bold text-stone-100 leading-tight">
-            The RoldyGoldy Experience
+            The Boutique, Reimagined
           </h2>
 
           <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
-            Discover, try and style jewellery through a premium boutique experience—bridal consultations, doorstep trials and after-care in one place.
+            Discover jewellery beyond a catalogue. Explore curated collections, experience doorstep trials and connect with RoldyGoldy services designed around how you actually shop.
           </p>
 
           <div className="flex flex-wrap gap-2 pt-2 text-xs">
@@ -66,7 +66,7 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
               }}
               className="bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold px-4 py-2 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all"
             >
-              Order 20-Min Doorstep Trial
+              Explore Trial @Home
             </button>
             <button
               onClick={() => {
@@ -75,7 +75,7 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
               }}
               className="bg-stone-800 text-stone-200 hover:text-white border border-stone-700 font-bold px-3.5 py-2 rounded-xl transition-all"
             >
-              Exchange Old Scrap (₹0.35/g)
+              Start Jewellery Exchange
             </button>
           </div>
         </div>
@@ -87,15 +87,16 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
       {/* 4 Core Purposes of the Boutique */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="font-serif text-lg font-bold text-stone-200">
-            Your Jewellery Experience, Elevated
-          </h3>
-          <span className="text-[11px] text-amber-400 font-medium">Local &amp; Trusted</span>
+          <div>
+            <p className="text-[10px] tracking-[0.18em] text-amber-400/80 font-bold uppercase">BOUTIQUE SERVICES</p>
+            <h3 className="font-serif text-xl font-bold text-stone-100">Choose your experience</h3>
+          </div>
+          <span className="text-[11px] text-stone-500 font-medium">Designed around you</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
           
-          {/* Pillar 1 */}
+          {/* Experience cards */}
           <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2 hover:border-amber-500/40 transition-all">
             <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
               <Truck className="w-5 h-5" />

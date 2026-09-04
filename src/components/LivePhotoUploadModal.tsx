@@ -48,13 +48,12 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
   
   // Imitation / Rold Gold Scrap Parameters
   const [description, setDescription] = useState<string>('Old Broken Imitation Bangles & Chain');
-  const [gramsInput, setGramsInput] = useState<string>('50');
+  const [gramsInput, setGramsInput] = useState<string>('');
   const [metalType, setMetalType] = useState<string>('Micro-Plated Rold Gold (1-Gram Polish Finish)');
   const [isAppraising, setIsAppraising] = useState<boolean>(false);
   const [valuationResult, setValuationResult] = useState<ExchangeScrapData | null>(null);
   const [rejectionError, setRejectionError] = useState<string | null>(null);
   const [showExplanation, setShowExplanation] = useState<boolean>(false);
-  const [failedAttempts, setFailedAttempts] = useState<number>(0);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -331,19 +330,12 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
     }
   };
 
-  // Request AI Appraisal & Strict Verification
+  // Request AI verification first. Weight is collected only after the image passes verification.
   const handleAppraise = async (): Promise<boolean> => {
     if (!capturedImage) {
-      setRejectionError('Please snap a live photo or upload an image of your old imitation jewellery scrap before running AI appraisal.');
+      setRejectionError('Please snap or upload a clear image of your old imitation jewellery before verification.');
       return false;
     }
-
-    if (numericGrams <= 0) {
-      setRejectionError('Please specify scrap weight in grams (e.g. 50g, 100g, 200g) to compute exchange credit.');
-      return false;
-    }
-
-    const finalWeight = numericGrams;
 
     setIsAppraising(true);
     setRejectionError(null);
@@ -359,90 +351,55 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
         body: JSON.stringify({
-          imageBase64: capturedImage || '',
-          grams: finalWeight,
+          imageBase64: capturedImage,
           metalType,
           description,
         }),
       });
       clearTimeout(timeoutId);
-
       const data = await res.json();
 
-      // Fallback or lenient acceptance for all domestic photos:
-      // In doorstep model, photo serves as digital audit record, while digital scale calibration is done at doorstep
-      const verifiedGrams = finalWeight;
-      const verifiedGross = Math.round(verifiedGrams * currentRateObj.rate * 100) / 100;
-      const verifiedWastage = Math.round(verifiedGross * 0.10 * 100) / 100;
-      const verifiedNet = Math.max(1, Math.round(verifiedGross - verifiedWastage));
+      if (!res.ok || data?.isRejected || data?.verified === false || data?.isJewellery === false) {
+        setRejectionError(data?.message || 'This image could not be verified as eligible imitation jewellery. Please upload a clear jewellery image.');
+        return false;
+      }
 
       setRejectionError(null);
-
-      const result: ExchangeScrapData = {
-        id: `EX-${Date.now().toString().slice(-4)}`,
-        description: data.identifiedItem || description || 'Old Imitation Scrap Jewellery',
-        metalType: data.estimatedPurity || metalType,
-        grams: verifiedGrams,
-        grossCredit: verifiedGross,
-        netCredit: verifiedNet,
-        livePhotoUrl: capturedImage || undefined,
-        voucherCode: data.voucherCode || `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
-        date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }),
-        status: 'Applied',
-        notes: data.appraisalNotes || `Imitation scrap assessed at ₹${currentRateObj.rate}/g with 10% wastage deduction. Doorstep precision scale verification required.`,
-      };
       triggerHaptic('success');
-      setValuationResult(result);
       return true;
     } catch (err: any) {
       clearTimeout(timeoutId);
-      console.warn('Appraisal network fallback:', err?.message || err);
-      
-      const verifiedGrams = finalWeight;
-      const verifiedGross = Math.round(verifiedGrams * currentRateObj.rate * 100) / 100;
-      const verifiedWastage = Math.round(verifiedGross * 0.10 * 100) / 100;
-      const verifiedNet = Math.max(1, Math.round(verifiedGross - verifiedWastage));
-
-      const fallbackResult: ExchangeScrapData = {
-        id: `EX-${Date.now().toString().slice(-4)}`,
-        description: description || 'Old Imitation Scrap Jewellery',
-        metalType: metalType,
-        grams: verifiedGrams,
-        grossCredit: verifiedGross,
-        netCredit: verifiedNet,
-        livePhotoUrl: capturedImage || undefined,
-        voucherCode: `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
-        date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }),
-        status: 'Applied',
-        notes: 'Domestic scrap photo registered. Exact weight and purity will be verified by concierge executive with digital precision scale at doorstep.',
-      };
-      setRejectionError(null);
-      setValuationResult(fallbackResult);
-      triggerHaptic('success');
-      return true;
+      console.warn('Appraisal verification failed:', err?.message || err);
+      setRejectionError('Verification could not be completed. Please try again with a clear jewellery image.');
+      return false;
     } finally {
       setIsAppraising(false);
     }
   };
 
-  // Doorstep verification bypass (available immediately whenever user needs physical scale calibration)
-  const handleAcceptDoorstepVerification = () => {
-    triggerHaptic('success');
-    const doorstepResult: ExchangeScrapData = {
-      id: `EX-DOOR-${Date.now().toString().slice(-4)}`,
-      description: description || 'Doorstep-Verified Scrap Jewellery',
-      metalType: metalType,
-      grams: numericGrams || 50,
-      grossCredit: Math.round(grossEstimated),
-      netCredit: netEstimated,
-      livePhotoUrl: capturedImage || undefined,
-      voucherCode: `RG-DOORSTEP-${Math.floor(1000 + Math.random() * 9000)}`,
+  const calculateVerifiedValuation = () => {
+    if (!capturedImage || rejectionError) return;
+    if (numericGrams <= 0) {
+      setRejectionError('Enter the verified jewellery weight in grams to calculate the exchange estimate.');
+      return;
+    }
+    const verifiedGross = Math.round(numericGrams * currentRateObj.rate * 100) / 100;
+    const verifiedWastage = Math.round(verifiedGross * 0.10 * 100) / 100;
+    const verifiedNet = Math.max(1, Math.round(verifiedGross - verifiedWastage));
+    setValuationResult({
+      id: `EX-${Date.now().toString().slice(-4)}`,
+      description: description || 'Old Imitation Scrap Jewellery',
+      metalType,
+      grams: numericGrams,
+      grossCredit: verifiedGross,
+      netCredit: verifiedNet,
+      livePhotoUrl: capturedImage,
+      voucherCode: `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
       date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }),
       status: 'Applied',
-      notes: 'Doorstep Scale & Metal Verification Approved: Live photo registered. Executive will verify metal purity and calibrate weight on digital scale at doorstep collection.',
-    };
-    setValuationResult(doorstepResult);
-    setRejectionError(null);
+      notes: 'Image verified as eligible jewellery. Final weight and eligibility remain subject to physical verification where applicable.',
+    });
+    triggerHaptic('success');
   };
 
   const handleApplyVoucher = () => {
@@ -1041,7 +998,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4 text-stone-950" />
-                    <span>Verify Scrap Photo with AI &rarr;</span>
+                    <span>Verify Jewellery Image with AI &rarr;</span>
                   </>
                 )}
               </button>

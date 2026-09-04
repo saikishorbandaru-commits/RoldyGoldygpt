@@ -107,7 +107,7 @@ export const LocationSelectorModal: React.FC<LocationSelectorModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-md rg-sheet border-t sm:border border-amber-500/30 rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 space-y-5 shadow-2xl animate-in slide-in-from-bottom sm:zoom-in-95 max-h-[90vh] flex flex-col">
+      <div className="w-full max-w-md rg-sheet border-t sm:border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] p-5 sm:p-6 space-y-5 shadow-2xl animate-in slide-in-from-bottom sm:zoom-in-95 max-h-[90vh] flex flex-col">
         
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-1 border-b border-stone-800">

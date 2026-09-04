@@ -1,0 +1,6 @@
+{
+  "name": "RoldyGoldy — Luxury Jewellery & Concierge",
+  "description": "Bespoke luxury jewellery boutique with AI Jeweller bargaining, live photo capture scrap exchange appraisal, dedicated patron login portal, and Trial @Home concierge starting from Rs.49/- only.",
+  "requestFramePermissions": ["camera", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -9,9 +9,7 @@ import {
   ArrowRight,
   ShieldCheck,
   Crown,
-  CheckCircle2,
-  ExternalLink,
-  ChevronRight
+  CheckCircle2
 } from 'lucide-react';
 import { Product } from '../types';
 import { triggerHaptic } from '../utils/haptics';
@@ -77,7 +75,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                   {wishlist.length} {wishlist.length === 1 ? 'item' : 'items'}
                 </span>
               </h2>
-              <p className="text-[11px] text-stone-400">Personal jewellery curated collection</p>
+              <p className="text-[11px] text-stone-400">Saved pieces, ready whenever you are</p>
             </div>
           </div>
           <button
@@ -96,16 +94,16 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                 <Heart className="w-8 h-8" />
               </div>
               <div className="space-y-1">
-                <h3 className="font-serif font-bold text-stone-200 text-base">Your Wishlist is Empty</h3>
+                <h3 className="font-serif font-bold text-stone-200 text-base">Save what catches your eye</h3>
                 <p className="text-xs text-stone-400 max-w-xs leading-relaxed">
-                  Save jewellery you love here for later. Compare pieces, book Trial @Home where eligible, bargain, or move a selection to your cart when you are ready.
+                  Your favourites stay here while you browse. Open any piece, book Trial @Home when eligible, bargain with the jeweller, or add only the pieces you want to cart.
                 </p>
               </div>
               <button
                 onClick={onClose}
                 className="bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs px-5 py-2.5 rounded-xl shadow-lg transition-all"
               >
-                Explore Boutique Collection
+                Continue Exploring
               </button>
             </div>
           ) : (
@@ -316,22 +314,28 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
         {wishlist.length > 0 && (
           <div className="bg-stone-950 p-4 border-t border-stone-800 space-y-2">
             <div className="flex items-center justify-between text-xs text-stone-400">
-              <span>Saved Items Total:</span>
-              <span className="font-bold text-amber-400 text-sm font-mono">
-                ₹{wishlist.reduce((acc, p) => acc + (p.bargainedPrice || p.price), 0).toLocaleString('en-IN')}
-              </span>
+              <span>{wishlist.length} saved {wishlist.length === 1 ? 'piece' : 'pieces'}</span>
+              <span className="font-medium text-stone-500">Choose what you want to buy</span>
             </div>
-            <button
-              onClick={() => {
-                triggerHaptic('success');
-                wishlist.forEach((p) => onAddToCart(p, false));
-                setCartAlertProduct(wishlist[0]);
-              }}
-              className="w-full bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs py-3 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
-            >
-              <ShoppingBag className="w-4 h-4" />
-              <span>Move All ({wishlist.length}) to Cart</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onClose}
+                className="flex-1 bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-200 font-semibold text-xs py-3 rounded-xl transition-colors"
+              >
+                Keep Browsing
+              </button>
+              <button
+                onClick={() => {
+                  triggerHaptic('success');
+                  onClose();
+                  if (onOpenCart) onOpenCart();
+                }}
+                className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs py-3 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                <span>View Cart</span>
+              </button>
+            </div>
           </div>
         )}
 

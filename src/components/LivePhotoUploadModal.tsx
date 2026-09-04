@@ -253,6 +253,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         setValuationResult(null);
         setRejectionError(null);
         setIsVerified(false);
+        setGramsInput('');
         stopCamera();
       }
     }
@@ -311,6 +312,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         setValuationResult(null);
         setRejectionError(null);
         setIsVerified(false);
+        setGramsInput('');
       };
       reader.readAsDataURL(file);
     }
@@ -331,6 +333,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         setValuationResult(null);
         setRejectionError(null);
         setIsVerified(false);
+        setGramsInput('');
       };
       reader.readAsDataURL(file);
     }
@@ -365,7 +368,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
       clearTimeout(timeoutId);
       const data = await res.json();
 
-      if (!res.ok || data?.isRejected || data?.verified === false || data?.isJewellery === false) {
+      if (!res.ok || data?.isRejected || data?.verified !== true || data?.isJewellery !== true) {
         setRejectionError(data?.message || 'This image could not be verified as eligible imitation jewellery. Please upload a clear jewellery image.');
         return false;
       }

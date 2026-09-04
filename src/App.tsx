@@ -91,7 +91,7 @@ export default function App() {
   });
   const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false);
 
-  // Active Sponsored Ad Banners
+  // Featured Boutique Banners
   const [adBanners, setAdBanners] = useState<AdBanner[]>([
     {
       id: 'ad-eluru-1',
@@ -775,7 +775,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* Offers / artisan banner */}
+            {/* Curated boutique banner — shown only in the Home discovery flow */}
             <section className="px-4 pt-5 sm:px-6 max-w-5xl mx-auto w-full">
               <AdBannerSlider
                 banners={adBanners}
@@ -1062,7 +1062,7 @@ export default function App() {
         onSelectLocation={handleLocationSelected}
       />
 
-      {/* 10. Seller Ad Slot Booking Portal Modal */}
+      {/* 10. Boutique Promotion Portal Modal */}
       <SellerAdBookingModal
         isOpen={isSellerAdModalOpen}
         onClose={() => setIsSellerAdModalOpen(false)}
@@ -1071,7 +1071,7 @@ export default function App() {
         onAdBooked={(booking, banner) => {
           setSellerAdBookings((prev) => [booking, ...prev]);
           setAdBanners((prev) => [banner, ...prev]);
-          showToast(`📢 Ad Slot Booked! "${banner.title}" is now live.`);
+          showToast(`📢 Featured collection updated! "${banner.title}" is now live.`);
         }}
       />
 

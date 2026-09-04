@@ -171,3 +171,18 @@ button:focus-visible, a:focus-visible {
   background:var(--rg-gold); color:#2b0710; font-size:9px; font-weight:900;
   border:2px solid #2b0710;
 }
+
+
+/* Final completion states: empty, loading, feedback and safe-area consistency */
+.rg-page :is(.empty-state,.loading-state,.error-state){
+  border:1px dashed rgba(240,195,90,.24); border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(240,195,90,.045));
+}
+.rg-surface, .rg-sheet { overflow-wrap:anywhere; }
+@media (max-width: 640px){
+  .rg-sheet{border-bottom-left-radius:0!important;border-bottom-right-radius:0!important}
+  button,input,select,textarea{max-width:100%}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
+}

@@ -385,7 +385,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {/* Delivery & Assurance Badges */}
           {cartItems.length > 0 && (
-            <div className="bg-stone-900/60 border border-stone-800/80 rounded-2xl p-3 flex items-center justify-between text-stone-400 text-[11px]">
+            <div className="rg-surface rounded-2xl p-3 flex items-center justify-between text-stone-400 text-[11px]">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span>Doorstep Digital Weight Verified</span>
@@ -400,7 +400,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
         {/* Drawer Footer & Bill Breakdown */}
         {cartItems.length > 0 && (
-          <div className="bg-stone-950 p-4 border-t border-stone-800 space-y-3">
+          <div className="rg-glass p-4 border-t border-stone-800 space-y-3">
             <div className="space-y-1.5 text-xs">
               <div className="flex justify-between text-stone-400">
                 <span>Items MRP Value:</span>

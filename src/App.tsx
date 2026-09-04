@@ -81,7 +81,14 @@ export default function App() {
     return !!localStorage.getItem('roldygoldy_auth_user');
   });
   const [isArtisanShowcaseOpen, setIsArtisanShowcaseOpen] = useState<boolean>(false);
-  const [wishlist, setWishlist] = useState<Product[]>([]);
+  const [wishlist, setWishlist] = useState<Product[]>(() => {
+    try {
+      const saved = localStorage.getItem('roldygoldy_wishlist');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
   const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false);
 
   // Active Sponsored Ad Banners
@@ -143,40 +150,22 @@ export default function App() {
     };
   });
 
-  // Attempt automatic detection on mount
+  // Privacy-first location restore: never request GPS automatically at app startup.
+  // Users can explicitly choose location detection from the location workflow.
   useEffect(() => {
     const saved = localStorage.getItem('roldygoldy_detected_location');
-    if (saved) {
-      try {
-        const parsed: DetectedLocationResult = JSON.parse(saved);
-        setCurrentLocation(parsed);
-        setUserPincode(parsed.pincode);
-        setUserProfile(prev => ({
-          ...prev,
-          address: parsed.formattedAddress,
-          pincode: parsed.pincode
-        }));
-        return;
-      } catch (e) {
-        console.warn('Failed to parse saved location', e);
-      }
-    }
-
-    if (typeof navigator !== 'undefined' && 'geolocation' in navigator) {
-      detectCurrentLocation()
-        .then((loc) => {
-          setCurrentLocation(loc);
-          setUserPincode(loc.pincode);
-          setUserProfile(prev => ({
-            ...prev,
-            address: loc.formattedAddress,
-            pincode: loc.pincode
-          }));
-          showToast(`📍 Auto-Detected Location: ${loc.city} (${loc.pincode})`);
-        })
-        .catch((err) => {
-          console.log('GPS auto-detect skipped:', err);
-        });
+    if (!saved) return;
+    try {
+      const parsed: DetectedLocationResult = JSON.parse(saved);
+      setCurrentLocation(parsed);
+      setUserPincode(parsed.pincode);
+      setUserProfile(prev => ({
+        ...prev,
+        address: parsed.formattedAddress,
+        pincode: parsed.pincode
+      }));
+    } catch (e) {
+      console.warn('Failed to restore saved location', e);
     }
   }, []);
 
@@ -307,6 +296,11 @@ export default function App() {
 
   const [exchangeSlips, setExchangeSlips] = useState<ExchangeScrapData[]>([]);
   const [bargainHistory, setBargainHistory] = useState<{ item: string; offer: number; counter: number; date: string }[]>([]);
+
+  // Persist wishlist independently from the screen lifecycle.
+  useEffect(() => {
+    localStorage.setItem('roldygoldy_wishlist', JSON.stringify(wishlist));
+  }, [wishlist]);
 
   // Toast Notification
   const [toastMessage, setToastMessage] = useState<string | null>(null);

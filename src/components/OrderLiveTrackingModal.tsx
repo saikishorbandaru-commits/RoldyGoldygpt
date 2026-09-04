@@ -89,7 +89,7 @@ export const OrderLiveTrackingModal: React.FC<OrderLiveTrackingModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-2xl bg-stone-900 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+      <div className="w-full max-w-2xl rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
         
         {/* Header */}
         <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
@@ -99,7 +99,7 @@ export const OrderLiveTrackingModal: React.FC<OrderLiveTrackingModalProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-stone-100 text-sm">Live Order Tracking</h3>
+                <h3 className="font-semibold text-stone-100 text-sm">Track your order</h3>
                 <span className="text-[10px] bg-amber-500/20 text-amber-300 font-mono font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
                   {order.id}
                 </span>
@@ -223,7 +223,7 @@ export const OrderLiveTrackingModal: React.FC<OrderLiveTrackingModalProps> = ({
           <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 sm:p-5 space-y-3">
             <span className="font-bold text-stone-200 text-xs uppercase tracking-wider block flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5 text-amber-400" />
-              <span>Full Custody &amp; Transit Audit Timeline</span>
+              <span>Order journey</span>
             </span>
 
             <div className="space-y-4 pt-1">

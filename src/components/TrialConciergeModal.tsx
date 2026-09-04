@@ -154,20 +154,20 @@ export const TrialConciergeModal: React.FC<TrialConciergeModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-lg bg-stone-900 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+      <div className="w-full max-w-lg rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
         
         {/* Header */}
-        <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-glass px-5 py-4 border-b border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center font-bold">
               👑
             </div>
             <div>
               <h3 className="font-semibold text-stone-100 text-sm flex items-center gap-1.5">
-                <span>Trial @Home Concierge</span>
+                <span>Trial @Home · Your private try-on</span>
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded-sm border border-emerald-500/30">Starts ₹49/- Only</span>
               </h3>
-              <p className="text-xs text-stone-400">Trial@Home starts from Rs.49/- only · 100% credited if you purchase</p>
+              <p className="text-xs text-stone-400">Choose a convenient slot and experience selected pieces at home.</p>
             </div>
           </div>
           <button 

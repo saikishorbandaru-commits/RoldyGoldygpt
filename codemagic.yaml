@@ -11,17 +11,16 @@ workflows:
     scripts:
       - name: Install dependencies
         script: |
-          node --version
-          npm --version
           npm install
 
       - name: Build web application
         script: |
           npm run build
 
-      - name: Sync Capacitor Android project
+      - name: Create and Sync Capacitor Android project
         script: |
-          node --version
+          rm -rf android
+          npx cap add android
           npx cap sync android
 
       - name: Build Android Debug APK

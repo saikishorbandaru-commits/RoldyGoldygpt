@@ -247,7 +247,7 @@ export const BargainModal: React.FC<BargainModalProps> = ({
         </div>
 
         {/* Chat Stream */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-stone-950/60">
+        <div className="flex-1 overflow-y-auto p-4 space-y-3.5 rg-page">
           {messages.map((msg) => (
             <div 
               key={msg.id} 

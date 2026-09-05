@@ -111,7 +111,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 min-h-screen w-full rg-page text-stone-100 flex flex-col justify-between overflow-y-auto font-sans">
+    <div className="rg-approved-auth fixed inset-0 z-50 min-h-screen w-full rg-page text-stone-100 flex flex-col justify-between overflow-y-auto font-sans">
       {/* Ambient Luxury Background Lights */}
       <div className="absolute top-[-10%] left-[-10%] w-[450px] h-[450px] bg-amber-600/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[450px] h-[450px] bg-yellow-500/10 rounded-full blur-[100px] pointer-events-none" />

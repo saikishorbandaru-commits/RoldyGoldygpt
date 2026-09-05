@@ -705,7 +705,7 @@ export default function App() {
               </button>
             </div>
           </nav>
-        )}}
+        )}
 
       </div>
 

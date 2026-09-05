@@ -259,3 +259,19 @@ button:focus-visible, a:focus-visible {
 .rg-pdp-content section,.rg-pdp-content .rounded-2xl{border-color:var(--rg-line)}
 .rg-pdp-content .bg-stone-900{background-color:rgba(59,10,22,.62)!important}
 .rg-pdp-content .bg-stone-950{background-color:#23070e!important}
+
+
+/* Phase 3 — shared commerce surfaces */
+.rg-drawer-overlay,.rg-checkout-overlay{background:rgba(7,2,4,.78);backdrop-filter:blur(12px)}
+.rg-commerce-drawer{background:linear-gradient(180deg,#3b0a16 0%,#23070e 100%);border-left:1px solid var(--rg-line-strong);box-shadow:var(--rg-shadow-float)}
+.rg-checkout-shell{background:linear-gradient(180deg,#430b18,#23070e);border:1px solid var(--rg-line-strong);border-radius:var(--rg-radius-xl) var(--rg-radius-xl) 0 0;box-shadow:var(--rg-shadow-float)}
+.rg-commerce-header{background:rgba(35,7,14,.9);border-bottom:1px solid var(--rg-line);backdrop-filter:blur(18px)}
+.rg-commerce-drawer .rg-glass,.rg-checkout-shell .rg-glass{background:transparent!important;border-color:var(--rg-line)!important}
+.rg-commerce-drawer .bg-stone-950,.rg-checkout-shell .bg-stone-950{background-color:rgba(25,5,10,.76)!important}
+.rg-commerce-drawer .bg-stone-900,.rg-checkout-shell .bg-stone-900{background-color:rgba(59,10,22,.58)!important}
+.rg-commerce-drawer .border-stone-800,.rg-checkout-shell .border-stone-800{border-color:var(--rg-line)!important}
+.rg-commerce-drawer .rounded-2xl,.rg-checkout-shell .rounded-2xl{border-radius:var(--rg-radius-lg)!important}
+.rg-commerce-drawer .text-amber-400,.rg-checkout-shell .text-amber-400{color:var(--rg-gold-2)!important}
+.rg-commerce-drawer button:focus-visible,.rg-checkout-shell button:focus-visible{outline:2px solid var(--rg-gold);outline-offset:2px}
+.rg-checkout-shell input[type="radio"]{accent-color:var(--rg-gold)}
+@media(min-width:641px){.rg-checkout-shell{border-radius:var(--rg-radius-xl)}}

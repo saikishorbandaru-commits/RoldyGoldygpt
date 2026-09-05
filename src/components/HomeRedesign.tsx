@@ -1,15 +1,170 @@
 import React from 'react';
-import { Search, MapPin, SlidersHorizontal, Heart, ShoppingBag, ArrowRight, Sparkles, Recycle, Handshake, Crown, ChevronRight, ScanLine } from 'lucide-react';
+import {
+  Search, MapPin, Heart, ShoppingBag, Crown, Recycle, Handshake,
+  ChevronRight, SlidersHorizontal, Grid2X2, Sparkles, ArrowRight
+} from 'lucide-react';
 import { Product } from '../types';
 
-type Props = { products: Product[]; filteredProducts: Product[]; selectedCategory: string; searchQuery: string; trialOnlyFilter: boolean; locationLabel: string; trialAvailable: boolean; wishlist: Product[]; onSearch:(v:string)=>void; onCategory:(v:string)=>void; onToggleTrial:()=>void; onOpenLocation:()=>void; onSelectProduct:(p:Product)=>void; onToggleWishlist:(p:Product)=>void; onAddToCart:(p:Product)=>void; onOpenTrial:()=>void; onOpenExchange:()=>void; onOpenBargain:()=>void; };
-const categories=[['All','All'],['Bridal','Bridal'],['Daily Wear','Daily'],['Temple','Temple'],['Korean','Korean'],['Polki','Polki']];
-export function HomeRedesign(p:Props){const hero=p.products.find(x=>x.trialEligible)||p.products[0];return <main className="rg-approved-home flex-1 rg-page pb-28"><div className="max-w-5xl mx-auto w-full px-4 sm:px-6 pt-4 space-y-6">
-<header className="rg-home-header"><div><p className="rg-home-overline">ROLDYGOLDY</p><h1>Jewellery, <em>your way.</em></h1></div><button onClick={p.onOpenLocation} className="rg-location-pill"><MapPin className="w-4 h-4"/><span><small>Deliver to</small>{p.locationLabel}</span><ChevronRight className="w-4 h-4 opacity-60"/></button></header>
-<section className="rg-search-redesign"><Search className="w-5 h-5 text-amber-300/80"/><input value={p.searchQuery} onChange={e=>p.onSearch(e.target.value)} placeholder="Search jewellery, styles and collections"/><button onClick={p.onToggleTrial} className={p.trialOnlyFilter?'rg-filter-button active':'rg-filter-button'}><SlidersHorizontal className="w-4 h-4"/><span>Trial</span></button></section>
-<section className="rg-editorial-hero"><div className="rg-editorial-copy"><span className="rg-hero-chip"><Sparkles className="w-3.5 h-3.5"/> The new jewellery experience</span><h2>See it.<br/><strong>Try it.</strong><br/>Love it.</h2><p>Discover everyday shine and statement bridal pieces, with selected local jewellery available for a doorstep trial.</p><div className="flex gap-2.5 flex-wrap"><button onClick={p.onOpenTrial} className="rg-editorial-primary"><Crown className="w-4 h-4"/> Book a home trial</button><button onClick={()=>p.onSelectProduct(hero)} className="rg-editorial-link">Explore collection <ArrowRight className="w-4 h-4"/></button></div></div>{hero&&<button onClick={()=>p.onSelectProduct(hero)} className="rg-editorial-image"><img src={hero.image} alt={hero.name}/><span className="rg-image-caption">Featured today</span></button>}</section>
-<section><div className="rg-section-title"><div><p>START EXPLORING</p><h2>Shop by mood</h2></div><span>{p.filteredProducts.length} pieces</span></div><div className="rg-category-rail">{categories.map(([v,l])=><button key={v} onClick={()=>p.onCategory(v)} className={p.selectedCategory===v?'selected':''}>{l}</button>)}</div></section>
-<section className="rg-feature-grid"><button onClick={p.onOpenTrial} className="rg-feature-card trial"><span className="rg-feature-icon"><Crown className="w-5 h-5"/></span><div><small>01 / DOORSTEP</small><h3>Trial @Home</h3><p>{p.trialAvailable?'Available for your location':'Check availability by PIN'}</p></div><ArrowRight className="w-5 h-5"/></button><button onClick={p.onOpenExchange} className="rg-feature-card exchange"><span className="rg-feature-icon"><Recycle className="w-5 h-5"/></span><div><small>02 / CIRCULAR</small><h3>Exchange & Save</h3><p>Turn eligible old jewellery into savings</p></div><ArrowRight className="w-5 h-5"/></button><button onClick={p.onOpenBargain} className="rg-feature-card bargain"><span className="rg-feature-icon"><Handshake className="w-5 h-5"/></span><div><small>03 / YOUR PRICE</small><h3>Make an offer</h3><p>Bargain directly on selected pieces</p></div><ArrowRight className="w-5 h-5"/></button></section>
-<section id="product-catalog-section"><div className="rg-section-title"><div><p>CURATED FOR YOU</p><h2>{p.selectedCategory==='All'?'The edit':p.selectedCategory}</h2></div><button onClick={()=>p.onCategory('All')} className="rg-view-all">View all</button></div>{p.filteredProducts.length===0?<div className="rg-empty-state"><ScanLine className="w-8 h-8 mx-auto mb-3 rg-gold"/><h3>No pieces found</h3><p>Try a different search or collection.</p></div>:<div className="rg-product-grid-new">{p.filteredProducts.map(product=>{const saved=p.wishlist.some(w=>w.id===product.id),price=product.bargainedPrice||product.price;return <article key={product.id} className="rg-product-card-new"><button onClick={()=>p.onSelectProduct(product)} className="rg-product-image-new"><img src={product.image} alt={product.name}/>{product.trialEligible&&<span>Trial @Home</span>}</button><button onClick={()=>p.onToggleWishlist(product)} className={saved?'rg-save-new saved':'rg-save-new'}><Heart className={saved?'fill-current':''}/></button><div className="rg-product-info-new"><button onClick={()=>p.onSelectProduct(product)} className="text-left"><small>{product.category}</small><h3>{product.name}</h3></button><div className="rg-product-bottom"><div><strong>₹{price.toLocaleString('en-IN')}</strong><small>₹{product.originalPrice.toLocaleString('en-IN')}</small></div><button onClick={()=>p.onAddToCart(product)}><ShoppingBag className="w-4 h-4"/></button></div></div></article>})}</div>}</section>
-<section className="rg-home-assurance"><span>Hyperlocal trial</span><i/><span>PIN-based discovery</span><i/><span>Exchange savings</span><i/><span>Secure checkout</span></section>
-</div></main>}
+type Props = {
+  products: Product[];
+  filteredProducts: Product[];
+  selectedCategory: string;
+  searchQuery: string;
+  trialOnlyFilter: boolean;
+  locationLabel: string;
+  trialAvailable: boolean;
+  wishlist: Product[];
+  onSearch:(v:string)=>void;
+  onCategory:(v:string)=>void;
+  onToggleTrial:()=>void;
+  onOpenLocation:()=>void;
+  onSelectProduct:(p:Product)=>void;
+  onToggleWishlist:(p:Product)=>void;
+  onAddToCart:(p:Product)=>void;
+  onOpenTrial:()=>void;
+  onOpenExchange:()=>void;
+  onOpenBargain:()=>void;
+};
+
+const categoryLabels = ['Daily Wear','Korean','Temple','Bridal','Necklaces','Earrings','Bangles','Rings','Anklets','Accessories'];
+
+export function HomeRedesign(p: Props) {
+  const hero = p.products.find(x => x.trialEligible) || p.products[0];
+  const categoryProduct = (label:string) => {
+    const key = label === 'Necklaces' ? 'Necklace' : label;
+    return p.products.find(x =>
+      x.category.toLowerCase().includes(key.toLowerCase()) ||
+      x.name.toLowerCase().includes(key.toLowerCase())
+    ) || p.products[(categoryLabels.indexOf(label) + 1) % Math.max(p.products.length, 1)];
+  };
+  const bestSellers = p.filteredProducts.slice(0, 8);
+
+  return (
+    <main className="rg-showcase-home flex-1 pb-28">
+      <div className="rg-showcase-home-inner">
+        <header className="rg-showcase-home-header">
+          <div>
+            <h1>RoldyGoldy</h1>
+            <button onClick={p.onOpenLocation} className="rg-showcase-location">
+              <MapPin size={13} />
+              <span>{p.locationLabel}</span>
+              <ChevronRight size={13} />
+            </button>
+          </div>
+          <div className="rg-showcase-header-actions">
+            <button onClick={p.onToggleTrial} className={p.trialOnlyFilter ? 'is-active' : ''} aria-label="Trial eligible filter">
+              <SlidersHorizontal size={18} />
+            </button>
+            <button onClick={p.onOpenExchange} aria-label="Exchange jewellery">
+              <Recycle size={18} />
+            </button>
+          </div>
+        </header>
+
+        <section className="rg-showcase-search">
+          <Search size={19} />
+          <input
+            value={p.searchQuery}
+            onChange={e => p.onSearch(e.target.value)}
+            placeholder="Search jewellery"
+          />
+          <button aria-label="Search filters"><SlidersHorizontal size={17}/></button>
+        </section>
+
+        <section className="rg-showcase-trial-banner">
+          <div className="rg-showcase-trial-copy">
+            <span>Trial @Home</span>
+            <h2>Try before you buy</h2>
+            <p>{p.trialAvailable ? 'Curated pieces at your doorstep' : 'Check serviceability for your PIN'}</p>
+            <button onClick={p.onOpenTrial}>BOOK NOW <ArrowRight size={14}/></button>
+          </div>
+          {hero && <button onClick={() => p.onSelectProduct(hero)} className="rg-showcase-trial-image">
+            <img src={hero.image} alt={hero.name}/>
+          </button>}
+          <Sparkles className="rg-showcase-trial-sparkle" size={20}/>
+        </section>
+
+        <section id="shop-by-category-section" className="rg-showcase-section">
+          <div className="rg-showcase-section-heading">
+            <div><span>SHOP YOUR WAY</span><h2>Categories</h2></div>
+            <button onClick={() => p.onCategory('All')}>View all <ChevronRight size={15}/></button>
+          </div>
+          <div className="rg-showcase-category-grid">
+            {categoryLabels.map((label) => {
+              const product = categoryProduct(label);
+              return (
+                <button
+                  key={label}
+                  onClick={() => p.onCategory(label === 'Necklaces' ? 'All' : label)}
+                  className={p.selectedCategory === label ? 'is-selected' : ''}
+                >
+                  {product && <img src={product.image} alt="" />}
+                  <span>{label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="rg-showcase-feature-row">
+          <button onClick={p.onOpenTrial}>
+            <span className="rg-showcase-feature-icon"><Crown size={18}/></span>
+            <span><small>DOORSTEP</small><strong>Trial @Home</strong></span>
+            <ChevronRight size={17}/>
+          </button>
+          <button onClick={p.onOpenExchange}>
+            <span className="rg-showcase-feature-icon"><Recycle size={18}/></span>
+            <span><small>CIRCULAR</small><strong>Exchange & Save</strong></span>
+            <ChevronRight size={17}/>
+          </button>
+          <button onClick={p.onOpenBargain}>
+            <span className="rg-showcase-feature-icon"><Handshake size={18}/></span>
+            <span><small>YOUR PRICE</small><strong>Bargain</strong></span>
+            <ChevronRight size={17}/>
+          </button>
+        </section>
+
+        <section id="product-catalog-section" className="rg-showcase-section">
+          <div className="rg-showcase-section-heading">
+            <div><span>CURATED FOR YOU</span><h2>Best Sellers</h2></div>
+            <button onClick={() => p.onCategory('All')}>See All <ChevronRight size={15}/></button>
+          </div>
+
+          {bestSellers.length === 0 ? (
+            <div className="rg-showcase-empty"><Grid2X2 size={28}/><p>No pieces found for this filter.</p></div>
+          ) : (
+            <div className="rg-showcase-product-grid">
+              {bestSellers.map(product => {
+                const saved = p.wishlist.some(w => w.id === product.id);
+                const price = product.bargainedPrice || product.price;
+                return (
+                  <article key={product.id} className="rg-showcase-product-card">
+                    <button onClick={() => p.onSelectProduct(product)} className="rg-showcase-product-image">
+                      <img src={product.image} alt={product.name}/>
+                      {product.trialEligible && <span>TRIAL</span>}
+                    </button>
+                    <button
+                      onClick={() => p.onToggleWishlist(product)}
+                      className={saved ? 'rg-showcase-save is-saved' : 'rg-showcase-save'}
+                      aria-label="Save item"
+                    >
+                      <Heart size={17} fill={saved ? 'currentColor' : 'none'} />
+                    </button>
+                    <button onClick={() => p.onSelectProduct(product)} className="rg-showcase-product-info">
+                      <small>{product.category}</small>
+                      <h3>{product.name}</h3>
+                      <strong>₹{price.toLocaleString('en-IN')}</strong>
+                    </button>
+                    <button onClick={() => p.onAddToCart(product)} className="rg-showcase-add" aria-label="Add to cart">
+                      <ShoppingBag size={16}/>
+                    </button>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      </div>
+    </main>
+  );
+}

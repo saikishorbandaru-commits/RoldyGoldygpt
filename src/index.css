@@ -810,3 +810,15 @@ button,input,select,textarea{font:inherit}
 .rg-customer-shell .bg-amber-500,.rg-customer-shell .bg-gradient-to-r.from-amber-500{background:linear-gradient(135deg,#f0ca72,#dba23a)!important;color:#351018!important}
 .rg-customer-shell .divide-stone-800\/60>*+*{border-color:#eadcc6!important}
 .rg-customer-shell>div:last-child.bg-stone-950{background:rgba(255,250,241,.98)!important;border-color:#eadcc6!important}
+
+
+/* Device stability and no-shake guard */
+html,body,#root{width:100%;max-width:100%;overflow-x:hidden}
+body{overscroll-behavior-x:none}
+img,svg,video,canvas{max-width:100%}
+.rg-app-shell,.rg-page,.rg-feature-shell,.rg-customer-shell,.rg-commerce-drawer{min-width:0}
+.rg-showcase-product-grid,.rg-showcase-category-grid{align-items:stretch}
+@media(max-width:430px){
+  .rg-app-shell{width:100vw;min-height:100svh}
+  .rg-app-dock{padding-bottom:max(8px,env(safe-area-inset-bottom))}
+}

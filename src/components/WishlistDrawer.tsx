@@ -59,11 +59,11 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="w-full max-w-md bg-stone-900 border-l border-amber-500/30 flex flex-col h-full shadow-2xl animate-in slide-in-from-right duration-300 relative">
+    <div className="rg-drawer-overlay fixed inset-0 z-50 flex justify-end animate-in fade-in duration-300">
+      <div className="w-full max-w-md rg-commerce-drawer flex flex-col h-full animate-in slide-in-from-right duration-300 relative">
         
         {/* Drawer Header */}
-        <div className="rg-glass px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-commerce-header px-5 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400">
               <Heart className="w-4 h-4 fill-rose-500" />

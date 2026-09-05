@@ -685,3 +685,9 @@ button,input,select,textarea{font:inherit}
  .rg-pdp-stage .h-\[420px\]{height:52svh!important}
  .rg-pdp-stage .px-3\.5.py-2\.5{padding:10px 14px!important}
 }
+
+.rg-showcase-catalog{padding-top:4px}
+.rg-showcase-filter-strip{display:flex;gap:7px;overflow-x:auto;padding:1px 1px 4px;scrollbar-width:none}
+.rg-showcase-filter-strip::-webkit-scrollbar{display:none}
+.rg-showcase-filter-strip button{flex:0 0 auto;border-radius:999px;border:1px solid rgba(230,184,77,.25);background:#2a0b12;color:#d8c0a1;padding:8px 11px;font-size:10px;white-space:nowrap}
+.rg-showcase-filter-strip button.is-active{background:#e7b94e;color:#351018;border-color:#f3cf78;font-weight:800}

@@ -592,3 +592,66 @@ button,input,select,textarea{font:inherit}
 @media(max-width:640px){
   .fixed.inset-0.z-75 > div,.fixed.inset-0.z-\[100\] > div,.fixed.inset-0.z-60 > div{max-width:100%!important}
 }
+
+
+/* ==========================================================================
+   APPROVED SHOWCASE — structural screen rebuild
+   Reference: RoldyGoldy Jewellery App Showcase. These styles support rebuilt
+   compositions instead of recolouring the legacy layout.
+   ========================================================================== */
+.rg-showcase-home{
+  min-height:100%;
+  background:linear-gradient(180deg,#18070c 0%,#26080f 72%,#1b060b 100%);
+  color:#f8dfaa;
+}
+.rg-showcase-home-inner{max-width:560px;margin:0 auto;padding:14px 14px 24px;display:flex;flex-direction:column;gap:18px}
+.rg-showcase-home-header{display:flex;align-items:flex-start;justify-content:space-between;padding:4px 2px 0}
+.rg-showcase-home-header h1{font-family:Georgia,'Times New Roman',serif;font-size:1.3rem;line-height:1.05;letter-spacing:.01em;color:#f2c55f;margin:0}
+.rg-showcase-location{margin-top:6px;display:flex;align-items:center;gap:4px;color:#9d7b80;font-size:10px;background:transparent;border:0;padding:0}
+.rg-showcase-header-actions{display:flex;gap:7px}
+.rg-showcase-header-actions button{width:34px;height:34px;border-radius:11px;border:1px solid rgba(234,188,81,.24);background:#260a12;color:#e7b94f;display:grid;place-items:center}
+.rg-showcase-header-actions button.is-active{background:#e6b74e;color:#26080f;border-color:#f5d57e}
+.rg-showcase-search{height:43px;border-radius:12px;background:#fdf8ed;border:1px solid #e5d7c0;display:flex;align-items:center;gap:9px;padding:0 11px;color:#76555b;box-shadow:0 10px 25px rgba(0,0,0,.18)}
+.rg-showcase-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#311018;font-size:12px}
+.rg-showcase-search button{border:0;background:transparent;color:#7c5d61;padding:2px}
+.rg-showcase-trial-banner{position:relative;min-height:138px;overflow:hidden;border-radius:18px;border:1px solid rgba(235,190,81,.34);background:linear-gradient(115deg,#6f1026,#3a0813 60%,#22070c);display:flex;box-shadow:0 16px 36px rgba(0,0,0,.24)}
+.rg-showcase-trial-copy{position:relative;z-index:2;width:64%;padding:18px 14px 16px;display:flex;flex-direction:column;align-items:flex-start}
+.rg-showcase-trial-copy span{font-size:10px;color:#f1cb76;letter-spacing:.08em;text-transform:uppercase}
+.rg-showcase-trial-copy h2{margin:4px 0 3px;font-family:Georgia,'Times New Roman',serif;color:#fff4df;font-size:1.15rem}
+.rg-showcase-trial-copy p{margin:0;color:#d4b7aa;font-size:10px;line-height:1.45}
+.rg-showcase-trial-copy button{margin-top:auto;display:inline-flex;align-items:center;gap:5px;border:0;border-radius:8px;background:linear-gradient(135deg,#f1cb72,#d99d31);color:#311018;font-size:9px;font-weight:800;padding:8px 10px}
+.rg-showcase-trial-image{position:absolute;right:0;top:0;width:43%;height:100%;border:0;background:#22070c;padding:0}
+.rg-showcase-trial-image:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#3a0813 0%,transparent 38%,rgba(0,0,0,.1))}
+.rg-showcase-trial-image img{width:100%;height:100%;object-fit:cover;object-position:center}
+.rg-showcase-trial-sparkle{position:absolute;right:43%;top:15px;color:#f5cc66;z-index:2;filter:drop-shadow(0 0 8px rgba(245,204,102,.55))}
+.rg-showcase-section{display:flex;flex-direction:column;gap:10px}
+.rg-showcase-section-heading{display:flex;align-items:flex-end;justify-content:space-between}
+.rg-showcase-section-heading span{display:block;font-size:9px;letter-spacing:.14em;color:#a47c57}
+.rg-showcase-section-heading h2{font-family:Georgia,'Times New Roman',serif;font-size:1.05rem;color:#f7e8c9;margin:2px 0 0}
+.rg-showcase-section-heading button{display:flex;align-items:center;gap:2px;border:0;background:transparent;color:#e6b74e;font-size:10px}
+.rg-showcase-category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.rg-showcase-category-grid button{position:relative;height:70px;border-radius:11px;overflow:hidden;border:1px solid rgba(229,183,78,.22);background:#2a0b12;color:#f6dfae;text-align:left;padding:0}
+.rg-showcase-category-grid button img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:saturate(.8)}
+.rg-showcase-category-grid button:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,7,12,.84),rgba(24,7,12,.25))}
+.rg-showcase-category-grid button span{position:relative;z-index:2;display:block;padding:12px;font-size:10px;font-weight:700}
+.rg-showcase-category-grid button.is-selected{outline:1px solid #efc45d;border-color:#efc45d}
+.rg-showcase-feature-row{display:grid;grid-template-columns:1fr;gap:8px}
+.rg-showcase-feature-row>button{min-height:64px;border-radius:13px;border:1px solid rgba(229,183,78,.2);background:linear-gradient(135deg,#2d0b13,#21080d);color:#f4e1bb;display:grid;grid-template-columns:38px 1fr 18px;align-items:center;gap:9px;padding:8px 10px;text-align:left}
+.rg-showcase-feature-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(232,184,79,.12);color:#e9b94d}
+.rg-showcase-feature-row small{display:block;color:#a37d67;font-size:8px;letter-spacing:.1em}
+.rg-showcase-feature-row strong{display:block;margin-top:2px;font-family:Georgia,'Times New Roman',serif;font-size:12px}
+.rg-showcase-feature-row>button>svg{justify-self:end;color:#b58b48}
+.rg-showcase-product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.rg-showcase-product-card{position:relative;border-radius:13px;overflow:hidden;border:1px solid rgba(229,183,78,.18);background:#fffaf0;box-shadow:0 9px 20px rgba(0,0,0,.16)}
+.rg-showcase-product-image{position:relative;width:100%;height:148px;border:0;background:#efe1c9;padding:0;overflow:hidden}
+.rg-showcase-product-image img{width:100%;height:100%;object-fit:cover}
+.rg-showcase-product-image span{position:absolute;left:7px;top:7px;border-radius:999px;background:#61142a;color:#f7dc96;font-size:7px;font-weight:800;padding:4px 6px;letter-spacing:.04em}
+.rg-showcase-save{position:absolute;right:7px;top:7px;width:28px;height:28px;border-radius:9px;border:0;background:rgba(255,250,240,.92);color:#7b5558;display:grid;place-items:center}
+.rg-showcase-save.is-saved{color:#8d1835}
+.rg-showcase-product-info{display:block;width:100%;border:0;background:#fffaf0;text-align:left;padding:9px 10px 12px;color:#351017}
+.rg-showcase-product-info small{display:block;color:#98725c;font-size:8px}
+.rg-showcase-product-info h3{margin:3px 0 6px;font-size:10px;font-weight:700;line-height:1.3;min-height:26px;overflow:hidden}
+.rg-showcase-product-info strong{font-size:12px;color:#641126}
+.rg-showcase-add{position:absolute;right:8px;bottom:9px;width:28px;height:28px;border-radius:9px;border:0;background:#f0c35e;color:#321017;display:grid;place-items:center}
+.rg-showcase-empty{padding:28px 18px;border-radius:14px;border:1px dashed rgba(229,183,78,.3);text-align:center;color:#a98779}
+@media(min-width:640px){.rg-showcase-home-inner{max-width:760px;padding:20px}.rg-showcase-category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rg-showcase-feature-row{grid-template-columns:repeat(3,minmax(0,1fr))}.rg-showcase-feature-row>button{grid-template-columns:34px 1fr}.rg-showcase-feature-row>button>svg{display:none}.rg-showcase-product-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.rg-showcase-product-image{height:180px}.rg-showcase-trial-banner{min-height:190px}}

@@ -822,3 +822,22 @@ img,svg,video,canvas{max-width:100%}
   .rg-app-shell{width:100vw;min-height:100svh}
   .rg-app-dock{padding-bottom:max(8px,env(safe-area-inset-bottom))}
 }
+
+
+/* Approved premium interaction polish */
+@media (prefers-reduced-motion: no-preference){
+  .rg-showcase-product-card,.rg-showcase-category-card,.rg-dock-item,.rg-surface,.rg-commerce-drawer button,.rg-customer-shell button{
+    transition:transform 180ms ease,box-shadow 180ms ease,border-color 180ms ease,background-color 180ms ease,color 180ms ease;
+  }
+  .rg-showcase-product-card:active,.rg-showcase-category-card:active,.rg-dock-item:active{transform:scale(.985)}
+}
+.rg-app-dock{isolation:isolate}
+.rg-app-dock-inner{min-width:0}
+.rg-dock-item{min-width:0;overflow:hidden}
+.rg-dock-item span{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.rg-page,.rg-showcase-page{scrollbar-gutter:stable both-edges}
+@media(max-width:380px){
+  .rg-dock-item span{font-size:9px!important}
+  .rg-app-dock-inner{gap:1px!important}
+  .rg-showcase-product-grid{gap:10px!important}
+}

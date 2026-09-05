@@ -21,7 +21,8 @@ import {
   X,
   Navigation,
   House,
-  Gem
+  Gem,
+  Recycle
 } from 'lucide-react';
 import { INITIAL_PRODUCTS } from './data/products';
 import { Product, CartItem, ExchangeScrapData, TrialBooking, Order, UserProfile, AdBanner, SellerAdBooking } from './types';
@@ -531,7 +532,7 @@ export default function App() {
       <div className="rg-app-frame w-full max-w-5xl mx-auto flex-1 flex flex-col relative">
         
         {/* Top Header */}
-        {!selectedProduct && activeTab !== 'account' && (
+        {!selectedProduct && activeTab !== 'account' && activeTab !== 'home' && (
           <header className="rg-app-topbar sticky top-0 z-30 px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2.5">
@@ -686,25 +687,28 @@ export default function App() {
 
         {/* Persistent premium app navigation */}
         {!selectedProduct && (
-          <nav className="rg-app-dock" aria-label="Primary navigation">
-            <div className="rg-app-dock-inner">
-              <button onClick={() => { setSelectedProduct(null); setActiveTab('home'); }} className={`rg-dock-item ${activeTab === 'home' ? 'is-active' : ''}`} aria-label="Home">
-                <House className="w-5 h-5" strokeWidth={activeTab === 'home' ? 2.6 : 2} /><span>Home</span>
-              </button>
-              <button onClick={() => { setSelectedProduct(null); setActiveTab('boutique'); }} className={`rg-dock-item ${activeTab === 'boutique' ? 'is-active' : ''}`} aria-label="Boutique">
-                <Gem className="w-5 h-5" strokeWidth={activeTab === 'boutique' ? 2.6 : 2} /><span>Boutique</span>
-              </button>
-              <button onClick={() => setIsWishlistOpen(true)} className="rg-dock-item" aria-label="Saved">
-                <span className="relative"><Heart className="w-5 h-5" />{wishlist.length > 0 && <span className="rg-nav-count">{wishlist.length}</span>}</span><span>Saved</span>
-              </button>
-              <button onClick={() => setIsCartOpen(true)} className="rg-dock-item" aria-label="Cart">
-                <span className="relative"><ShoppingBag className="w-5 h-5" />{cartItemsCount > 0 && <span className="rg-nav-count">{cartItemsCount}</span>}</span><span>Cart</span>
-              </button>
-              <button onClick={() => { setSelectedProduct(null); setActiveTab('account'); }} className={`rg-dock-item ${activeTab === 'account' ? 'is-active' : ''}`} aria-label="Account">
-                <User className="w-5 h-5" strokeWidth={activeTab === 'account' ? 2.6 : 2} /><span>Account</span>
-              </button>
-            </div>
-          </nav>
+          <nav className="rg-app-dock rg-showcase-dock" aria-label="Primary navigation">
+  <div className="rg-app-dock-inner">
+    <button onClick={() => { setSelectedProduct(null); setActiveTab('home'); }} className={`rg-dock-item ${activeTab === 'home' ? 'is-active' : ''}`} aria-label="Home">
+      <House className="w-5 h-5" strokeWidth={activeTab === 'home' ? 2.6 : 2} /><span>Home</span>
+    </button>
+    <button onClick={() => {
+      setSelectedProduct(null); setActiveTab('home'); setSelectedCategory('All');
+      window.setTimeout(() => document.getElementById('shop-by-category-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    }} className="rg-dock-item" aria-label="Categories">
+      <Layers className="w-5 h-5" /><span>Categories</span>
+    </button>
+    <button onClick={() => { setTrialTargetProduct(products.find(p => p.trialEligible) || products[0]); setIsTrialModalOpen(true); }} className="rg-dock-item" aria-label="Trial at home">
+      <Crown className="w-5 h-5" /><span>Trial</span>
+    </button>
+    <button onClick={() => setIsLivePhotoModalOpen(true)} className="rg-dock-item" aria-label="Exchange">
+      <Recycle className="w-5 h-5" /><span>Exchange</span>
+    </button>
+    <button onClick={() => { setSelectedProduct(null); setActiveTab('account'); }} className={`rg-dock-item ${activeTab === 'account' ? 'is-active' : ''}`} aria-label="Account">
+      <User className="w-5 h-5" strokeWidth={activeTab === 'account' ? 2.6 : 2} /><span>Account</span>
+    </button>
+  </div>
+</nav>
         )}
 
       </div>

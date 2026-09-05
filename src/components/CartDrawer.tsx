@@ -83,11 +83,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-xs animate-in fade-in">
-      <div className="w-full max-w-md rg-sheet border-l border-amber-500/30 h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-300">
+    <div className="rg-drawer-overlay fixed inset-0 z-50 flex justify-end animate-in fade-in">
+      <div className="w-full max-w-md rg-commerce-drawer h-full flex flex-col animate-in slide-in-from-right duration-300">
         
         {/* Header with Back Navigation Button */}
-        <div className="bg-stone-950 px-4 py-3.5 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-commerce-header px-4 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
               onClick={() => {

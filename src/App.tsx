@@ -528,11 +528,11 @@ export default function App() {
       )}
 
       {/* Main Responsive Container */}
-      <div className="w-full max-w-5xl mx-auto flex-1 flex flex-col relative bg-stone-950 border-x border-stone-800/60 shadow-2xl">
+      <div className="rg-app-frame w-full max-w-5xl mx-auto flex-1 flex flex-col relative">
         
         {/* Top Header */}
         {!selectedProduct && activeTab !== 'account' && (
-          <header className="sticky top-0 z-30 bg-stone-950/95 backdrop-blur-md border-b border-stone-800/80 px-4 py-3 flex items-center justify-between">
+          <header className="rg-app-topbar sticky top-0 z-30 px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2.5">
                 <img src="/roldygoldy-logo.png" alt="RoldyGoldy" className="h-10 w-auto object-contain rounded-xl" />

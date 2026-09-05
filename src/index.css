@@ -746,3 +746,25 @@ button,input,select,textarea{font:inherit}
 .rg-checkout-overlay .bg-amber-500,.rg-customer-overlay .bg-amber-500{
   background:linear-gradient(135deg,#f0cb72,#dba23a)!important;color:#351018!important
 }
+
+
+/* APPROVED SHOWCASE — Account, activity and support composition */
+.rg-account-hub{background:#fff8ed!important;color:#351018!important;min-height:100svh!important}
+.rg-account-header{background:linear-gradient(120deg,#5b1025,#300810)!important;border-bottom:1px solid rgba(231,185,78,.24);box-shadow:0 10px 24px rgba(43,8,16,.18)}
+.rg-account-header h2{font-family:Georgia,'Times New Roman',serif!important;color:#fff4df!important}
+.rg-account-header p{color:#d9b9aa!important}
+.rg-account-header .bg-stone-900{background:rgba(255,248,237,.1)!important;border-color:rgba(231,185,78,.22)!important;color:#f7e7c5!important}
+.rg-account-content{max-width:760px!important;padding:16px 14px 110px!important}
+.rg-account-hub .rg-account-hero{border-radius:18px!important;border:1px solid #ead7bd!important;background:linear-gradient(135deg,#fffdf7,#f8ecda)!important;box-shadow:0 12px 30px rgba(77,24,34,.08)!important}
+.rg-account-hub .rg-account-hero:before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(#f0ca72,#8c1932)}
+.rg-account-hub .rg-surface{background:#fffdf7!important;border-color:#eadcc6!important;color:#351018!important;box-shadow:0 8px 22px rgba(77,24,34,.05)!important}
+.rg-account-hub .text-stone-100,.rg-account-hub .text-stone-200{color:#351018!important}
+.rg-account-hub .text-stone-300,.rg-account-hub .text-stone-400,.rg-account-hub .text-stone-500{color:#87666a!important}
+.rg-account-hub .bg-stone-900,.rg-account-hub .bg-stone-950{background:#fffdf7!important}
+.rg-account-hub .bg-stone-800{background:#f3e7d6!important}
+.rg-account-hub .border-stone-700,.rg-account-hub .border-stone-800{border-color:#eadcc6!important}
+.rg-account-hub .text-amber-300,.rg-account-hub .text-amber-400{color:#8d1934!important}
+.rg-account-hub .bg-amber-500{background:#e5b64d!important;color:#351018!important}
+.rg-account-hub .hover\:bg-stone-850:hover,.rg-account-hub .hover\:bg-stone-800:hover{background:#f7ead9!important}
+.rg-account-hub .font-serif{font-family:Georgia,'Times New Roman',serif!important}
+.rg-account-hub input,.rg-account-hub textarea{background:#fffdf7!important;border-color:#dfcfb7!important;color:#351018!important}

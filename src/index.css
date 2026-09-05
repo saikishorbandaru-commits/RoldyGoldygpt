@@ -289,3 +289,14 @@ button:focus-visible, a:focus-visible {
 .rg-feature-shell button:focus-visible{outline:2px solid var(--rg-gold);outline-offset:2px}
 .rg-feature-shell .bg-gradient-to-r.from-amber-500,.rg-feature-shell .bg-gradient-to-tr.from-amber-600{box-shadow:0 12px 28px rgba(231,169,46,.16)}
 @media(min-width:641px){.rg-feature-shell{border-radius:var(--rg-radius-xl)}}
+
+
+/* Phase 5 — customer hub */
+.rg-account-hub{background:radial-gradient(circle at 88% 0,rgba(240,195,90,.09),transparent 28%),linear-gradient(180deg,#180308,#0d0205 62%)}
+.rg-account-header{background:rgba(24,3,8,.88);border-bottom:1px solid var(--rg-line);backdrop-filter:blur(20px)}
+.rg-account-hero{background:linear-gradient(135deg,rgba(67,11,24,.96),rgba(35,7,14,.98));border:1px solid var(--rg-line-strong);border-radius:var(--rg-radius-xl);box-shadow:var(--rg-shadow-float)}
+.rg-account-content .rg-surface{border-color:var(--rg-line)!important;background:rgba(59,10,22,.56)!important}
+.rg-account-content .bg-stone-900{background-color:rgba(59,10,22,.62)!important}
+.rg-account-content .bg-stone-950{background-color:rgba(24,3,8,.84)!important}
+.rg-account-content .border-stone-800,.rg-account-content .border-stone-700{border-color:var(--rg-line)!important}
+.rg-account-content button:focus-visible{outline:2px solid var(--rg-gold);outline-offset:2px}

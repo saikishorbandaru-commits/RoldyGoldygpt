@@ -309,7 +309,7 @@ Return strict JSON only.`;
 
       const parsed = JSON.parse(response.text.trim());
       const confidence = Math.max(0, Math.min(1, Number(parsed.confidence) || 0));
-      const isJewellery = parsed.isJewelleryDetected === true && confidence >= 0.65;
+      // Accept clearly detected jewellery under ordinary indoor conditions; confidence is a guardrail, not a studio-lighting score.\n      const isJewellery = parsed.isJewelleryDetected === true && confidence >= 0.50;
 
       if (!isJewellery) {
         return reject(

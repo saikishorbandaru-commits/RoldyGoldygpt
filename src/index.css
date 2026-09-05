@@ -691,3 +691,58 @@ button,input,select,textarea{font:inherit}
 .rg-showcase-filter-strip::-webkit-scrollbar{display:none}
 .rg-showcase-filter-strip button{flex:0 0 auto;border-radius:999px;border:1px solid rgba(230,184,77,.25);background:#2a0b12;color:#d8c0a1;padding:8px 11px;font-size:10px;white-space:nowrap}
 .rg-showcase-filter-strip button.is-active{background:#e7b94e;color:#351018;border-color:#f3cf78;font-weight:800}
+
+
+/* APPROVED SHOWCASE — Trial and Exchange feature journeys */
+.rg-checkout-overlay .rg-feature-shell,
+.rg-customer-overlay .rg-feature-shell{
+  background:#fffaf1!important;
+  border:1px solid #eadcc6!important;
+  border-radius:22px 22px 0 0!important;
+  box-shadow:0 -18px 60px rgba(35,8,14,.35)!important;
+  color:#351018!important;
+}
+@media(min-width:640px){
+  .rg-checkout-overlay .rg-feature-shell,.rg-customer-overlay .rg-feature-shell{border-radius:22px!important}
+}
+.rg-checkout-overlay .rg-feature-header,
+.rg-customer-overlay .rg-feature-header{
+  background:linear-gradient(120deg,#5d1026,#300811)!important;
+  border-color:rgba(231,185,78,.28)!important;
+  color:#fff4df!important;
+}
+.rg-checkout-overlay .rg-feature-header h3,
+.rg-customer-overlay .rg-feature-header h3{font-family:Georgia,'Times New Roman',serif!important;color:#fff4df!important}
+.rg-checkout-overlay .rg-feature-header p,
+.rg-customer-overlay .rg-feature-header p{color:#d9b9aa!important}
+.rg-checkout-overlay .rg-page,.rg-customer-overlay .rg-page{background:#fffaf1!important;color:#4a252b!important}
+.rg-checkout-overlay .rg-page .bg-stone-900,
+.rg-checkout-overlay .rg-page .bg-stone-950,
+.rg-customer-overlay .rg-page .bg-stone-900,
+.rg-customer-overlay .rg-page .bg-stone-950{
+  background:#fffdf7!important;
+  color:#4a252b!important;
+}
+.rg-checkout-overlay .rg-page .border-stone-800,
+.rg-checkout-overlay .rg-page .border-stone-700,
+.rg-customer-overlay .rg-page .border-stone-800,
+.rg-customer-overlay .rg-page .border-stone-700{border-color:#eadcc6!important}
+.rg-checkout-overlay .rg-page .text-stone-100,.rg-checkout-overlay .rg-page .text-stone-200,
+.rg-customer-overlay .rg-page .text-stone-100,.rg-customer-overlay .rg-page .text-stone-200{color:#351018!important}
+.rg-checkout-overlay .rg-page .text-stone-300,.rg-checkout-overlay .rg-page .text-stone-400,.rg-checkout-overlay .rg-page .text-stone-500,
+.rg-customer-overlay .rg-page .text-stone-300,.rg-customer-overlay .rg-page .text-stone-400,.rg-customer-overlay .rg-page .text-stone-500{color:#87666a!important}
+.rg-checkout-overlay .rg-page .bg-amber-500,.rg-customer-overlay .rg-page .bg-amber-500{
+  background:linear-gradient(135deg,#f0cb72,#dba23a)!important;color:#351018!important
+}
+.rg-checkout-overlay .rg-page .text-amber-400,.rg-checkout-overlay .rg-page .text-amber-300,
+.rg-customer-overlay .rg-page .text-amber-400,.rg-customer-overlay .rg-page .text-amber-300{color:#8d1934!important}
+.rg-checkout-overlay .rg-page input,.rg-checkout-overlay .rg-page select,
+.rg-customer-overlay .rg-page input,.rg-customer-overlay .rg-page select{
+  background:#fffdf7!important;border-color:#dfcfb7!important;color:#351018!important
+}
+.rg-checkout-overlay .bg-stone-950:last-child,.rg-customer-overlay .bg-stone-950:last-child{
+  background:rgba(255,250,241,.98)!important;border-color:#eadcc6!important
+}
+.rg-checkout-overlay .bg-amber-500,.rg-customer-overlay .bg-amber-500{
+  background:linear-gradient(135deg,#f0cb72,#dba23a)!important;color:#351018!important
+}

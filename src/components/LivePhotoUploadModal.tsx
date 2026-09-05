@@ -218,7 +218,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
       if (ctx) {
         // Capture raw frame first
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const rawDataUrl = canvas.toDataURL('image/jpeg', 0.88);
+        const rawDataUrl = canvas.toDataURL('image/jpeg', 0.92);
         setRawSnappedImage(rawDataUrl);
 
         // Measure average scene luminance across frame
@@ -239,8 +239,8 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
 
         // If scene is slightly dim (standard household/indoor ambient room light),
         // automatically boost exposure & contrast so gold luster, stones, and links stand out brightly for AI
-        if (avgLuminance < 115) {
-          ctx.filter = 'brightness(1.28) contrast(1.16) saturate(1.10)';
+        if (avgLuminance < 85) {
+          ctx.filter = 'brightness(1.38) contrast(1.12) saturate(1.08)';
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
           ctx.filter = 'none';
           setIsLightingBoosted(true);
@@ -248,7 +248,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
           setIsLightingBoosted(false);
         }
 
-        const finalDataUrl = canvas.toDataURL('image/jpeg', 0.88);
+        const finalDataUrl = canvas.toDataURL('image/jpeg', 0.92);
         setCapturedImage(finalDataUrl);
         setValuationResult(null);
         setRejectionError(null);
@@ -278,7 +278,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         canvas.height = img.height;
         const ctx = canvas.getContext('2d');
         if (ctx) {
-          ctx.filter = 'brightness(1.32) contrast(1.18) saturate(1.12)';
+          ctx.filter = 'brightness(1.36) contrast(1.12) saturate(1.08)';
           ctx.drawImage(img, 0, 0);
           const boostedUrl = canvas.toDataURL('image/jpeg', 0.88);
           setCapturedImage(boostedUrl);
@@ -442,11 +442,11 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-md p-0 sm:p-4 animate-in fade-in">
+    <div className="rg-customer-overlay fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in">
       <div className="w-full max-w-lg rg-feature-shell flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
-        <div className="rg-glass px-5 py-3.5 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-feature-header px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
               <Camera className="w-5 h-5" />

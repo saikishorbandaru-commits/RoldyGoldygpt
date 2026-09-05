@@ -83,11 +83,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-xs animate-in fade-in">
-      <div className="w-full max-w-md bg-stone-900 border-l border-amber-500/30 h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-200">
+    <div className="rg-drawer-overlay fixed inset-0 z-50 flex justify-end animate-in fade-in">
+      <div className="w-full max-w-md rg-commerce-drawer h-full flex flex-col animate-in slide-in-from-right duration-300">
         
         {/* Header with Back Navigation Button */}
-        <div className="bg-stone-950 px-4 py-3.5 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-commerce-header px-4 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
               onClick={() => {
@@ -106,7 +106,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <ShoppingBag className="w-4 h-4" />
               </div>
               <div>
-                <h3 className="font-semibold text-stone-100 text-xs sm:text-sm">My Cart &amp; Bill</h3>
+                <h3 className="font-semibold text-stone-100 text-xs sm:text-sm">My Jewellery Bag</h3>
                 <p className="text-[10px] text-stone-400">{cartItems.length} item(s)</p>
               </div>
             </div>
@@ -121,7 +121,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         </div>
 
         {/* Cart Items List */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-stone-950/60 text-xs">
+        <div className="flex-1 overflow-y-auto p-4 space-y-3 rg-page text-xs">
           {cartItems.length === 0 ? (
             <div className="text-center py-16 space-y-4">
               <div className="w-16 h-16 rounded-full bg-stone-800/80 border border-stone-700 text-stone-500 flex items-center justify-center mx-auto text-2xl">
@@ -129,7 +129,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </div>
               <div>
                 <h4 className="text-sm font-bold text-stone-200">Your jewellery cart is empty</h4>
-                <p className="text-xs text-stone-400 mt-1">Discover handcrafted bridal chokers, temple jhumkas &amp; daily wear.</p>
+                <p className="text-xs text-stone-400 mt-1">Your selected pieces will appear here when you are ready to compare or buy.</p>
               </div>
               <button
                 onClick={() => {
@@ -139,7 +139,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 className="bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs px-5 py-2.5 rounded-xl shadow-lg inline-flex items-center gap-2"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Back to Boutique Collections</span>
+                <span>Continue Exploring</span>
               </button>
             </div>
           ) : (
@@ -264,7 +264,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                             <span className="font-bold text-xs">~₹{Math.round((item.product.price) * 0.85).toLocaleString('en-IN')} Trade Value</span>
                           </div>
                           <p className="text-[9.5px] text-emerald-400/80">
-                            Snap live photo of old jewellery to get instant cashback credit against this item.
+                            Upload a clear jewellery image for verification before an exchange estimate can be created.
                           </p>
                           <div className="flex items-center gap-1.5 pt-0.5">
                             <button
@@ -275,7 +275,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                               className="flex-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold py-1.5 px-2 rounded-lg text-[10px] flex items-center justify-center gap-1 transition-colors"
                             >
                               <Camera className="w-3 h-3" />
-                              <span>Live Snap Scrap Exchange</span>
+                              <span>Start Jewellery Exchange</span>
                             </button>
                             <button
                               onClick={() => handleProductClick(item.product)}
@@ -366,7 +366,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <span>Have Old Scrap Jewellery?</span>
                     </div>
                     <p className="text-[11px] text-stone-400">
-                      Snap live photo of old ornaments for instant doorstep cashback.
+                      Get an exchange estimate after a jewellery image is successfully verified. Random or unrelated images are not eligible for valuation.
                     </p>
                   </div>
                   <button
@@ -385,7 +385,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {/* Delivery & Assurance Badges */}
           {cartItems.length > 0 && (
-            <div className="bg-stone-900/60 border border-stone-800/80 rounded-2xl p-3 flex items-center justify-between text-stone-400 text-[11px]">
+            <div className="rg-surface rounded-2xl p-3 flex items-center justify-between text-stone-400 text-[11px]">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span>Doorstep Digital Weight Verified</span>
@@ -400,7 +400,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
         {/* Drawer Footer & Bill Breakdown */}
         {cartItems.length > 0 && (
-          <div className="bg-stone-950 p-4 border-t border-stone-800 space-y-3">
+          <div className="rg-glass p-4 border-t border-stone-800 space-y-3">
             <div className="space-y-1.5 text-xs">
               <div className="flex justify-between text-stone-400">
                 <span>Items MRP Value:</span>

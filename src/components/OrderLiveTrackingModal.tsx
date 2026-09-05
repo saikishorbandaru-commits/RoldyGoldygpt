@@ -88,18 +88,18 @@ export const OrderLiveTrackingModal: React.FC<OrderLiveTrackingModalProps> = ({
   const totalItemsCount = order.items.reduce((acc, i) => acc + i.quantity, 0);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-2xl bg-stone-900 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+    <div className="rg-customer-overlay fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div className="w-full max-w-2xl rg-customer-shell flex flex-col max-h-[94vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
-        <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-customer-header px-5 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-600 to-yellow-400 p-0.5 shadow-md flex items-center justify-center text-stone-950 font-bold shrink-0">
               <Truck className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-stone-100 text-sm">Live Order Tracking</h3>
+                <h3 className="font-semibold text-stone-100 text-sm">Track your order</h3>
                 <span className="text-[10px] bg-amber-500/20 text-amber-300 font-mono font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
                   {order.id}
                 </span>
@@ -118,7 +118,7 @@ export const OrderLiveTrackingModal: React.FC<OrderLiveTrackingModalProps> = ({
         </div>
 
         {/* Scrollable Tracking Content */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 bg-stone-950/60 text-xs">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 rg-page text-xs">
           
           {/* Live Delivery Status Hero Banner */}
           <div className="bg-gradient-to-r from-amber-950/70 via-stone-900 to-amber-950/40 border border-amber-500/40 rounded-2xl p-4 space-y-3 shadow-lg">
@@ -220,10 +220,10 @@ export const OrderLiveTrackingModal: React.FC<OrderLiveTrackingModalProps> = ({
           </div>
 
           {/* Detailed Tracking Milestones Stepper */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 sm:p-5 space-y-3">
+          <div className="rg-surface rounded-2xl p-4 sm:p-5 space-y-3">
             <span className="font-bold text-stone-200 text-xs uppercase tracking-wider block flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5 text-amber-400" />
-              <span>Full Custody &amp; Transit Audit Timeline</span>
+              <span>Order journey</span>
             </span>
 
             <div className="space-y-4 pt-1">
@@ -280,7 +280,7 @@ export const OrderLiveTrackingModal: React.FC<OrderLiveTrackingModalProps> = ({
           </div>
 
           {/* Individual Products in this Specific Order */}
-          <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-3">
+          <div className="rg-surface rounded-2xl p-4 space-y-3">
             <span className="font-bold text-stone-200 text-xs uppercase tracking-wider block flex items-center gap-1.5">
               <Package className="w-3.5 h-3.5 text-amber-400" />
               <span>Individually Tracked Jewellery Pieces ({totalItemsCount} Total)</span>

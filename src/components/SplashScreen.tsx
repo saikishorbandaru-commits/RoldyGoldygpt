@@ -17,7 +17,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
     const t2 = setTimeout(() => setStage(2), 800);
     // Stage 2: Subtitle & heritage badge
     const t3 = setTimeout(() => setStage(3), 1400);
-    // Stage 3: Smooth fade-out and transition into home
+    // Stage 3: Smooth fade-out and transition into the mandatory app-features tour
     const t4 = setTimeout(() => {
       setIsFadingOut(true);
       setTimeout(onComplete, 500);
@@ -39,7 +39,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-[100] bg-stone-950 flex flex-col items-center justify-between p-6 select-none transition-opacity duration-500 overflow-hidden ${
+      className={`rg-approved-splash fixed inset-0 z-[100] rg-page flex flex-col items-center justify-between p-6 select-none transition-opacity duration-500 overflow-hidden ${
         isFadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
@@ -70,7 +70,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         {/* Animated Royal Insignia */}
         <div className="relative">
           <div
-            className={`w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-tr from-amber-600 via-yellow-400 to-amber-200 p-[2px] shadow-[0_0_50px_rgba(245,158,11,0.35)] transition-all duration-700 ${
+            className={`w-24 h-24 sm:w-28 sm:h-28 rounded-[28px] bg-gradient-to-tr from-amber-600 via-yellow-400 to-amber-200 p-[2px] shadow-[0_0_50px_rgba(245,158,11,0.35)] transition-all duration-700 ${
               stage >= 1 ? 'scale-100 opacity-100 rotate-0' : 'scale-75 opacity-0 rotate-12'
             }`}
           >
@@ -92,7 +92,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
             RoldyGoldy
           </h1>
           <p className="text-xs uppercase tracking-[0.25em] text-stone-400 font-semibold">
-            Her Pride · Her Choice · Her Trust
+            Premium imitation jewellery, your way
           </p>
         </div>
 
@@ -123,7 +123,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           />
         </div>
         <p className="text-[11px] text-stone-400">
-          Opening your jewellery experience...
+          Curating your RoldyGoldy experience...
         </p>
       </div>
     </div>

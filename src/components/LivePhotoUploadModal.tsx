@@ -38,7 +38,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
   onScrapValued,
   targetProductName,
 }) => {
-  const [activeTab, setActiveTab] = useState<'camera' | 'upload'>('camera');
+  const [activeTab, setActiveTab] = useState<'camera' | 'upload'>('upload');
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [facingMode, setFacingMode] = useState<'user' | 'environment'>('environment');
@@ -48,13 +48,13 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
   
   // Imitation / Rold Gold Scrap Parameters
   const [description, setDescription] = useState<string>('Old Broken Imitation Bangles & Chain');
-  const [gramsInput, setGramsInput] = useState<string>('50');
+  const [gramsInput, setGramsInput] = useState<string>('');
   const [metalType, setMetalType] = useState<string>('Micro-Plated Rold Gold (1-Gram Polish Finish)');
   const [isAppraising, setIsAppraising] = useState<boolean>(false);
   const [valuationResult, setValuationResult] = useState<ExchangeScrapData | null>(null);
   const [rejectionError, setRejectionError] = useState<string | null>(null);
+  const [isVerified, setIsVerified] = useState<boolean>(false);
   const [showExplanation, setShowExplanation] = useState<boolean>(false);
-  const [failedAttempts, setFailedAttempts] = useState<number>(0);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -218,7 +218,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
       if (ctx) {
         // Capture raw frame first
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const rawDataUrl = canvas.toDataURL('image/jpeg', 0.88);
+        const rawDataUrl = canvas.toDataURL('image/jpeg', 0.92);
         setRawSnappedImage(rawDataUrl);
 
         // Measure average scene luminance across frame
@@ -239,8 +239,8 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
 
         // If scene is slightly dim (standard household/indoor ambient room light),
         // automatically boost exposure & contrast so gold luster, stones, and links stand out brightly for AI
-        if (avgLuminance < 115) {
-          ctx.filter = 'brightness(1.28) contrast(1.16) saturate(1.10)';
+        if (avgLuminance < 85) {
+          ctx.filter = 'brightness(1.38) contrast(1.12) saturate(1.08)';
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
           ctx.filter = 'none';
           setIsLightingBoosted(true);
@@ -248,10 +248,12 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
           setIsLightingBoosted(false);
         }
 
-        const finalDataUrl = canvas.toDataURL('image/jpeg', 0.88);
+        const finalDataUrl = canvas.toDataURL('image/jpeg', 0.92);
         setCapturedImage(finalDataUrl);
         setValuationResult(null);
         setRejectionError(null);
+        setIsVerified(false);
+        setGramsInput('');
         stopCamera();
       }
     }
@@ -267,6 +269,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
       setIsLightingBoosted(false);
       setValuationResult(null);
       setRejectionError(null);
+      setIsVerified(false);
     } else {
       const img = new Image();
       img.onload = () => {
@@ -275,13 +278,14 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         canvas.height = img.height;
         const ctx = canvas.getContext('2d');
         if (ctx) {
-          ctx.filter = 'brightness(1.32) contrast(1.18) saturate(1.12)';
+          ctx.filter = 'brightness(1.36) contrast(1.12) saturate(1.08)';
           ctx.drawImage(img, 0, 0);
           const boostedUrl = canvas.toDataURL('image/jpeg', 0.88);
           setCapturedImage(boostedUrl);
           setIsLightingBoosted(true);
           setValuationResult(null);
           setRejectionError(null);
+          setIsVerified(false);
         }
       };
       img.src = rawSnappedImage || capturedImage;
@@ -307,6 +311,8 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         setIsLightingBoosted(false);
         setValuationResult(null);
         setRejectionError(null);
+        setIsVerified(false);
+        setGramsInput('');
       };
       reader.readAsDataURL(file);
     }
@@ -326,24 +332,19 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         setIsLightingBoosted(false);
         setValuationResult(null);
         setRejectionError(null);
+        setIsVerified(false);
+        setGramsInput('');
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Request AI Appraisal & Strict Verification
+  // Request AI verification first. Weight is collected only after the image passes verification.
   const handleAppraise = async (): Promise<boolean> => {
     if (!capturedImage) {
-      setRejectionError('Please snap a live photo or upload an image of your old imitation jewellery scrap before running AI appraisal.');
+      setRejectionError('Please snap or upload a clear image of your old imitation jewellery before verification.');
       return false;
     }
-
-    if (numericGrams <= 0) {
-      setRejectionError('Please specify scrap weight in grams (e.g. 50g, 100g, 200g) to compute exchange credit.');
-      return false;
-    }
-
-    const finalWeight = numericGrams;
 
     setIsAppraising(true);
     setRejectionError(null);
@@ -359,90 +360,59 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
         body: JSON.stringify({
-          imageBase64: capturedImage || '',
-          grams: finalWeight,
+          imageBase64: capturedImage,
           metalType,
           description,
         }),
       });
       clearTimeout(timeoutId);
-
       const data = await res.json();
 
-      // Fallback or lenient acceptance for all domestic photos:
-      // In doorstep model, photo serves as digital audit record, while digital scale calibration is done at doorstep
-      const verifiedGrams = finalWeight;
-      const verifiedGross = Math.round(verifiedGrams * currentRateObj.rate * 100) / 100;
-      const verifiedWastage = Math.round(verifiedGross * 0.10 * 100) / 100;
-      const verifiedNet = Math.max(1, Math.round(verifiedGross - verifiedWastage));
+      if (!res.ok || data?.isRejected || data?.verified !== true || data?.isJewellery !== true) {
+        setRejectionError(data?.message || 'This image could not be verified as eligible imitation jewellery. Please upload a clear jewellery image.');
+        return false;
+      }
 
       setRejectionError(null);
-
-      const result: ExchangeScrapData = {
-        id: `EX-${Date.now().toString().slice(-4)}`,
-        description: data.identifiedItem || description || 'Old Imitation Scrap Jewellery',
-        metalType: data.estimatedPurity || metalType,
-        grams: verifiedGrams,
-        grossCredit: verifiedGross,
-        netCredit: verifiedNet,
-        livePhotoUrl: capturedImage || undefined,
-        voucherCode: data.voucherCode || `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
-        date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }),
-        status: 'Applied',
-        notes: data.appraisalNotes || `Imitation scrap assessed at ₹${currentRateObj.rate}/g with 10% wastage deduction. Doorstep precision scale verification required.`,
-      };
+      setIsVerified(true);
       triggerHaptic('success');
-      setValuationResult(result);
       return true;
     } catch (err: any) {
       clearTimeout(timeoutId);
-      console.warn('Appraisal network fallback:', err?.message || err);
-      
-      const verifiedGrams = finalWeight;
-      const verifiedGross = Math.round(verifiedGrams * currentRateObj.rate * 100) / 100;
-      const verifiedWastage = Math.round(verifiedGross * 0.10 * 100) / 100;
-      const verifiedNet = Math.max(1, Math.round(verifiedGross - verifiedWastage));
-
-      const fallbackResult: ExchangeScrapData = {
-        id: `EX-${Date.now().toString().slice(-4)}`,
-        description: description || 'Old Imitation Scrap Jewellery',
-        metalType: metalType,
-        grams: verifiedGrams,
-        grossCredit: verifiedGross,
-        netCredit: verifiedNet,
-        livePhotoUrl: capturedImage || undefined,
-        voucherCode: `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
-        date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }),
-        status: 'Applied',
-        notes: 'Domestic scrap photo registered. Exact weight and purity will be verified by concierge executive with digital precision scale at doorstep.',
-      };
-      setRejectionError(null);
-      setValuationResult(fallbackResult);
-      triggerHaptic('success');
-      return true;
+      console.warn('Appraisal verification failed:', err?.message || err);
+      setRejectionError('Verification could not be completed. Please try again with a clear jewellery image.');
+      return false;
     } finally {
       setIsAppraising(false);
     }
   };
 
-  // Doorstep verification bypass (available immediately whenever user needs physical scale calibration)
-  const handleAcceptDoorstepVerification = () => {
-    triggerHaptic('success');
-    const doorstepResult: ExchangeScrapData = {
-      id: `EX-DOOR-${Date.now().toString().slice(-4)}`,
-      description: description || 'Doorstep-Verified Scrap Jewellery',
-      metalType: metalType,
-      grams: numericGrams || 50,
-      grossCredit: Math.round(grossEstimated),
-      netCredit: netEstimated,
-      livePhotoUrl: capturedImage || undefined,
-      voucherCode: `RG-DOORSTEP-${Math.floor(1000 + Math.random() * 9000)}`,
+  const calculateVerifiedValuation = () => {
+    if (!capturedImage || rejectionError || !isVerified) {
+      setRejectionError('Please complete successful jewellery image verification before calculating an exchange estimate.');
+      return;
+    }
+    if (numericGrams <= 0) {
+      setRejectionError('Enter the verified jewellery weight in grams to calculate the exchange estimate.');
+      return;
+    }
+    const verifiedGross = Math.round(numericGrams * currentRateObj.rate * 100) / 100;
+    const verifiedWastage = Math.round(verifiedGross * 0.10 * 100) / 100;
+    const verifiedNet = Math.max(1, Math.round(verifiedGross - verifiedWastage));
+    setValuationResult({
+      id: `EX-${Date.now().toString().slice(-4)}`,
+      description: description || 'Old Imitation Scrap Jewellery',
+      metalType,
+      grams: numericGrams,
+      grossCredit: verifiedGross,
+      netCredit: verifiedNet,
+      livePhotoUrl: capturedImage,
+      voucherCode: `RG-TRADE-${Math.floor(1000 + Math.random() * 9000)}`,
       date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }),
       status: 'Applied',
-      notes: 'Doorstep Scale & Metal Verification Approved: Live photo registered. Executive will verify metal purity and calibrate weight on digital scale at doorstep collection.',
-    };
-    setValuationResult(doorstepResult);
-    setRejectionError(null);
+      notes: 'Image verified as eligible jewellery. Final weight and eligibility remain subject to physical verification where applicable.',
+    });
+    triggerHaptic('success');
   };
 
   const handleApplyVoucher = () => {
@@ -465,17 +435,18 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
     setIsLightingBoosted(false);
     setValuationResult(null);
     setRejectionError(null);
+    setIsVerified(false);
     if (activeTab === 'camera') {
       startCamera();
     }
   };
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-md p-0 sm:p-4 animate-in fade-in">
-      <div className="w-full max-w-lg bg-stone-900 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+    <div className="rg-customer-overlay fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in">
+      <div className="w-full max-w-lg rg-feature-shell flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
-        <div className="bg-stone-950 px-5 py-3.5 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-feature-header px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
               <Camera className="w-5 h-5" />
@@ -500,13 +471,13 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3.5 no-scrollbar bg-stone-950/40">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3.5 no-scrollbar rg-page">
 
           {/* Verification Process Notice */}
-          <div className="bg-stone-950 border border-stone-800 rounded-2xl p-3 flex items-start gap-2.5 text-xs text-stone-300">
+          <div className="rg-glass rounded-2xl p-3 flex items-start gap-2.5 text-xs text-stone-300">
             <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <div className="leading-relaxed">
-              <strong className="text-amber-300">AI Gemmological Verification: </strong>
+              <strong className="text-amber-300">AI Jewellery Verification: </strong>
               To unlock exchange valuation, attach a clear photo of your old scrap imitation jewellery. Non-jewellery items will be rejected.
             </div>
           </div>
@@ -514,37 +485,22 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
           {/* Rejection Alert Banner if Non-Jewellery Uploaded */}
           {rejectionError && (
             <div className={`rounded-2xl p-4 text-xs space-y-2 animate-in fade-in border ${
-              failedAttempts >= 3 
+              false 
                 ? 'bg-amber-950/90 border-amber-500/80 text-amber-200' 
                 : 'bg-red-950/90 border-red-500/60 text-red-200'
             }`}>
               <div className="font-bold flex items-center justify-between gap-1.5">
                 <div className="flex items-center gap-1.5">
-                  <AlertCircle className={`w-4 h-4 shrink-0 ${failedAttempts >= 3 ? 'text-amber-400' : 'text-red-400'}`} />
-                  <span className={failedAttempts >= 3 ? 'text-amber-300 font-bold' : 'text-red-300'}>
-                    {failedAttempts >= 3 ? 'Doorstep Executive Verification Unlocked' : 'Jewellery Photo Verification Failed'}
-                  </span>
+                  <AlertCircle className={`w-4 h-4 shrink-0 ${false ? 'text-amber-400' : 'text-red-400'}`} />
+                  <span className="text-red-300">Jewellery Photo Verification Failed</span>
                 </div>
                 <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/40 border border-white/10">
-                  Attempt {failedAttempts}/3
+                  Verification required
                 </span>
               </div>
-              <p className={`text-[11.5px] leading-relaxed ${failedAttempts >= 3 ? 'text-amber-200/90' : 'text-red-200/90'}`}>
-                {failedAttempts >= 3 
-                  ? 'Since automatic photo verification was unsuccessful after 3 attempts, you can proceed with your photo upload! Our delivery concierge executive will physically verify the metal purity and calibrate the net weight on a certified digital scale at the time of doorstep collection.'
-                  : rejectionError}
-              </p>
+              <p className="text-[11.5px] leading-relaxed text-red-200/90">{rejectionError}</p>
               <div className="pt-1 flex items-center gap-2 flex-wrap">
-                {failedAttempts >= 3 && (
-                  <button
-                    type="button"
-                    onClick={handleAcceptDoorstepVerification}
-                    className="bg-gradient-to-r from-amber-500 to-yellow-400 hover:brightness-110 text-stone-950 font-bold text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md transition-all active:scale-95"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-stone-950" />
-                    <span>Proceed with Doorstep Verification (Unlock ₹{netEstimated.toLocaleString('en-IN')})</span>
-                  </button>
-                )}
+                
                 <button
                   type="button"
                   onClick={handleRetakePhoto}
@@ -562,7 +518,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-stone-300 uppercase tracking-wider flex items-center gap-1.5">
                 <span>1. Scrap Photo (Mandatory Verification)</span>
-                {capturedImage && !rejectionError && valuationResult && (
+                {capturedImage && !rejectionError && isVerified && (
                   <span className="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-1.5 py-0.2 rounded-sm font-bold">✓ Verified</span>
                 )}
               </span>
@@ -596,7 +552,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
             </div>
 
             {/* Stage: Live Camera vs Captured Image vs File Upload */}
-            <div className="relative rounded-2xl overflow-hidden border border-stone-800 bg-stone-950 min-h-[160px] max-h-[200px] flex items-center justify-center">
+            <div className="relative rounded-2xl overflow-hidden border border-stone-800 rg-page min-h-[160px] max-h-[200px] flex items-center justify-center">
               {capturedImage ? (
                 <div className="relative w-full h-44 group">
                   <img
@@ -620,7 +576,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                     <span className={`text-[11px] font-bold flex items-center gap-1 px-2.5 py-1 rounded-lg backdrop-blur-md ${
                       rejectionError
                         ? 'bg-red-950/80 text-red-300 border border-red-500/50'
-                        : valuationResult
+                        : isVerified
                         ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/50'
                         : 'bg-amber-950/80 text-amber-300 border border-amber-500/50'
                     }`}>
@@ -628,7 +584,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                         <>
                           <AlertCircle className="w-3.5 h-3.5 text-red-400" /> Verification Notice
                         </>
-                      ) : valuationResult ? (
+                      ) : isVerified ? (
                         <>
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Verified Jewellery
                         </>
@@ -720,7 +676,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full h-44 p-4 border-2 border-dashed border-stone-800 hover:border-amber-500/60 rounded-2xl flex flex-col items-center justify-center text-center cursor-pointer transition-all space-y-1.5 bg-stone-950"
+                  className="w-full h-44 p-4 border-2 border-dashed border-stone-800 hover:border-amber-500/60 rounded-2xl flex flex-col items-center justify-center text-center cursor-pointer transition-all space-y-1.5 rg-page"
                 >
                   <Upload className="w-6 h-6 text-amber-400" />
                   <div className="space-y-0.5">
@@ -794,7 +750,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                   setMetalType(e.target.value);
                   setValuationResult(null);
                 }}
-                className="w-full bg-stone-950 border border-stone-700 rounded-xl px-3 py-2.5 text-xs text-stone-200 focus:outline-hidden focus:border-amber-500 font-medium"
+                className="w-full rg-page border border-stone-700 rounded-xl px-3 py-2.5 text-xs text-stone-200 focus:outline-hidden focus:border-amber-500 font-medium"
               >
                 {Object.keys(METAL_RATES).map((key) => (
                   <option key={key} value={key}>
@@ -819,7 +775,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 bg-stone-950 border border-stone-700 rounded-xl px-3.5 py-2.5 focus-within:border-amber-500 transition-colors">
+              <div className="flex items-center gap-2 rg-page border border-stone-700 rounded-xl px-3.5 py-2.5 focus-within:border-amber-500 transition-colors">
                 <input
                   type="text"
                   inputMode="decimal"
@@ -832,7 +788,8 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                       if (rejectionError) setRejectionError(null);
                     }
                   }}
-                  placeholder="Enter weight (e.g. 50, 100, 200, 500)"
+                  placeholder={isVerified ? "Enter weight (e.g. 50, 100, 200, 500)" : "Verify jewellery image first"}
+                  disabled={!isVerified}
                   className="w-full bg-transparent text-sm font-bold text-stone-100 placeholder-stone-600 focus:outline-hidden"
                 />
                 <span className="text-amber-400 font-bold text-xs">Grams (g)</span>
@@ -851,13 +808,14 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                 ].map((chip) => (
                   <button
                     key={chip.val}
+                    disabled={!isVerified}
                     type="button"
                     onClick={() => {
                       triggerHaptic('light');
                       setGramsInput(chip.val);
                       setValuationResult(null);
                     }}
-                    className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all ${
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-all disabled:opacity-40 disabled:cursor-not-allowed ${
                       gramsInput === chip.val
                         ? 'bg-amber-500 text-stone-950 border-amber-400 font-bold shadow-xs'
                         : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-500/50 hover:text-white'
@@ -879,26 +837,30 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                   setValuationResult(null);
                 }}
                 placeholder="e.g. 4 broken bangles, 2 old rold gold necklaces, loose earrings"
-                className="w-full bg-stone-950 border border-stone-700 rounded-xl px-3 py-2 text-xs text-stone-200 focus:outline-hidden focus:border-amber-500"
+                className="w-full rg-page border border-stone-700 rounded-xl px-3 py-2 text-xs text-stone-200 focus:outline-hidden focus:border-amber-500"
               />
             </div>
 
             {/* STRICT VALUATION STATE CONTAINER */}
             {!valuationResult ? (
-              <div className="bg-stone-950/80 rounded-2xl p-4 border border-stone-800 space-y-2.5 text-xs text-center">
+              <div className="rg-page/80 rounded-2xl p-4 border border-stone-800 space-y-2.5 text-xs text-center">
                 <div className="flex flex-col items-center justify-center py-2 space-y-1.5">
                   <div className="w-10 h-10 rounded-full bg-stone-900 border border-stone-700 flex items-center justify-center text-amber-400">
                     <Lock className="w-5 h-5" />
                   </div>
                   <h4 className="font-bold text-stone-200 text-xs">
-                    {rejectionError
+                    {!isVerified
+                      ? 'Verify Jewellery Image to Unlock Weight & Valuation'
+                      : rejectionError
                       ? 'Valuation Locked (Verification Failed)'
                       : !capturedImage
                       ? 'Exchange Valuation Locked: Photo Required'
                       : 'Photo Attached: AI Verification Required'}
                   </h4>
                   <p className="text-[11px] text-stone-400 max-w-xs mx-auto leading-relaxed">
-                    {rejectionError
+                    {!isVerified
+                      ? 'Complete successful AI jewellery verification first. Weight and exchange calculation stay locked until verification passes.'
+                      : rejectionError
                       ? 'The uploaded photo was rejected as non-jewellery. Valuation cannot be generated.'
                       : !capturedImage
                       ? 'Snap or upload a photo of your old scrap jewellery to run AI Gemmological verification and unlock your cart cash discount.'
@@ -908,7 +870,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
               </div>
             ) : (
               /* Verified Calculation Breakdown (Only visible when verified) */
-              <div className="bg-stone-950 rounded-2xl p-3.5 border border-emerald-500/40 space-y-2 text-xs animate-in fade-in">
+              <div className="rg-page rounded-2xl p-3.5 border border-emerald-500/40 space-y-2 text-xs animate-in fade-in">
                 <div className="font-bold text-[11px] text-emerald-300 uppercase tracking-wide flex items-center justify-between">
                   <span className="flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -972,7 +934,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
         </div>
 
         {/* Footer Actions: Strictly Context-Aware (No unverified discount button) */}
-        <div className="bg-stone-950 px-4 py-3.5 border-t border-stone-800 flex flex-col gap-2.5">
+        <div className="rg-page px-4 py-3.5 border-t border-stone-800 flex flex-col gap-2.5">
           {valuationResult ? (
             /* State 1: Verified - Can Apply */
             <div className="flex flex-col gap-2">
@@ -1005,11 +967,11 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
               <div className="flex flex-col sm:flex-row gap-2">
                 <button
                   type="button"
-                  onClick={handleAcceptDoorstepVerification}
+                  onClick={() => setRejectionError('Please verify the jewellery image successfully before any exchange value can be calculated.')}
                   className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-md hover:brightness-110"
                 >
                   <CheckCircle2 className="w-4 h-4 text-stone-950" />
-                  <span>Proceed with Doorstep Verification (Unlock ₹{netEstimated.toLocaleString('en-IN')})</span>
+                  <span>Image verification required before exchange</span>
                 </button>
                 <button
                   type="button"
@@ -1046,17 +1008,16 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4 text-stone-950" />
-                    <span>Verify Scrap Photo with AI &rarr;</span>
+                    <span>Verify Jewellery Image with AI &rarr;</span>
                   </>
                 )}
               </button>
               <button
                 type="button"
-                onClick={handleAcceptDoorstepVerification}
+                onClick={() => setRejectionError('Doorstep collection cannot unlock an exchange voucher before successful image verification.')}
                 className="text-[11px] text-stone-400 hover:text-amber-300 py-1 transition-colors flex items-center justify-center gap-1"
               >
-                <span>Prefer doorstep scale calibration directly?</span>
-                <span className="underline font-semibold text-amber-400">Lock ₹{netEstimated.toLocaleString('en-IN')} Voucher Now</span>
+                <span>Image verification is required before entering weight or calculating an estimate.</span>
               </button>
             </div>
           ) : (

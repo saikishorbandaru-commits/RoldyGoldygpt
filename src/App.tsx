@@ -19,7 +19,10 @@ import {
   Clock,
   Layers,
   X,
-  Navigation
+  Navigation,
+  House,
+  Gem,
+  Recycle
 } from 'lucide-react';
 import { INITIAL_PRODUCTS } from './data/products';
 import { Product, CartItem, ExchangeScrapData, TrialBooking, Order, UserProfile, AdBanner, SellerAdBooking } from './types';
@@ -46,6 +49,7 @@ import { WishlistDrawer } from './components/WishlistDrawer';
 import { AdBannerSlider } from './components/AdBannerSlider';
 import { IntroBannerSlides } from './components/IntroBannerSlides';
 import { LoginScreen } from './components/LoginScreen';
+import { HomeRedesign } from './components/HomeRedesign';
 
 export default function App() {
   // State
@@ -81,10 +85,17 @@ export default function App() {
     return !!localStorage.getItem('roldygoldy_auth_user');
   });
   const [isArtisanShowcaseOpen, setIsArtisanShowcaseOpen] = useState<boolean>(false);
-  const [wishlist, setWishlist] = useState<Product[]>([]);
+  const [wishlist, setWishlist] = useState<Product[]>(() => {
+    try {
+      const saved = localStorage.getItem('roldygoldy_wishlist');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
   const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false);
 
-  // Active Sponsored Ad Banners
+  // Featured Boutique Banners
   const [adBanners, setAdBanners] = useState<AdBanner[]>([
     {
       id: 'ad-eluru-1',
@@ -143,40 +154,22 @@ export default function App() {
     };
   });
 
-  // Attempt automatic detection on mount
+  // Privacy-first location restore: never request GPS automatically at app startup.
+  // Users can explicitly choose location detection from the location workflow.
   useEffect(() => {
     const saved = localStorage.getItem('roldygoldy_detected_location');
-    if (saved) {
-      try {
-        const parsed: DetectedLocationResult = JSON.parse(saved);
-        setCurrentLocation(parsed);
-        setUserPincode(parsed.pincode);
-        setUserProfile(prev => ({
-          ...prev,
-          address: parsed.formattedAddress,
-          pincode: parsed.pincode
-        }));
-        return;
-      } catch (e) {
-        console.warn('Failed to parse saved location', e);
-      }
-    }
-
-    if (typeof navigator !== 'undefined' && 'geolocation' in navigator) {
-      detectCurrentLocation()
-        .then((loc) => {
-          setCurrentLocation(loc);
-          setUserPincode(loc.pincode);
-          setUserProfile(prev => ({
-            ...prev,
-            address: loc.formattedAddress,
-            pincode: loc.pincode
-          }));
-          showToast(`📍 Auto-Detected Location: ${loc.city} (${loc.pincode})`);
-        })
-        .catch((err) => {
-          console.log('GPS auto-detect skipped:', err);
-        });
+    if (!saved) return;
+    try {
+      const parsed: DetectedLocationResult = JSON.parse(saved);
+      setCurrentLocation(parsed);
+      setUserPincode(parsed.pincode);
+      setUserProfile(prev => ({
+        ...prev,
+        address: parsed.formattedAddress,
+        pincode: parsed.pincode
+      }));
+    } catch (e) {
+      console.warn('Failed to restore saved location', e);
     }
   }, []);
 
@@ -307,6 +300,11 @@ export default function App() {
 
   const [exchangeSlips, setExchangeSlips] = useState<ExchangeScrapData[]>([]);
   const [bargainHistory, setBargainHistory] = useState<{ item: string; offer: number; counter: number; date: string }[]>([]);
+
+  // Persist wishlist independently from the screen lifecycle.
+  useEffect(() => {
+    localStorage.setItem('roldygoldy_wishlist', JSON.stringify(wishlist));
+  }, [wishlist]);
 
   // Toast Notification
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -473,19 +471,15 @@ export default function App() {
   const cartItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col justify-between font-sans selection:bg-amber-400 selection:text-stone-950">
+    <div className="rg-page min-h-screen text-stone-100 flex flex-col justify-between font-sans selection:bg-amber-400 selection:text-stone-950">
       
       {/* Animated Designed Splash Screen */}
       {showSplash && (
         <SplashScreen
           onComplete={() => {
             setShowSplash(false);
-            const hasSeenIntro = localStorage.getItem('roldygoldy_intro_seen');
-            if (!hasSeenIntro) {
-              setShowIntroSlides(true);
-            } else if (!localStorage.getItem('roldygoldy_auth_user')) {
-              setShowLoginScreen(true);
-            }
+            // App Features always follows Splash, as requested. Authentication is checked only after the tour.
+            setShowIntroSlides(true);
           }}
         />
       )}
@@ -496,8 +490,10 @@ export default function App() {
           onComplete={() => {
             localStorage.setItem('roldygoldy_intro_seen', 'true');
             setShowIntroSlides(false);
-            // After Banner slides complete or are skipped, land directly on dedicated Login Screen
-            setShowLoginScreen(true);
+            // Logged-in users continue straight into the app; guests see the OTP/login screen.
+            if (!localStorage.getItem('roldygoldy_auth_user')) {
+              setShowLoginScreen(true);
+            }
           }}
         />
       )}
@@ -533,11 +529,11 @@ export default function App() {
       )}
 
       {/* Main Responsive Container */}
-      <div className="w-full max-w-5xl mx-auto flex-1 flex flex-col relative bg-stone-950 border-x border-stone-800/60 shadow-2xl">
+      <div className="rg-app-frame w-full max-w-5xl mx-auto flex-1 flex flex-col relative">
         
         {/* Top Header */}
-        {!selectedProduct && activeTab !== 'account' && (
-          <header className="sticky top-0 z-30 bg-stone-950/95 backdrop-blur-md border-b border-stone-800/80 px-4 py-3 flex items-center justify-between">
+        {!selectedProduct && activeTab !== 'account' && activeTab !== 'home' && (
+          <header className="rg-app-topbar sticky top-0 z-30 px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2.5">
                 <img src="/roldygoldy-logo.png" alt="RoldyGoldy" className="h-10 w-auto object-contain rounded-xl" />
@@ -592,17 +588,22 @@ export default function App() {
                 )}
               </button>
 
-              {/* User Sign In / Account Header Button */}
+              {/* Account action: authenticated users go to Account; guests are invited to sign in. */}
               <button
                 onClick={() => {
                   triggerHaptic('light');
-                  setShowLoginScreen(true);
+                  if (isAuthenticated) {
+                    setSelectedProduct(null);
+                    setActiveTab('account');
+                  } else {
+                    setShowLoginScreen(true);
+                  }
                 }}
                 className="bg-stone-900 hover:bg-stone-800 text-stone-200 px-2.5 py-1.5 rounded-xl border border-stone-800 hover:border-amber-500/40 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-sm active:scale-95"
-                title="Sign In or Register"
+                title={isAuthenticated ? "Open Account" : "Sign In or Register"}
               >
                 <User className="w-3.5 h-3.5 text-amber-400" />
-                <span className="hidden sm:inline">{userProfile.name ? userProfile.name.split(' ')[0] : 'Sign In'}</span>
+                <span className="hidden sm:inline">{isAuthenticated ? (userProfile.name ? userProfile.name.split(' ')[0] : 'Account') : 'Sign In'}</span>
               </button>
             </div>
           </header>
@@ -649,14 +650,12 @@ export default function App() {
               localStorage.setItem('roldygoldy_auth_user', JSON.stringify(updated));
               showToast('Profile updated successfully!');
             }}
-            onOpenAuth={() => setShowLoginScreen(true)}
             onLogout={() => {
               localStorage.removeItem('roldygoldy_auth_user');
               setIsAuthenticated(false);
               setShowLoginScreen(true);
               showToast('Logged out of boutique session');
             }}
-            onReplayBanners={() => setShowIntroSlides(true)}
             orders={orders}
             trialBookings={trialBookings}
             exchangeSlips={exchangeSlips}
@@ -664,265 +663,52 @@ export default function App() {
             onOpenLiveScrapUpload={() => setIsLivePhotoModalOpen(true)}
           />
         ) : (
-          <main className="flex-1 rg-page pb-28">
-            {/* Premium location ribbon */}
-            <section className="px-4 pt-4 sm:px-6 max-w-5xl mx-auto w-full">
-              <button
-                onClick={() => {
-                  triggerHaptic('light');
-                  setIsLocationModalOpen(true);
-                }}
-                className="rg-location-card w-full text-left flex items-center justify-between gap-3"
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="rg-icon-orb"><MapPin className="w-4 h-4" /></div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] uppercase tracking-[0.16em] rg-muted font-bold">Delivering to</p>
-                    <p className="text-sm font-bold truncate rg-cream">{currentLocation.city} · {currentLocation.pincode}</p>
-                  </div>
-                </div>
-                <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full border shrink-0 ${currentLocation.trialAtHomeAvailable ? 'rg-trial-badge' : 'rg-standard-badge'}`}>
-                  {currentLocation.trialAtHomeAvailable ? '⚡ Trial Today' : 'Standard Delivery'}
-                </span>
-              </button>
-            </section>
-
-            {/* Brand hero */}
-            <section className="px-4 pt-4 sm:px-6 max-w-5xl mx-auto w-full">
-              <div className="rg-hero relative overflow-hidden">
-                <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_85%_20%,rgba(247,204,106,.38),transparent_24%),radial-gradient(circle_at_12%_90%,rgba(129,14,45,.65),transparent_40%)]" />
-                <div className="relative z-10 max-w-xl py-7 sm:py-10">
-                  <span className="rg-kicker">NEW EXPERIENCE · MADE FOR EVERY MOMENT</span>
-                  <h2 className="mt-3 font-serif text-3xl sm:text-5xl font-bold leading-[1.02] rg-cream">
-                    Her choice.<br/><span className="rg-gold-text">Her shine.</span> Her story.
-                  </h2>
-                  <p className="mt-3 max-w-md text-xs sm:text-sm leading-relaxed text-rose-100/75">
-                    From everyday minimal pieces to bridal statements — discover jewellery your way, try selected pieces at home, and exchange old imitation jewellery for savings.
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-2.5">
-                    <button
-                      onClick={() => { setTrialTargetProduct(products.find(p => p.trialEligible) || products[0]); setIsTrialModalOpen(true); triggerHaptic('medium'); }}
-                      className="rg-primary-btn"
-                    >
-                      <Crown className="w-4 h-4" /> Try @Home
-                    </button>
-                    <button
-                      onClick={() => { setIsLivePhotoModalOpen(true); triggerHaptic('light'); }}
-                      className="rg-secondary-btn"
-                    >
-                      ♻️ Exchange & Save
-                    </button>
-                  </div>
-                </div>
-                <div className="absolute right-0 bottom-0 h-full w-[42%] hidden sm:block pointer-events-none">
-                  <div className="absolute inset-y-0 right-0 w-full bg-[linear-gradient(90deg,transparent,rgba(35,7,14,.05)),url('/roldygoldy-logo.png')] bg-contain bg-right-bottom bg-no-repeat opacity-80 mix-blend-screen" />
-                </div>
-              </div>
-            </section>
-
-            {/* Search */}
-            <section id="product-catalog-section" className="px-4 pt-4 sm:px-6 max-w-5xl mx-auto w-full space-y-3">
-              <div className="rg-search-shell">
-                <Search className="w-4 h-4 rg-gold shrink-0" />
-                <input
-                  type="text"
-                  placeholder="Search necklaces, jhumkas, bangles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-transparent flex-1 min-w-0 text-sm outline-none rg-cream placeholder:text-rose-100/35"
-                />
-                <button onClick={() => setTrialOnlyFilter(!trialOnlyFilter)} className={`text-[10px] sm:text-xs font-bold px-3 py-2 rounded-xl border transition-all ${trialOnlyFilter ? 'rg-filter-active' : 'rg-filter-idle'}`}>
-                  {trialOnlyFilter ? 'Trial Only ✓' : 'Trial @Home'}
-                </button>
-              </div>
-            </section>
-
-            {/* Category cards */}
-            <section className="px-4 pt-2 sm:px-6 max-w-5xl mx-auto w-full">
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <p className="rg-section-eyebrow">SHOP YOUR MOOD</p>
-                  <h3 className="font-serif text-xl font-bold rg-cream">Explore categories</h3>
-                </div>
-                <button onClick={() => setSelectedCategory('All')} className="text-xs rg-gold font-bold">View all</button>
-              </div>
-              <div className="grid grid-cols-4 sm:grid-cols-6 gap-2.5">
-                {[
-                  ['All', '✨'], ['Bridal', '👑'], ['Temple', '🛕'], ['Daily Wear', '☀️'], ['Korean', '🌸'], ['Polki', '💎']
-                ].map(([cat, icon]) => (
-                  <button key={cat} onClick={() => { setSelectedCategory(cat); triggerHaptic('light'); }} className={`rg-category-card ${selectedCategory === cat ? 'rg-category-active' : ''}`}>
-                    <span className="text-lg">{icon}</span>
-                    <span>{cat}</span>
-                  </button>
-                ))}
-              </div>
-            </section>
-
-            {/* Signature service cards */}
-            <section className="px-4 pt-5 sm:px-6 max-w-5xl mx-auto w-full grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <button onClick={() => { setTrialTargetProduct(products.find(p => p.trialEligible) || products[0]); setIsTrialModalOpen(true); }} className="rg-service-card rg-service-trial text-left">
-                <span className="text-2xl">🏠</span><div><p className="font-bold rg-cream">Trial @Home</p><p>Choose, try, decide.</p></div><ArrowRight className="w-4 h-4 ml-auto" />
-              </button>
-              <button onClick={() => setIsLivePhotoModalOpen(true)} className="rg-service-card text-left">
-                <span className="text-2xl">♻️</span><div><p className="font-bold rg-cream">Exchange & Save</p><p>Upload old jewellery.</p></div><ArrowRight className="w-4 h-4 ml-auto" />
-              </button>
-              <button onClick={() => setActiveTab('boutique')} className="rg-service-card text-left">
-                <span className="text-2xl">🎀</span><div><p className="font-bold rg-cream">Bridal Studio</p><p>Curated for your day.</p></div><ArrowRight className="w-4 h-4 ml-auto" />
-              </button>
-            </section>
-
-            {/* Offers / artisan banner */}
-            <section className="px-4 pt-5 sm:px-6 max-w-5xl mx-auto w-full">
-              <AdBannerSlider
-                banners={adBanners}
-                onSelectArtisan={(businessName) => {
-                  setSelectedArtisanFilter(businessName);
-                  setSelectedCategory('All');
-                  setTrialOnlyFilter(false);
-                  showToast(`Showing ${businessName} collections`);
-                }}
-              />
-            </section>
-
-            {/* Collection heading + products */}
-            <section className="px-4 pt-5 sm:px-6 max-w-5xl mx-auto w-full">
-              <div className="flex items-end justify-between gap-3 mb-4">
-                <div>
-                  <p className="rg-section-eyebrow">CURATED FOR YOU</p>
-                  <h3 className="font-serif text-2xl font-bold rg-cream">{selectedCategory === 'All' ? 'Trending collections' : selectedCategory}</h3>
-                  <p className="text-xs rg-muted mt-1">{filteredProducts.length} beautiful pieces waiting for you</p>
-                </div>
-                {selectedArtisanFilter && (
-                  <button onClick={() => setSelectedArtisanFilter(null)} className="text-[11px] rg-gold font-bold border border-amber-400/30 px-2.5 py-1.5 rounded-xl">Clear filter</button>
-                )}
-              </div>
-
-              {filteredProducts.length === 0 ? (
-                <div className="rg-empty-state">
-                  <span className="text-4xl">✨</span>
-                  <h4>No matching jewellery yet</h4>
-                  <p>Try another category or clear the filters.</p>
-                  <button onClick={() => { setTrialOnlyFilter(false); setSelectedCategory('All'); setSelectedArtisanFilter(null); setSearchQuery(''); }} className="rg-primary-btn">Show everything</button>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                  {filteredProducts.map((product) => {
-                    const activePrice = product.bargainedPrice || product.price;
-                    const isSaved = wishlist.some((w) => w.id === product.id);
-                    return (
-                      <article key={product.id} className="rg-product-card group">
-                        <div onClick={() => setSelectedProduct(product)} className="relative aspect-[4/5] overflow-hidden cursor-pointer bg-[#2a0811]">
-                          <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#24070e]/70 to-transparent pointer-events-none" />
-                          {product.trialEligible && <span className="absolute top-2 left-2 rg-product-badge">Try @Home</span>}
-                          <button onClick={(e) => { e.stopPropagation(); handleToggleWishlist(product); }} className={`absolute top-2 right-2 rg-heart-btn ${isSaved ? 'rg-heart-active' : ''}`}><Heart className={`w-4 h-4 ${isSaved ? 'fill-current' : ''}`} /></button>
-                        </div>
-                        <div className="p-3.5 space-y-2">
-                          <button onClick={() => setSelectedProduct(product)} className="text-left w-full">
-                            <h4 className="font-bold text-sm rg-cream line-clamp-1">{product.name}</h4>
-                            <p className="text-[10px] rg-muted mt-1">{product.category} · {product.metal}</p>
-                          </button>
-                          <div className="flex items-baseline gap-2">
-                            <span className="font-extrabold rg-gold text-base">₹{activePrice.toLocaleString('en-IN')}</span>
-                            <span className="text-[10px] line-through text-rose-100/35">₹{product.originalPrice.toLocaleString('en-IN')}</span>
-                          </div>
-                          <div className="flex gap-2 pt-1">
-                            <button onClick={() => handleOpenBargain(product)} className="rg-mini-secondary flex-1"><MessageSquare className="w-3.5 h-3.5"/> Bargain</button>
-                            <button onClick={() => handleAddToCart(product, false)} className="rg-mini-primary"><ShoppingBag className="w-4 h-4" /></button>
-                          </div>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-              )}
-            </section>
-
-            {/* Trust strip */}
-            <section className="px-4 pt-6 sm:px-6 max-w-5xl mx-auto w-full pb-3">
-              <div className="rg-trust-strip grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div><span>🏠</span><b>Trial @Home</b><small>Selected local pieces</small></div>
-                <div><span>♻️</span><b>Exchange & Save</b><small>Old jewellery value</small></div>
-                <div><span>🔒</span><b>Secure Payments</b><small>Protected checkout</small></div>
-                <div><span>↩️</span><b>Easy Returns</b><small>Simple support flow</small></div>
-              </div>
-            </section>
-          </main>
+          <HomeRedesign
+            products={products}
+            filteredProducts={filteredProducts}
+            selectedCategory={selectedCategory}
+            searchQuery={searchQuery}
+            trialOnlyFilter={trialOnlyFilter}
+            locationLabel={`${currentLocation.city} · ${currentLocation.pincode}`}
+            trialAvailable={currentLocation.trialAtHomeAvailable}
+            wishlist={wishlist}
+            onSearch={setSearchQuery}
+            onCategory={(category) => { setSelectedCategory(category); setSelectedArtisanFilter(null); }}
+            onToggleTrial={() => setTrialOnlyFilter(prev => !prev)}
+            onOpenLocation={() => setIsLocationModalOpen(true)}
+            onSelectProduct={setSelectedProduct}
+            onToggleWishlist={handleToggleWishlist}
+            onAddToCart={(product) => handleAddToCart(product, false)}
+            onOpenTrial={() => { setTrialTargetProduct(products.find(p => p.trialEligible) || products[0]); setIsTrialModalOpen(true); }}
+            onOpenExchange={() => setIsLivePhotoModalOpen(true)}
+            onOpenBargain={() => setIsBargainPickerOpen(true)}
+          />
         )}
 
-        {/* Persistent Bottom 5-Tab Navigation */}
+        {/* Persistent premium app navigation */}
         {!selectedProduct && (
-          <nav className="fixed bottom-0 inset-x-0 z-30 bg-stone-950/95 backdrop-blur-md border-t border-stone-800 max-w-5xl mx-auto flex justify-around py-2 px-2 sm:px-4 shadow-2xl">
-            <button
-              onClick={() => {
-                setSelectedProduct(null);
-                setActiveTab('home');
-              }}
-              className={`flex flex-col items-center gap-1 text-[11px] font-semibold transition-colors ${
-                activeTab === 'home' ? 'text-amber-400 font-bold' : 'text-stone-400 hover:text-stone-200'
-              }`}
-            >
-              <span className="text-base">🏠</span>
-              <span>Home</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedProduct(null);
-                setActiveTab('boutique');
-              }}
-              className={`flex flex-col items-center gap-1 text-[11px] font-semibold transition-colors ${
-                activeTab === 'boutique' ? 'text-amber-400 font-bold' : 'text-stone-400 hover:text-stone-200'
-              }`}
-            >
-              <span className="text-base">💎</span>
-              <span>Studio</span>
-            </button>
-
-            {/* Wishlist Bottom Tab */}
-            <button
-              onClick={() => setIsWishlistOpen(true)}
-              className="flex flex-col items-center gap-1 text-[11px] font-semibold text-stone-400 hover:text-rose-400 relative transition-colors"
-            >
-              <div className="relative">
-                <span className="text-base">💖</span>
-                {wishlist.length > 0 && (
-                  <span className="absolute -top-1 -right-2 bg-rose-500 text-white font-extrabold text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
-                    {wishlist.length}
-                  </span>
-                )}
-              </div>
-              <span>Wishlist</span>
-            </button>
-
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="flex flex-col items-center gap-1 text-[11px] font-semibold text-stone-400 hover:text-amber-300 relative transition-colors"
-            >
-              <div className="relative">
-                <span className="text-base">🛒</span>
-                {cartItemsCount > 0 && (
-                  <span className="absolute -top-1 -right-2 bg-amber-500 text-stone-950 font-extrabold text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
-                    {cartItemsCount}
-                  </span>
-                )}
-              </div>
-              <span>Cart</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setSelectedProduct(null);
-                setActiveTab('account');
-              }}
-              className={`flex flex-col items-center gap-1 text-[11px] font-semibold transition-colors ${
-                activeTab === 'account' ? 'text-amber-400 font-bold' : 'text-stone-400 hover:text-stone-200'
-              }`}
-            >
-              <span className="text-base">👤</span>
-              <span>Account</span>
-            </button>
-          </nav>
+          <nav className="rg-app-dock rg-showcase-dock" aria-label="Primary navigation">
+  <div className="rg-app-dock-inner">
+    <button onClick={() => { setSelectedProduct(null); setActiveTab('home'); }} className={`rg-dock-item ${activeTab === 'home' ? 'is-active' : ''}`} aria-label="Home">
+      <House className="w-5 h-5" strokeWidth={activeTab === 'home' ? 2.6 : 2} /><span>Home</span>
+    </button>
+    <button onClick={() => {
+      setSelectedProduct(null); setActiveTab('home'); setSelectedCategory('All');
+      window.setTimeout(() => document.getElementById('shop-by-category-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    }} className="rg-dock-item" aria-label="Categories">
+      <Layers className="w-5 h-5" /><span>Categories</span>
+    </button>
+    <button onClick={() => { setTrialTargetProduct(products.find(p => p.trialEligible) || products[0]); setIsTrialModalOpen(true); }} className="rg-dock-item" aria-label="Trial at home">
+      <Crown className="w-5 h-5" /><span>Trial</span>
+    </button>
+    <button onClick={() => setIsLivePhotoModalOpen(true)} className="rg-dock-item" aria-label="Exchange">
+      <Recycle className="w-5 h-5" /><span>Exchange</span>
+    </button>
+    <button onClick={() => { setSelectedProduct(null); setActiveTab('account'); }} className={`rg-dock-item ${activeTab === 'account' ? 'is-active' : ''}`} aria-label="Account">
+      <User className="w-5 h-5" strokeWidth={activeTab === 'account' ? 2.6 : 2} /><span>Account</span>
+    </button>
+  </div>
+</nav>
         )}
 
       </div>
@@ -1058,7 +844,7 @@ export default function App() {
         onSelectLocation={handleLocationSelected}
       />
 
-      {/* 10. Seller Ad Slot Booking Portal Modal */}
+      {/* 10. Boutique Promotion Portal Modal */}
       <SellerAdBookingModal
         isOpen={isSellerAdModalOpen}
         onClose={() => setIsSellerAdModalOpen(false)}
@@ -1067,7 +853,7 @@ export default function App() {
         onAdBooked={(booking, banner) => {
           setSellerAdBookings((prev) => [booking, ...prev]);
           setAdBanners((prev) => [banner, ...prev]);
-          showToast(`📢 Ad Slot Booked! "${banner.title}" is now live.`);
+          showToast(`📢 Featured collection updated! "${banner.title}" is now live.`);
         }}
       />
 

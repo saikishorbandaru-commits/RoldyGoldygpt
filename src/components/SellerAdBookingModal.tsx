@@ -118,11 +118,11 @@ export const SellerAdBookingModal: React.FC<SellerAdBookingModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl bg-stone-900 border border-amber-500/40 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4 animate-in fade-in duration-300">
+      <div className="w-full max-w-2xl bg-stone-900 border border-amber-500/40 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden">
         
         {/* Header */}
-        <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-glass px-5 py-4 border-b border-stone-800 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
               <Store className="w-5 h-5" />
@@ -194,7 +194,7 @@ export const SellerAdBookingModal: React.FC<SellerAdBookingModalProps> = ({
                 <p className="text-xs text-stone-300 leading-relaxed">
                   You are currently viewing the <strong>Customer Application</strong>, where shoppers browse jewellery, book ⚡ 20-min home trials, and view sponsored collection banners.
                 </p>
-                <div className="text-xs text-amber-300/90 bg-stone-950/60 p-2.5 rounded-xl border border-amber-500/20 flex items-start gap-2">
+                <div className="text-xs text-amber-300/90 rg-page p-2.5 rounded-xl border border-amber-500/20 flex items-start gap-2">
                   <Smartphone className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                   <span>
                     <strong>Ad Campaigns &amp; Banner Uploads</strong> are managed exclusively through the <strong>RoldyGoldy Seller App</strong> by verified artisanal boutiques.

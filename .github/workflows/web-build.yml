@@ -1,0 +1,77 @@
+name: Validate Web Build
+
+on:
+  push:
+    branches:
+      - premium-rebuild
+      - main
+    paths:
+      - '**'
+  pull_request:
+    branches:
+      - premium-rebuild
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  build:
+    name: Install and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: TypeScript check
+        run: npm run lint
+
+      - name: Build application
+        run: npm run build
+
+      - name: Sync Android project
+        run: npm run android:sync
+
+      - name: Install Gradle for CI
+        run: |
+          GRADLE_VERSION=8.11.1
+          curl -fsSL "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" -o /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp
+          echo "/tmp/gradle-${GRADLE_VERSION}/bin" >> $GITHUB_PATH
+
+      - name: Assemble Android debug APK
+        run: |
+          cd android
+          gradle --version
+          gradle assembleDebug
+
+      - name: Upload Android debug APK
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: roldygoldy-debug-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload web build
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: roldygoldy-web-build
+          path: dist
+          if-no-files-found: error
+          retention-days: 7

@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { Product, ExchangeScrapData, ProductReview, ProductAngle } from '../types';
 import { triggerHaptic } from '../utils/haptics';
+import { RGButton, RGScreenHeader } from './ui/RoldyPrimitives';
 
 interface ProductDetailViewProps {
   product: Product;
@@ -155,10 +156,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
   });
 
   return (
-    <div className="flex-1 flex flex-col bg-stone-950 pb-24 animate-in fade-in duration-200">
+    <div className="rg-page flex-1 flex flex-col bg-stone-950 pb-28 animate-in fade-in slide-in-from-bottom-2 duration-300">
       
       {/* Top Header */}
-      <div className="sticky top-0 z-20 bg-stone-950/90 backdrop-blur-md px-4 py-3 border-b border-stone-800 flex items-center justify-between">
+      <div className="sticky top-0 z-20"><RGScreenHeader eyebrow={product.category} title={product.name} onBack={onBack} action={<div className="flex items-center gap-2">
         <button
           onClick={onBack}
           className="w-9 h-9 rounded-full bg-stone-900 border border-stone-800 text-stone-300 hover:text-white flex items-center justify-center transition-colors"
@@ -166,7 +167,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           <ArrowLeft className="w-4 h-4" />
         </button>
         <span className="font-serif text-amber-300/90 text-sm tracking-wide font-medium">
-          RoldyGoldy Haute Joaillerie
+          ROLDYGOLDY · SIGNATURE PIECE
         </span>
         <div className="flex items-center gap-1.5 sm:gap-2">
           {onOpenMartTour && (
@@ -179,14 +180,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
               <span className="hidden sm:inline">360° Mart</span>
             </button>
           )}
-          <button
-            onClick={() => onOpenTrial(product)}
-            className="bg-stone-900 hover:bg-stone-800 text-amber-300 border border-amber-500/40 px-2.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-md"
-            title="Trial@Home Starts from Rs.49/- only"
-          >
-            <Crown className="w-3.5 h-3.5 text-amber-400" />
-            <span className="hidden sm:inline">Trial @Home</span>
-          </button>
+          {product.trialEligible && (
+            <button
+              onClick={() => onOpenTrial(product)}
+              className="bg-stone-900 hover:bg-stone-800 text-amber-300 border border-amber-500/40 px-2.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-md"
+              title="Trial@Home starts from ₹49"
+            >
+              <Crown className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden sm:inline">Trial @Home</span>
+            </button>
+          )}
           {/* Direct Cart Button with live Badge */}
           <button
             onClick={onOpenCart}
@@ -211,10 +214,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-rose-500 text-rose-500' : ''}`} />
           </button>
         </div>
-      </div>
+      </div>} /></div>
 
       {/* Main Multi-Image Stage & Carousel with Same-Product Angles & Video */}
-      <div className="relative bg-stone-900 border-b border-stone-800 overflow-hidden select-none">
+      <div className="relative rg-pdp-stage border-b border-stone-800 overflow-hidden select-none">
         
         {/* Visual Angle & Video Mode Switcher Bar */}
         <div className="bg-stone-950/90 border-b border-stone-800/80 px-3 py-2 flex items-center justify-between text-[11px] overflow-x-auto gap-2">
@@ -266,7 +269,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         </div>
 
         {/* Main Stage Viewport */}
-        <div className="relative h-80 sm:h-96 w-full flex items-center justify-center overflow-hidden bg-stone-950">
+        <div className="relative h-[420px] sm:h-[560px] w-full flex items-center justify-center overflow-hidden bg-stone-950">
           {isVideoActive && product.videoUrl ? (
             <div className="relative w-full h-full flex items-center justify-center bg-black">
               <video
@@ -349,14 +352,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             </button>
           </div>
 
-          {/* Floating Trial@Home Action Badge */}
-          <button
-            onClick={() => onOpenTrial(product)}
-            className="absolute bottom-3 right-3 bg-stone-950/90 hover:bg-stone-900 backdrop-blur-md border border-amber-500/50 text-amber-300 text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-2 shadow-xl active:scale-95 transition-all"
-          >
-            <Crown className="w-3.5 h-3.5 text-amber-400" />
-            <span>Trial @Home · Starts ₹49/-</span>
-          </button>
+          {/* Trial is shown only when this product is eligible. */}
+          {product.trialEligible && (
+            <button
+              onClick={() => onOpenTrial(product)}
+              className="absolute bottom-3 right-3 bg-stone-950/90 hover:bg-stone-900 backdrop-blur-md border border-amber-500/50 text-amber-300 text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-2 shadow-xl active:scale-95 transition-all"
+            >
+              <Crown className="w-3.5 h-3.5 text-amber-400" />
+              <span>Trial @Home · Starts ₹49/-</span>
+            </button>
+          )}
         </div>
 
         {/* Active Angle Craftsmanship Explanation Banner */}
@@ -405,7 +410,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       </div>
 
       {/* Product Details Section */}
-      <div className="p-4 sm:p-6 space-y-5 max-w-2xl mx-auto w-full">
+      <div className="p-4 sm:p-6 space-y-5 max-w-2xl mx-auto w-full rg-page rg-pdp-content">
         
         {/* Title, Rating Summary & Pricing */}
         <div className="space-y-2">
@@ -419,12 +424,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             </a>
           </div>
 
-          <h1 className="text-xl sm:text-2xl font-bold text-stone-100 font-serif leading-snug">
+          <h1 className="rg-pdp-title">
             {product.name}
           </h1>
 
           <div className="flex items-baseline gap-3 pt-1 flex-wrap">
-            <span className="text-2xl sm:text-3xl font-extrabold text-amber-400">
+            <span className="rg-pdp-price">
               ₹{effectivePrice.toLocaleString('en-IN')}
             </span>
             {appliedExchangeVoucher ? (
@@ -554,7 +559,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         </div>
 
         {/* Specifications Grid */}
-        <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-3">
+        <div className="rg-surface rounded-2xl p-4 space-y-3">
           <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-wider">
             <ShieldCheck className="w-4 h-4" />
             <span>Artisanal Specifications &amp; Hallmarks</span>
@@ -584,9 +589,9 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           </p>
         </div>
 
-        {/* ========================================================================= */}
+        {/* Section */}
         {/* CUSTOMER REVIEWS & FEEDBACK SECTION (E-COMMERCE STANDARD) */}
-        {/* ========================================================================= */}
+        {/* Section */}
         <div id="reviews-section" className="bg-stone-900 border border-stone-800 rounded-3xl p-5 space-y-5">
           
           <div className="flex items-center justify-between border-b border-stone-800 pb-3">
@@ -1015,14 +1020,14 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             onClick={() => onAddToCart(product, false)}
             className="bg-stone-900 hover:bg-stone-800 text-stone-200 font-bold text-xs py-3 px-4 rounded-xl border border-stone-700 active:scale-95 transition-all"
           >
-            Add to Cart
+            Save to Cart
           </button>
           <button
             onClick={() => onAddToCart(product, true)}
             className="bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs py-3 px-5 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
-            <span>Buy Now</span>
+            <span>Buy Securely</span>
           </button>
         </div>
       </div>

@@ -9,9 +9,7 @@ import {
   ArrowRight,
   ShieldCheck,
   Crown,
-  CheckCircle2,
-  ExternalLink,
-  ChevronRight
+  CheckCircle2
 } from 'lucide-react';
 import { Product } from '../types';
 import { triggerHaptic } from '../utils/haptics';
@@ -61,11 +59,11 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full max-w-md bg-stone-900 border-l border-amber-500/30 flex flex-col h-full shadow-2xl animate-in slide-in-from-right duration-200 relative">
+    <div className="rg-drawer-overlay fixed inset-0 z-50 flex justify-end animate-in fade-in duration-300">
+      <div className="w-full max-w-md rg-commerce-drawer flex flex-col h-full animate-in slide-in-from-right duration-300 relative">
         
         {/* Drawer Header */}
-        <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-commerce-header px-5 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400">
               <Heart className="w-4 h-4 fill-rose-500" />
@@ -77,12 +75,12 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                   {wishlist.length} {wishlist.length === 1 ? 'item' : 'items'}
                 </span>
               </h2>
-              <p className="text-[11px] text-stone-400">Personal jewellery curated collection</p>
+              <p className="text-[11px] text-stone-400">Saved pieces, ready whenever you are</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-stone-900 border border-stone-800 text-stone-400 hover:text-white flex items-center justify-center transition-colors"
+            className="w-8 h-8 rounded-full rg-surface border text-stone-400 hover:text-white flex items-center justify-center transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -96,16 +94,16 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                 <Heart className="w-8 h-8" />
               </div>
               <div className="space-y-1">
-                <h3 className="font-serif font-bold text-stone-200 text-base">Your Wishlist is Empty</h3>
+                <h3 className="font-serif font-bold text-stone-200 text-base">Save what catches your eye</h3>
                 <p className="text-xs text-stone-400 max-w-xs leading-relaxed">
-                  Tap the heart icon on any jewellery piece in our boutique to save it for later, try it in 3D AR, or bargain with our Master Goldsmith.
+                  Your favourites stay here while you browse. Open any piece, book Trial @Home when eligible, bargain with the jeweller, or add only the pieces you want to cart.
                 </p>
               </div>
               <button
                 onClick={onClose}
                 className="bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs px-5 py-2.5 rounded-xl shadow-lg transition-all"
               >
-                Explore Boutique Collection
+                Continue Exploring
               </button>
             </div>
           ) : (
@@ -126,7 +124,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                         onSelectProduct(product);
                         onClose();
                       }}
-                      className="w-20 h-20 rounded-xl overflow-hidden bg-stone-900 border border-stone-800 shrink-0 cursor-pointer relative"
+                      className="w-20 h-20 rounded-xl overflow-hidden rg-surface border shrink-0 cursor-pointer relative"
                     >
                       <img
                         src={product.image}
@@ -249,7 +247,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
         {/* PROMINENT IN-DRAWER ADDED-TO-CART CONFIRMATION MODAL */}
         {cartAlertProduct && (
           <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-            <div className="w-full max-w-sm bg-stone-900 border border-emerald-500/60 rounded-2xl p-5 shadow-2xl space-y-4 animate-in zoom-in-95 duration-200">
+            <div className="w-full max-w-sm rg-showcase-modal p-5 space-y-4 animate-in zoom-in-95 duration-300">
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
@@ -314,24 +312,30 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
 
         {/* Drawer Footer */}
         {wishlist.length > 0 && (
-          <div className="bg-stone-950 p-4 border-t border-stone-800 space-y-2">
+          <div className="rg-glass p-4 border-t border-stone-800 space-y-2">
             <div className="flex items-center justify-between text-xs text-stone-400">
-              <span>Saved Items Total:</span>
-              <span className="font-bold text-amber-400 text-sm font-mono">
-                ₹{wishlist.reduce((acc, p) => acc + (p.bargainedPrice || p.price), 0).toLocaleString('en-IN')}
-              </span>
+              <span>{wishlist.length} saved {wishlist.length === 1 ? 'piece' : 'pieces'}</span>
+              <span className="font-medium text-stone-500">Choose what you want to buy</span>
             </div>
-            <button
-              onClick={() => {
-                triggerHaptic('success');
-                wishlist.forEach((p) => onAddToCart(p, false));
-                setCartAlertProduct(wishlist[0]);
-              }}
-              className="w-full bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs py-3 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
-            >
-              <ShoppingBag className="w-4 h-4" />
-              <span>Add All ({wishlist.length}) to Cart</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onClose}
+                className="flex-1 bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-200 font-semibold text-xs py-3 rounded-xl transition-colors"
+              >
+                Keep Browsing
+              </button>
+              <button
+                onClick={() => {
+                  triggerHaptic('success');
+                  onClose();
+                  if (onOpenCart) onOpenCart();
+                }}
+                className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-400 text-stone-950 font-bold text-xs py-3 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                <span>View Cart</span>
+              </button>
+            </div>
           </div>
         )}
 

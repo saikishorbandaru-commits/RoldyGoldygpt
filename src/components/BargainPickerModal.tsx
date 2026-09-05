@@ -43,18 +43,18 @@ export const BargainPickerModal: React.FC<BargainPickerModalProps> = ({
   });
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-lg bg-stone-900 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[85vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+    <div className="rg-checkout-overlay fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div className="w-full max-w-lg rg-feature-shell flex flex-col max-h-[92vh] sm:max-h-[85vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
-        <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-feature-header px-5 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold shrink-0 shadow-md">
               <MessageSquare className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <h3 className="font-semibold text-stone-100 text-sm">Bargain with Master Jeweller</h3>
+                <h3 className="font-semibold text-stone-100 text-sm">Bargain with a Jeweller</h3>
                 <span className="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-1.5 py-0.5 rounded-sm border border-amber-500/30">Live AI</span>
               </div>
               <p className="text-xs text-stone-400">Select which jewellery piece you wish to negotiate on</p>
@@ -77,7 +77,7 @@ export const BargainPickerModal: React.FC<BargainPickerModalProps> = ({
         </div>
 
         {/* Search & Category Filter */}
-        <div className="p-3 bg-stone-950/70 border-b border-stone-800 space-y-2">
+        <div className="p-3 rg-glass border-b border-stone-800 space-y-2">
           <div className="relative">
             <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-stone-500" />
             <input
@@ -110,7 +110,7 @@ export const BargainPickerModal: React.FC<BargainPickerModalProps> = ({
         </div>
 
         {/* Product Items List */}
-        <div className="flex-1 overflow-y-auto p-3.5 space-y-2.5 bg-stone-950/40">
+        <div className="flex-1 overflow-y-auto p-3.5 space-y-2.5 rg-page">
           {filtered.length === 0 ? (
             <div className="text-center py-8 text-stone-500 text-xs space-y-2">
               <p>No jewellery pieces match your search.</p>
@@ -134,7 +134,7 @@ export const BargainPickerModal: React.FC<BargainPickerModalProps> = ({
                     triggerHaptic('light');
                     onSelectProductToBargain(item);
                   }}
-                  className="bg-stone-900 hover:bg-stone-850 border border-stone-800 hover:border-amber-500/50 rounded-2xl p-3 flex items-center justify-between gap-3 cursor-pointer transition-all group shadow-sm"
+                  className="rg-surface hover:bg-stone-850 border hover:border-amber-500/50 rounded-2xl p-3 flex items-center justify-between gap-3 cursor-pointer transition-all group shadow-sm"
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <img 

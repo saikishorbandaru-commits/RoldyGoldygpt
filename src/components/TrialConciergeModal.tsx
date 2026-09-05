@@ -153,21 +153,21 @@ export const TrialConciergeModal: React.FC<TrialConciergeModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-lg bg-stone-900 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+    <div className="rg-checkout-overlay fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div className="w-full max-w-lg rg-feature-shell flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
-        <div className="bg-stone-950 px-5 py-4 border-b border-stone-800 flex items-center justify-between">
+        <div className="rg-feature-header px-5 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center font-bold">
               👑
             </div>
             <div>
               <h3 className="font-semibold text-stone-100 text-sm flex items-center gap-1.5">
-                <span>Trial @Home Concierge</span>
+                <span>Trial @Home · Your private try-on</span>
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-1.5 py-0.5 rounded-sm border border-emerald-500/30">Starts ₹49/- Only</span>
               </h3>
-              <p className="text-xs text-stone-400">Trial@Home starts from Rs.49/- only · 100% credited if you purchase</p>
+              <p className="text-xs text-stone-400">Choose a convenient slot and experience selected pieces at home.</p>
             </div>
           </div>
           <button 
@@ -179,7 +179,7 @@ export const TrialConciergeModal: React.FC<TrialConciergeModalProps> = ({
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-stone-950/60 text-xs">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 rg-page text-xs">
           
           {/* Pincode & Hub Geofencing & Partner Routing Status */}
           <div className={`p-3.5 rounded-2xl border flex items-start gap-3 ${
@@ -212,7 +212,7 @@ export const TrialConciergeModal: React.FC<TrialConciergeModalProps> = ({
           {activeStep === 'schedule' ? (
             <>
               {/* Tryout Pricing Details */}
-              <div className="bg-stone-900 border border-stone-800 rounded-2xl p-4 space-y-2.5">
+              <div className="rg-surface rounded-2xl p-4 space-y-2.5">
                 <div className="flex items-baseline justify-between">
                   <div>
                     <span className="text-stone-300 font-semibold text-xs block">Trial@Home Concierge Fee:</span>

@@ -43,15 +43,15 @@ const SLIDES: SlideItem[] = [
     id: 'scrap-exchange',
     badge: 'Exchange & Save',
     title: 'Turn Old Imitation Jewellery into Savings',
-    subtitle: 'Upload photos, get a quote and apply your exchange value',
-    description: 'Select the material category, upload your old or broken imitation jewellery and receive an estimated exchange value. Pickup and final cashback follow verification.',
+    subtitle: 'Verify eligible jewellery images, receive an estimate and apply exchange value',
+    description: 'Upload a clear image of eligible imitation jewellery. After successful image verification and valuation, you can review the estimated exchange value. Final value follows the applicable verification process.',
     image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=90',
     icon: Scale,
     accent: 'from-emerald-500/30 to-teal-600/10'
   },
   {
     id: 'hallmark-guarantee',
-    badge: 'Premium Imitation Craftsmanship',
+    badge: 'Premium Imitation Jewellery',
     title: 'Made to Look Beautiful. Designed for Real Life.',
     subtitle: 'From daily wear to statement bridal collections',
     description: 'Discover brass, alloy, oxidised and premium fashion jewellery across Kundan, Polki, AD and micro-plated styles — with clear product details and care guidance.',
@@ -62,9 +62,9 @@ const SLIDES: SlideItem[] = [
   {
     id: 'artisan-bargain',
     badge: 'Direct Guild Heritage',
-    title: 'Master Artisan Guild & Live Jeweller Bargain',
-    subtitle: 'Crafted in Eluru, Machilipatnam, Jaipur & Rajkot',
-    description: 'Skip showroom middlemen markups. Negotiate directly with master goldsmiths in real-time, inspect hallmarking certificates, and support generational craft families.',
+    title: 'Boutique Network & Jeweller Bargain',
+    subtitle: 'Discover collections from multiple jewellery craft centres',
+    description: 'Use the Bargain with Jeweller experience to submit an offer on eligible products. Browse collection details and negotiate only when the product and jeweller workflow support it.',
     image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=90',
     icon: Store,
     accent: 'from-purple-500/30 to-amber-600/10'
@@ -92,7 +92,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
   const IconComponent = slide.icon;
 
   return (
-    <div className="fixed inset-0 z-[95] bg-stone-950 flex flex-col justify-between p-5 select-none overflow-hidden animate-in fade-in duration-300">
+    <div className="rg-approved-tour fixed inset-0 z-[95] rg-page flex flex-col justify-between p-5 select-none overflow-hidden animate-in fade-in duration-300">
       
       {/* Background Opulent Gradients */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -124,7 +124,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
       {/* Center Slide Card */}
       <div className="my-auto z-10 w-full max-w-md mx-auto space-y-5">
         {/* Slide Visual Presentation */}
-        <div className="relative rounded-3xl overflow-hidden border border-amber-500/40 bg-stone-900 shadow-2xl aspect-[4/3] group">
+        <div className="relative rounded-[28px] overflow-hidden border border-amber-500/40 bg-stone-900 shadow-2xl aspect-[4/3] group">
           <img
             src={slide.image}
             alt={slide.title}
@@ -134,7 +134,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
           
           {/* Slide Top Badge */}
           <div className="absolute top-4 left-4 z-10">
-            <span className="inline-flex items-center gap-1.5 bg-stone-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-amber-500/40 text-[11px] text-amber-300 font-bold shadow-lg">
+            <span className="inline-flex items-center gap-1.5 rg-glass px-3 py-1 rounded-full border border-amber-500/40 text-[11px] text-amber-300 font-bold shadow-lg">
               <IconComponent className="w-3.5 h-3.5 text-amber-400" />
               <span>{slide.badge}</span>
             </span>
@@ -152,7 +152,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
         </div>
 
         {/* Slide Detailed Copy */}
-        <div className="bg-stone-900/90 border border-stone-800 rounded-2xl p-4 space-y-2 text-center backdrop-blur-md">
+        <div className="rg-surface rounded-2xl p-4 space-y-2 text-center backdrop-blur-md">
           <p className="text-stone-300 text-xs sm:text-sm leading-relaxed">
             {slide.description}
           </p>
@@ -196,7 +196,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
           onClick={handleNext}
           className="w-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-stone-950 font-bold text-sm py-3.5 rounded-2xl shadow-[0_4px_20px_rgba(245,158,11,0.4)] hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
         >
-          <span>{currentSlide === SLIDES.length - 1 ? 'Continue to Sign In & Registration' : 'Next Step'}</span>
+          <span>{currentSlide === SLIDES.length - 1 ? 'Continue' : 'Explore next'}</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>

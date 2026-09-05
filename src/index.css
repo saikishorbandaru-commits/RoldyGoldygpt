@@ -793,3 +793,20 @@ button,input,select,textarea{font:inherit}
 .rg-checkout-overlay .border-stone-700,.rg-checkout-overlay .border-stone-800{border-color:#eadcc6!important}
 .rg-checkout-overlay .text-amber-300,.rg-checkout-overlay .text-amber-400{color:#8d1934!important}
 .rg-checkout-overlay .bg-gradient-to-r.from-amber-500{background:linear-gradient(135deg,#f0ca72,#dca33a)!important;color:#351018!important}
+
+
+/* APPROVED SHOWCASE — Booking confirmation and order tracking */
+.rg-customer-overlay{background:rgba(31,6,12,.62)!important;backdrop-filter:blur(10px)}
+.rg-customer-shell{background:#fff8ed!important;border:1px solid #eadcc6!important;border-radius:22px 22px 0 0!important;box-shadow:0 -20px 65px rgba(38,7,14,.34)!important}
+@media(min-width:640px){.rg-customer-shell{border-radius:22px!important}}
+.rg-customer-shell>.bg-gradient-to-r.from-stone-950{background:linear-gradient(120deg,#5b1025,#310810)!important;border-color:rgba(231,185,78,.25)!important}
+.rg-customer-shell .font-serif{font-family:Georgia,'Times New Roman',serif!important}
+.rg-customer-shell .rg-page{background:#fff8ed!important;color:#351018!important}
+.rg-customer-shell .rg-sheet,.rg-customer-shell .bg-stone-900,.rg-customer-shell .bg-stone-950{background:#fffdf7!important;color:#351018!important}
+.rg-customer-shell .border-stone-700,.rg-customer-shell .border-stone-800{border-color:#eadcc6!important}
+.rg-customer-shell .text-stone-100,.rg-customer-shell .text-stone-200{color:#351018!important}
+.rg-customer-shell .text-stone-300,.rg-customer-shell .text-stone-400,.rg-customer-shell .text-stone-500{color:#87666a!important}
+.rg-customer-shell .text-amber-300,.rg-customer-shell .text-amber-400{color:#8d1934!important}
+.rg-customer-shell .bg-amber-500,.rg-customer-shell .bg-gradient-to-r.from-amber-500{background:linear-gradient(135deg,#f0ca72,#dba23a)!important;color:#351018!important}
+.rg-customer-shell .divide-stone-800\/60>*+*{border-color:#eadcc6!important}
+.rg-customer-shell>div:last-child.bg-stone-950{background:rgba(255,250,241,.98)!important;border-color:#eadcc6!important}

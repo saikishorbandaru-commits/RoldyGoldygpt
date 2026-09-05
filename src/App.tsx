@@ -686,26 +686,26 @@ export default function App() {
 
         {/* Persistent premium app navigation */}
         {!selectedProduct && (
-          <nav className="fixed bottom-0 inset-x-0 z-30 mx-auto max-w-5xl px-3 pb-[max(10px,env(safe-area-inset-bottom))] pt-2">
-            <div className="rg-glass rg-bottom-nav border border-amber-500/15 rounded-[26px] shadow-2xl flex items-center justify-around px-1 py-2">
-              <button onClick={() => { setSelectedProduct(null); setActiveTab('home'); }} className={`rg-nav-item ${activeTab === 'home' ? 'rg-nav-active' : ''}`} aria-label="Home">
+          <nav className="rg-app-dock" aria-label="Primary navigation">
+            <div className="rg-app-dock-inner">
+              <button onClick={() => { setSelectedProduct(null); setActiveTab('home'); }} className={`rg-dock-item ${activeTab === 'home' ? 'is-active' : ''}`} aria-label="Home">
                 <House className="w-5 h-5" strokeWidth={activeTab === 'home' ? 2.6 : 2} /><span>Home</span>
               </button>
-              <button onClick={() => { setSelectedProduct(null); setActiveTab('boutique'); }} className={`rg-nav-item ${activeTab === 'boutique' ? 'rg-nav-active' : ''}`} aria-label="Boutique">
+              <button onClick={() => { setSelectedProduct(null); setActiveTab('boutique'); }} className={`rg-dock-item ${activeTab === 'boutique' ? 'is-active' : ''}`} aria-label="Boutique">
                 <Gem className="w-5 h-5" strokeWidth={activeTab === 'boutique' ? 2.6 : 2} /><span>Boutique</span>
               </button>
-              <button onClick={() => setIsWishlistOpen(true)} className="rg-nav-item" aria-label="Saved">
+              <button onClick={() => setIsWishlistOpen(true)} className="rg-dock-item" aria-label="Saved">
                 <span className="relative"><Heart className="w-5 h-5" />{wishlist.length > 0 && <span className="rg-nav-count">{wishlist.length}</span>}</span><span>Saved</span>
               </button>
-              <button onClick={() => setIsCartOpen(true)} className="rg-nav-item" aria-label="Cart">
+              <button onClick={() => setIsCartOpen(true)} className="rg-dock-item" aria-label="Cart">
                 <span className="relative"><ShoppingBag className="w-5 h-5" />{cartItemsCount > 0 && <span className="rg-nav-count">{cartItemsCount}</span>}</span><span>Cart</span>
               </button>
-              <button onClick={() => { setSelectedProduct(null); setActiveTab('account'); }} className={`rg-nav-item ${activeTab === 'account' ? 'rg-nav-active' : ''}`} aria-label="Account">
+              <button onClick={() => { setSelectedProduct(null); setActiveTab('account'); }} className={`rg-dock-item ${activeTab === 'account' ? 'is-active' : ''}`} aria-label="Account">
                 <User className="w-5 h-5" strokeWidth={activeTab === 'account' ? 2.6 : 2} /><span>Account</span>
               </button>
             </div>
           </nav>
-        )}
+        )}}
 
       </div>
 

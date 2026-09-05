@@ -92,7 +92,7 @@ export const IntroBannerSlides: React.FC<IntroBannerSlidesProps> = ({ onComplete
   const IconComponent = slide.icon;
 
   return (
-    <div className="fixed inset-0 z-[95] rg-page flex flex-col justify-between p-5 select-none overflow-hidden animate-in fade-in duration-300">
+    <div className="rg-approved-tour fixed inset-0 z-[95] rg-page flex flex-col justify-between p-5 select-none overflow-hidden animate-in fade-in duration-300">
       
       {/* Background Opulent Gradients */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

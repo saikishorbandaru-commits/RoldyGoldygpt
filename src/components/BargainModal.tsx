@@ -179,7 +179,7 @@ export const BargainModal: React.FC<BargainModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-xs p-0 sm:p-4">
+    <div className="rg-customer-overlay fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
       <div className="w-full max-w-lg rg-feature-shell flex flex-col max-h-[92vh] sm:max-h-[85vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}

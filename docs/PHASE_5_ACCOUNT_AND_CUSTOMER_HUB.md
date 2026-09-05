@@ -5,11 +5,11 @@ Status: IN PROGRESS
 ## Scope
 - [x] Account hub visual migration
 - [ ] Profile management visual migration
-- [ ] Orders and invoice journey visual migration
-- [ ] Live order tracking visual migration
-- [ ] Order success visual migration
-- [ ] Customer reports/activity visual migration
-- [ ] Authentication modal visual migration
+- [x] Orders and invoice journey visual migration
+- [x] Live order tracking visual migration
+- [x] Order success visual migration
+- [x] Customer reports/activity visual migration
+- [ ] Authentication modal visual migration (next pass)
 - [ ] Build/type/Android validation
 - [ ] Resolve validation findings
 - [ ] Close Phase 5
@@ -19,3 +19,6 @@ Phase 5 must preserve existing profile updates, avatar upload, order filters, in
 
 ## Current checkpoint
 The AccountView now uses a dedicated customer-hub background, premium sticky header, profile hero and shared surface treatment. Existing section navigation and business actions are preserved; the next pass migrates order tracking, order success, reports and authentication shells.
+
+## Current checkpoint
+Order tracking, order success and customer reports are now migrated to the shared customer lifecycle visual system. Account and commerce actions remain unchanged. Authentication remains the next dedicated migration task, followed by build/type/Android validation.

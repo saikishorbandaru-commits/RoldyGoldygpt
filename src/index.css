@@ -768,3 +768,28 @@ button,input,select,textarea{font:inherit}
 .rg-account-hub .hover\:bg-stone-850:hover,.rg-account-hub .hover\:bg-stone-800:hover{background:#f7ead9!important}
 .rg-account-hub .font-serif{font-family:Georgia,'Times New Roman',serif!important}
 .rg-account-hub input,.rg-account-hub textarea{background:#fffdf7!important;border-color:#dfcfb7!important;color:#351018!important}
+
+
+/* APPROVED SHOWCASE — Cart, wishlist, checkout and confirmation */
+.rg-drawer-overlay{background:rgba(31,6,12,.58)!important;backdrop-filter:blur(8px)}
+.rg-commerce-drawer{background:#fff8ed!important;color:#351018!important;box-shadow:-18px 0 60px rgba(38,7,14,.28)!important}
+.rg-commerce-header{background:linear-gradient(120deg,#5b1025,#310810)!important;border-bottom:1px solid rgba(231,185,78,.25)!important}
+.rg-commerce-header h2,.rg-commerce-header h3{font-family:Georgia,'Times New Roman',serif!important;color:#fff4df!important}
+.rg-commerce-header p{color:#d9b9aa!important}
+.rg-commerce-drawer .rg-page{background:#fff8ed!important;color:#351018!important}
+.rg-commerce-drawer .rg-surface,.rg-commerce-drawer .bg-stone-900,.rg-commerce-drawer .bg-stone-950{background:#fffdf7!important;color:#351018!important}
+.rg-commerce-drawer .border-stone-700,.rg-commerce-drawer .border-stone-800{border-color:#eadcc6!important}
+.rg-commerce-drawer .text-stone-100,.rg-commerce-drawer .text-stone-200{color:#351018!important}
+.rg-commerce-drawer .text-stone-300,.rg-commerce-drawer .text-stone-400,.rg-commerce-drawer .text-stone-500{color:#87666a!important}
+.rg-commerce-drawer .text-amber-300,.rg-commerce-drawer .text-amber-400{color:#8d1934!important}
+.rg-commerce-drawer .bg-amber-500{background:#e5b64d!important;color:#351018!important}
+.rg-commerce-drawer .bg-gradient-to-r.from-amber-500{background:linear-gradient(135deg,#f0ca72,#dca33a)!important;color:#351018!important}
+.rg-commerce-drawer .hover\:bg-stone-800:hover,.rg-commerce-drawer .hover\:bg-stone-700:hover{background:#f4e7d6!important}
+.rg-checkout-overlay{background:rgba(31,6,12,.58)!important;backdrop-filter:blur(8px)}
+.rg-checkout-overlay .rg-sheet{background:#fffdf7!important;border-color:#eadcc6!important;color:#351018!important}
+.rg-checkout-overlay .text-stone-100,.rg-checkout-overlay .text-stone-200{color:#351018!important}
+.rg-checkout-overlay .text-stone-300,.rg-checkout-overlay .text-stone-400,.rg-checkout-overlay .text-stone-500{color:#87666a!important}
+.rg-checkout-overlay .bg-stone-950,.rg-checkout-overlay .bg-stone-900{background:#fff8ed!important}
+.rg-checkout-overlay .border-stone-700,.rg-checkout-overlay .border-stone-800{border-color:#eadcc6!important}
+.rg-checkout-overlay .text-amber-300,.rg-checkout-overlay .text-amber-400{color:#8d1934!important}
+.rg-checkout-overlay .bg-gradient-to-r.from-amber-500{background:linear-gradient(135deg,#f0ca72,#dca33a)!important;color:#351018!important}

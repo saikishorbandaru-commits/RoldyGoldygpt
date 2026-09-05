@@ -249,3 +249,13 @@ button:focus-visible, a:focus-visible {
 .rg-input,.rg-page input:not([type="radio"]):not([type="checkbox"]),.rg-page textarea,.rg-page select{border-radius:var(--rg-radius-sm);border-color:var(--rg-line);background-color:rgba(20,4,9,.62);color:var(--rg-text);min-height:42px}
 .rg-page input:focus,.rg-page textarea:focus,.rg-page select:focus{border-color:var(--rg-gold)!important;outline:none;box-shadow:0 0 0 3px rgba(240,195,90,.1)}
 .rg-page label:has(input[type="radio"]:checked){box-shadow:inset 0 0 0 1px rgba(240,195,90,.18)}
+
+
+/* Phase 3 — commerce detail hierarchy */
+.rg-pdp-stage{background:radial-gradient(circle at 50% 20%,rgba(240,195,90,.12),transparent 36%),linear-gradient(180deg,#1f050b,#100205)}
+.rg-pdp-content{padding-bottom:120px!important}
+.rg-pdp-title{margin:0;color:var(--rg-text);font:700 clamp(25px,6vw,38px)/1.08 Georgia,serif;letter-spacing:-.025em}
+.rg-pdp-price{font-size:clamp(28px,6vw,42px)!important;color:var(--rg-gold)!important;letter-spacing:-.035em}
+.rg-pdp-content section,.rg-pdp-content .rounded-2xl{border-color:var(--rg-line)}
+.rg-pdp-content .bg-stone-900{background-color:rgba(59,10,22,.62)!important}
+.rg-pdp-content .bg-stone-950{background-color:#23070e!important}

@@ -37,7 +37,8 @@ export function HomeRedesign(p: Props) {
       x.name.toLowerCase().includes(key.toLowerCase())
     ) || p.products[(categoryLabels.indexOf(label) + 1) % Math.max(p.products.length, 1)];
   };
-  const bestSellers = p.filteredProducts.slice(0, 4);\n  const catalog = p.filteredProducts.slice(0, 24);
+  const bestSellers = p.filteredProducts.slice(0, 4);
+  const catalog = p.filteredProducts.slice(0, 24);
 
   return (
     <main className="rg-showcase-home flex-1 pb-28">

@@ -18,7 +18,7 @@ Status: IN PROGRESS
 - [x] Android debug APK assembly (latest completed baseline successful)
 - [ ] Download/install smoke test on a physical Android device (manual device gate)
 - [ ] Customer critical-flow smoke test (manual acceptance gate)
-- [ ] Release APK/signing decision
+- [x] Release APK/signing decision documented (debug APK = internal testing; signed release build required for production distribution)
 
 ## Critical customer flows
 1. Open app → browse products → product detail
@@ -36,4 +36,4 @@ Virtual Try-On remains intentionally discontinued and is not part of release acc
 Latest Phase 6 CI validation completed successfully: GitHub Actions run #118. The successful run produced both the web build artifact and the Android debug APK artifact. The debug APK artifact is available in GitHub Actions as `roldygoldy-debug-apk` (8,815,281 bytes compressed artifact), retained for 7 days.
 
 ## Current checkpoint
-Release documentation is now aligned with the actual RoldyGoldy product scope. The CI workflow already performs the automated type, web build, Android sync and debug APK assembly gates. Remaining release acceptance is the latest queued CI confirmation plus a physical-device installation and smoke test before treating a release APK as customer-ready.
+Release documentation is now aligned with the actual RoldyGoldy product scope. The CI workflow already performs the automated type, web build, Android sync and debug APK assembly gates. The automated release candidate is prepared. Remaining release acceptance is the latest queued CI confirmation plus a physical-device installation and critical-flow smoke test before treating a production release as customer-ready.

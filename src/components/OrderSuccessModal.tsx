@@ -74,8 +74,8 @@ Security Warning: Open only after verifying tamper seal.
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-md p-0 sm:p-4">
-      <div className="w-full max-w-lg rg-sheet border border-amber-500/40 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
+    <div className="rg-customer-overlay fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div className="w-full max-w-lg rg-customer-shell flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Top Header */}
         <div className="bg-gradient-to-r from-stone-950 via-amber-950/40 to-stone-950 px-5 py-5 border-b border-stone-800 flex items-center justify-between text-center relative overflow-hidden">

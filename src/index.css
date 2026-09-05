@@ -300,3 +300,15 @@ button:focus-visible, a:focus-visible {
 .rg-account-content .bg-stone-950{background-color:rgba(24,3,8,.84)!important}
 .rg-account-content .border-stone-800,.rg-account-content .border-stone-700{border-color:var(--rg-line)!important}
 .rg-account-content button:focus-visible{outline:2px solid var(--rg-gold);outline-offset:2px}
+
+
+/* Phase 5 — orders, reports and customer lifecycle */
+.rg-customer-overlay{background:rgba(7,2,4,.8);backdrop-filter:blur(14px)}
+.rg-customer-shell,.rg-auth-shell{background:linear-gradient(180deg,#430b18 0%,#26070f 55%,#180308 100%);border:1px solid var(--rg-line-strong);border-radius:var(--rg-radius-xl) var(--rg-radius-xl) 0 0;box-shadow:var(--rg-shadow-float)}
+.rg-customer-header{background:rgba(35,7,14,.9);border-bottom:1px solid var(--rg-line);backdrop-filter:blur(18px)}
+.rg-customer-shell .rg-surface,.rg-auth-shell .rg-surface{border-color:var(--rg-line)!important;background:rgba(59,10,22,.58)!important}
+.rg-customer-shell .bg-stone-950,.rg-auth-shell .bg-stone-950{background-color:rgba(24,3,8,.84)!important}
+.rg-customer-shell .bg-stone-900,.rg-auth-shell .bg-stone-900{background-color:rgba(59,10,22,.62)!important}
+.rg-customer-shell .border-stone-800,.rg-auth-shell .border-stone-800,.rg-customer-shell .border-stone-700,.rg-auth-shell .border-stone-700{border-color:var(--rg-line)!important}
+.rg-customer-shell button:focus-visible,.rg-auth-shell button:focus-visible{outline:2px solid var(--rg-gold);outline-offset:2px}
+@media(min-width:641px){.rg-customer-shell,.rg-auth-shell{border-radius:var(--rg-radius-xl)}}

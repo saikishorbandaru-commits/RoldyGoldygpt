@@ -40,10 +40,10 @@ export const BoutiqueView: React.FC<BoutiqueViewProps> = ({
   };
 
   return (
-    <main className="rg-page flex-1 p-4 pb-28 space-y-6 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-300">
+    <main className="rg-approved-boutique rg-page flex-1 p-4 pb-28 space-y-6 max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-300">
       
       {/* Boutique Hero Showcase */}
-      <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#120b0b] via-[#2a1713] to-[#55121d] border border-amber-400/35 p-6 sm:p-8 shadow-2xl shadow-black/50">
+      <div className="rg-approved-boutique-hero relative overflow-hidden p-6 sm:p-8">
         <div className="relative z-10 max-w-lg space-y-2.5">
           <div className="inline-flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-300 text-[11px] font-bold px-3 py-1 rounded-full">
             <Store className="w-3.5 h-3.5 text-amber-400" />

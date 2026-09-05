@@ -37,7 +37,7 @@ export function HomeRedesign(p: Props) {
       x.name.toLowerCase().includes(key.toLowerCase())
     ) || p.products[(categoryLabels.indexOf(label) + 1) % Math.max(p.products.length, 1)];
   };
-  const bestSellers = p.filteredProducts.slice(0, 8);
+  const bestSellers = p.filteredProducts.slice(0, 4);\n  const catalog = p.filteredProducts.slice(0, 24);
 
   return (
     <main className="rg-showcase-home flex-1 pb-28">
@@ -163,6 +163,45 @@ export function HomeRedesign(p: Props) {
               })}
             </div>
           )}
+        </section>
+
+        <section id="rg-full-catalog" className="rg-showcase-section rg-showcase-catalog">
+          <div className="rg-showcase-section-heading">
+            <div><span>EXPLORE THE COLLECTION</span><h2>{p.selectedCategory === 'All' ? 'All Jewellery' : p.selectedCategory}</h2></div>
+            <button onClick={() => p.onCategory('All')}>Reset <ChevronRight size={15}/></button>
+          </div>
+          <div className="rg-showcase-filter-strip">
+            {['All', ...categoryLabels].map(label => (
+              <button
+                key={label}
+                onClick={() => p.onCategory(label === 'Necklaces' ? 'All' : label)}
+                className={p.selectedCategory === label ? 'is-active' : ''}
+              >{label}</button>
+            ))}
+          </div>
+          <div className="rg-showcase-product-grid">
+            {catalog.map(product => {
+              const saved = p.wishlist.some(w => w.id === product.id);
+              const price = product.bargainedPrice || product.price;
+              return (
+                <article key={product.id} className="rg-showcase-product-card">
+                  <button onClick={() => p.onSelectProduct(product)} className="rg-showcase-product-image">
+                    <img src={product.image} alt={product.name}/>
+                    {product.trialEligible && <span>TRIAL</span>}
+                  </button>
+                  <button onClick={() => p.onToggleWishlist(product)} className={saved ? 'rg-showcase-save is-saved' : 'rg-showcase-save'} aria-label="Save item">
+                    <Heart size={17} fill={saved ? 'currentColor' : 'none'} />
+                  </button>
+                  <button onClick={() => p.onSelectProduct(product)} className="rg-showcase-product-info">
+                    <small>{product.category}</small>
+                    <h3>{product.name}</h3>
+                    <strong>₹{price.toLocaleString('en-IN')}</strong>
+                  </button>
+                  <button onClick={() => p.onAddToCart(product)} className="rg-showcase-add" aria-label="Add to cart"><ShoppingBag size={16}/></button>
+                </article>
+              );
+            })}
+          </div>
         </section>
       </div>
     </main>

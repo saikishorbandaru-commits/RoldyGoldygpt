@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { Product, ExchangeScrapData, ProductReview, ProductAngle } from '../types';
 import { triggerHaptic } from '../utils/haptics';
+import { RGButton, RGScreenHeader } from './ui/RoldyPrimitives';
 
 interface ProductDetailViewProps {
   product: Product;
@@ -158,7 +159,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
     <div className="rg-page flex-1 flex flex-col bg-stone-950 pb-28 animate-in fade-in slide-in-from-bottom-2 duration-300">
       
       {/* Top Header */}
-      <div className="sticky top-0 z-20 rg-glass backdrop-blur-xl px-4 py-3 border-b border-stone-800 flex items-center justify-between">
+      <div className="sticky top-0 z-20"><RGScreenHeader eyebrow={product.category} title={product.name} onBack={onBack} action={<div className="flex items-center gap-2">
         <button
           onClick={onBack}
           className="w-9 h-9 rounded-full bg-stone-900 border border-stone-800 text-stone-300 hover:text-white flex items-center justify-center transition-colors"
@@ -213,10 +214,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-rose-500 text-rose-500' : ''}`} />
           </button>
         </div>
-      </div>
+      </div>} /></div>
 
       {/* Main Multi-Image Stage & Carousel with Same-Product Angles & Video */}
-      <div className="relative bg-stone-900 border-b border-stone-800 overflow-hidden select-none">
+      <div className="relative rg-pdp-stage border-b border-stone-800 overflow-hidden select-none">
         
         {/* Visual Angle & Video Mode Switcher Bar */}
         <div className="bg-stone-950/90 border-b border-stone-800/80 px-3 py-2 flex items-center justify-between text-[11px] overflow-x-auto gap-2">
@@ -268,7 +269,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         </div>
 
         {/* Main Stage Viewport */}
-        <div className="relative h-80 sm:h-96 w-full flex items-center justify-center overflow-hidden bg-stone-950">
+        <div className="relative h-[420px] sm:h-[560px] w-full flex items-center justify-center overflow-hidden bg-stone-950">
           {isVideoActive && product.videoUrl ? (
             <div className="relative w-full h-full flex items-center justify-center bg-black">
               <video
@@ -409,7 +410,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
       </div>
 
       {/* Product Details Section */}
-      <div className="p-4 sm:p-6 space-y-5 max-w-2xl mx-auto w-full rg-page">
+      <div className="p-4 sm:p-6 space-y-5 max-w-2xl mx-auto w-full rg-page rg-pdp-content">
         
         {/* Title, Rating Summary & Pricing */}
         <div className="space-y-2">
@@ -423,12 +424,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             </a>
           </div>
 
-          <h1 className="text-xl sm:text-2xl font-bold text-stone-100 font-serif leading-snug">
+          <h1 className="rg-pdp-title">
             {product.name}
           </h1>
 
           <div className="flex items-baseline gap-3 pt-1 flex-wrap">
-            <span className="text-2xl sm:text-3xl font-extrabold text-amber-400">
+            <span className="rg-pdp-price">
               ₹{effectivePrice.toLocaleString('en-IN')}
             </span>
             {appliedExchangeVoucher ? (

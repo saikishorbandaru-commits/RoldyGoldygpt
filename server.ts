@@ -286,7 +286,7 @@ Eligible examples: necklaces, chains, pendants, bangles, bracelets, earrings, ri
 Reject examples: people, faces, selfies, documents, screenshots, logos, text, packaging, food, electronics, vehicles, furniture, animals, landscapes, empty backgrounds, coins, unrelated metal objects, watches, and any ambiguous image where jewellery cannot be confidently identified.
 
 Do NOT infer jewellery from the user's description. Use the visible image only.
-If the image is blurry, heavily occluded, too dark, or confidence is insufficient, reject it.
+Normal indoor lighting is acceptable. Do NOT reject an otherwise clearly visible jewellery item merely because the image is not studio-bright. Reject for lighting only when the jewellery itself cannot be visually identified because the image is genuinely too dark.
 This is NOT a precious-metal purity test and must not claim that the item is gold.
 Return strict JSON only.`;
 
@@ -309,11 +309,11 @@ Return strict JSON only.`;
 
       const parsed = JSON.parse(response.text.trim());
       const confidence = Math.max(0, Math.min(1, Number(parsed.confidence) || 0));
-      const isJewellery = parsed.isJewelleryDetected === true && confidence >= 0.8;
+      const isJewellery = parsed.isJewelleryDetected === true && confidence >= 0.65;
 
       if (!isJewellery) {
         return reject(
-          parsed.rejectionReason || "The image was not confidently recognised as imitation jewellery.",
+          parsed.rejectionReason || "The jewellery could not be recognised clearly enough. Please ensure the ornament itself is visible and in focus.",
           parsed.rejectionReason || "Image did not meet jewellery verification confidence requirements."
         );
       }

@@ -275,3 +275,17 @@ button:focus-visible, a:focus-visible {
 .rg-commerce-drawer button:focus-visible,.rg-checkout-shell button:focus-visible{outline:2px solid var(--rg-gold);outline-offset:2px}
 .rg-checkout-shell input[type="radio"]{accent-color:var(--rg-gold)}
 @media(min-width:641px){.rg-checkout-shell{border-radius:var(--rg-radius-xl)}}
+
+
+/* Phase 4 — signature RoldyGoldy feature journeys */
+.rg-feature-shell{background:linear-gradient(180deg,#430b18 0%,#26070f 55%,#180308 100%);border:1px solid var(--rg-line-strong);border-radius:var(--rg-radius-xl) var(--rg-radius-xl) 0 0;box-shadow:var(--rg-shadow-float)}
+.rg-feature-header{background:linear-gradient(90deg,rgba(240,195,90,.09),rgba(59,10,22,.92));border-bottom:1px solid var(--rg-line);backdrop-filter:blur(18px)}
+.rg-feature-shell .rg-surface{border-color:var(--rg-line)!important;background:rgba(59,10,22,.62)!important}
+.rg-feature-shell .bg-stone-950{background-color:rgba(24,3,8,.84)!important}
+.rg-feature-shell .bg-stone-900{background-color:rgba(59,10,22,.68)!important}
+.rg-feature-shell .border-stone-800,.rg-feature-shell .border-stone-700{border-color:var(--rg-line)!important}
+.rg-feature-shell .text-amber-400{color:var(--rg-gold-2)!important}
+.rg-feature-shell input:focus,.rg-feature-shell textarea:focus{outline:none;border-color:var(--rg-gold)!important;box-shadow:0 0 0 3px rgba(240,195,90,.1)}
+.rg-feature-shell button:focus-visible{outline:2px solid var(--rg-gold);outline-offset:2px}
+.rg-feature-shell .bg-gradient-to-r.from-amber-500,.rg-feature-shell .bg-gradient-to-tr.from-amber-600{box-shadow:0 12px 28px rgba(231,169,46,.16)}
+@media(min-width:641px){.rg-feature-shell{border-radius:var(--rg-radius-xl)}}

@@ -247,7 +247,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
         {/* PROMINENT IN-DRAWER ADDED-TO-CART CONFIRMATION MODAL */}
         {cartAlertProduct && (
           <div className="absolute inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-            <div className="w-full max-w-sm bg-stone-900 border border-emerald-500/60 rounded-2xl p-5 shadow-2xl space-y-4 animate-in zoom-in-95 duration-300">
+            <div className="w-full max-w-sm rg-showcase-modal p-5 space-y-4 animate-in zoom-in-95 duration-300">
               <div className="flex items-start justify-between gap-2">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">

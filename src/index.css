@@ -333,3 +333,153 @@ button,input,select,textarea{font:inherit}
 @media(prefers-reduced-motion:reduce){
   .animate-in,.animate-pulse,[class*="transition-"]{animation:none!important;transition:none!important}
 }
+
+
+/* ==========================================================================
+   APPROVED SHOWCASE PARITY — the visual source of truth is the RoldyGoldy
+   Jewellery App Showcase. This layer intentionally changes composition,
+   contrast and spacing rather than only recolouring legacy screens.
+   ========================================================================== */
+:root{
+  --rg-showcase-ink:#1b050a;
+  --rg-showcase-wine:#5a0c1d;
+  --rg-showcase-wine-deep:#2a0710;
+  --rg-showcase-rose:#8f1d38;
+  --rg-showcase-gold:#e8b84f;
+  --rg-showcase-cream:#fff7e8;
+  --rg-showcase-paper:#f7ead6;
+}
+.rg-app-frame{
+  background:var(--rg-showcase-cream)!important;
+  color:var(--rg-showcase-ink)!important;
+  border:0!important;
+  box-shadow:0 0 0 1px rgba(90,12,29,.08),0 24px 80px rgba(27,5,10,.18)!important;
+}
+.rg-app-topbar{
+  background:rgba(255,247,232,.94)!important;
+  color:var(--rg-showcase-ink)!important;
+  border-bottom:1px solid rgba(90,12,29,.12)!important;
+  backdrop-filter:blur(18px);
+}
+.rg-app-frame .bg-stone-950{background-color:var(--rg-showcase-cream)!important}
+.rg-app-frame .bg-stone-900{background-color:#fffaf1!important}
+.rg-app-frame .text-stone-100,.rg-app-frame .text-stone-200{color:var(--rg-showcase-ink)!important}
+.rg-app-frame .text-stone-300{color:#684a4f!important}
+.rg-app-frame .text-stone-400,.rg-app-frame .text-stone-500{color:#8b6d70!important}
+.rg-app-frame .border-stone-800,.rg-app-frame .border-stone-700{border-color:rgba(90,12,29,.12)!important}
+
+.rg-approved-home{
+  background:
+    radial-gradient(circle at 88% 2%,rgba(232,184,79,.18),transparent 19rem),
+    linear-gradient(180deg,#fff9ed 0%,#f8ead7 100%)!important;
+  color:var(--rg-showcase-ink)!important;
+}
+.rg-approved-home .rg-home-header h1{color:var(--rg-showcase-ink)}
+.rg-approved-home .rg-home-overline,
+.rg-approved-home .rg-section-title p{color:var(--rg-showcase-rose)}
+.rg-approved-home .rg-location-pill{
+  background:#fffdf8;border-color:rgba(90,12,29,.14);color:var(--rg-showcase-ink);
+  box-shadow:0 10px 28px rgba(90,12,29,.08);
+}
+.rg-approved-home .rg-search-redesign{
+  background:#fffdf8;border:1px solid rgba(90,12,29,.13);
+  box-shadow:0 12px 30px rgba(90,12,29,.07);
+}
+.rg-approved-home .rg-search-redesign input{color:var(--rg-showcase-ink);background:transparent}
+.rg-approved-home .rg-editorial-hero{
+  min-height:440px;
+  border-radius:32px;
+  background:linear-gradient(118deg,#4a0918 0%,#78172c 54%,#2a0710 100%);
+  border-color:rgba(232,184,79,.45);
+  box-shadow:0 28px 65px rgba(61,8,20,.22);
+}
+.rg-approved-home .rg-editorial-copy h2{font-family:Georgia,'Times New Roman',serif;letter-spacing:-.055em}
+.rg-approved-home .rg-editorial-primary{
+  background:linear-gradient(135deg,#f5d47f,#e3ad40);color:#310812;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);
+}
+.rg-approved-home .rg-editorial-link{color:#fff7e8}
+.rg-approved-home .rg-feature-card{
+  background:#fffdf8!important;border-color:rgba(90,12,29,.12)!important;
+  color:var(--rg-showcase-ink)!important;box-shadow:0 12px 30px rgba(90,12,29,.07);
+}
+.rg-approved-home .rg-feature-card small{color:var(--rg-showcase-rose)!important}
+.rg-approved-home .rg-feature-card p{color:#806368!important}
+.rg-approved-home .rg-feature-card.exchange .rg-feature-icon{background:rgba(143,29,56,.09);color:var(--rg-showcase-rose)}
+.rg-approved-home .rg-product-card-new{
+  background:#fffdf8!important;border-color:rgba(90,12,29,.12)!important;
+  box-shadow:0 16px 32px rgba(90,12,29,.08);
+}
+.rg-approved-home .rg-product-info-new small{color:var(--rg-showcase-rose)}
+.rg-approved-home .rg-product-info-new h3{color:var(--rg-showcase-ink)}
+.rg-approved-home .rg-product-bottom strong{color:var(--rg-showcase-wine)}
+.rg-approved-home .rg-product-bottom small{color:#9a7b7b}
+.rg-approved-home .rg-home-assurance{
+  background:var(--rg-showcase-wine)!important;color:#fff7e8!important;border-radius:24px;
+}
+.rg-approved-home .rg-home-assurance i{background:rgba(255,247,232,.32)!important}
+
+.rg-approved-boutique{
+  background:linear-gradient(180deg,#fff8ed,#f4e4cf)!important;color:var(--rg-showcase-ink);
+}
+.rg-approved-boutique-hero{
+  border-radius:32px;background:linear-gradient(118deg,#5a0c1d,#8f1d38 62%,#320711)!important;
+  border:1px solid rgba(232,184,79,.52);box-shadow:0 28px 60px rgba(74,9,24,.2);
+}
+.rg-approved-boutique .rg-surface,.rg-approved-boutique .rg-sheet{
+  background:#fffdf8!important;border-color:rgba(90,12,29,.12)!important;
+  box-shadow:0 14px 32px rgba(90,12,29,.07);
+}
+.rg-approved-boutique .text-stone-100,.rg-approved-boutique .text-stone-200{color:var(--rg-showcase-ink)!important}
+.rg-approved-boutique .text-stone-300,.rg-approved-boutique .text-stone-400{color:#74565b!important}
+.rg-approved-boutique .bg-stone-950,.rg-approved-boutique .bg-stone-900{background:#fff8ef!important}
+.rg-approved-boutique .border-stone-800,.rg-approved-boutique .border-stone-700{border-color:rgba(90,12,29,.12)!important}
+
+.rg-approved-splash,.rg-approved-auth{
+  background:
+    radial-gradient(circle at 20% 12%,rgba(232,184,79,.22),transparent 18rem),
+    radial-gradient(circle at 85% 88%,rgba(143,29,56,.34),transparent 24rem),
+    linear-gradient(145deg,#24060d,#5a0c1d 58%,#28060f)!important;
+}
+.rg-approved-auth .rg-surface{
+  background:rgba(255,247,232,.96)!important;border-color:rgba(232,184,79,.5)!important;
+  box-shadow:0 28px 70px rgba(0,0,0,.28);
+}
+.rg-approved-auth .rg-surface .text-stone-100,.rg-approved-auth .rg-surface .text-stone-200{color:var(--rg-showcase-ink)!important}
+.rg-approved-auth .rg-surface .text-stone-300,.rg-approved-auth .rg-surface .text-stone-400{color:#76575d!important}
+.rg-approved-auth .rg-surface input,.rg-approved-auth .rg-surface select{
+  background:#fffaf2!important;color:var(--rg-showcase-ink)!important;border-color:rgba(90,12,29,.14)!important;
+}
+.rg-approved-auth .rg-surface .bg-stone-950,.rg-approved-auth .rg-surface .bg-stone-900{background:#f8ead7!important}
+.rg-approved-auth .rg-surface .bg-amber-500{background:linear-gradient(135deg,#f3cf73,#dfaa3d)!important}
+
+/* Product, cart, checkout and account inherit the showcase's editorial paper cards. */
+.rg-pdp-stage,.rg-account-hub,.rg-checkout-shell,.rg-customer-shell,.rg-auth-shell{
+  background:linear-gradient(180deg,#fff9ef,#f3e3ce)!important;
+}
+.rg-pdp-stage .rg-surface,.rg-account-hub .rg-surface,.rg-checkout-shell .rg-surface,
+.rg-customer-shell .rg-surface,.rg-auth-shell .rg-surface{
+  background:#fffdf8!important;border-color:rgba(90,12,29,.12)!important;
+}
+.rg-pdp-stage .text-stone-100,.rg-pdp-stage .text-stone-200,.rg-account-hub .text-stone-100,.rg-account-hub .text-stone-200,
+.rg-checkout-shell .text-stone-100,.rg-checkout-shell .text-stone-200,.rg-customer-shell .text-stone-100,.rg-customer-shell .text-stone-200{
+  color:var(--rg-showcase-ink)!important;
+}
+.rg-pdp-stage .text-stone-300,.rg-pdp-stage .text-stone-400,.rg-account-hub .text-stone-300,.rg-account-hub .text-stone-400,
+.rg-checkout-shell .text-stone-300,.rg-checkout-shell .text-stone-400,.rg-customer-shell .text-stone-300,.rg-customer-shell .text-stone-400{
+  color:#785b60!important;
+}
+.rg-pdp-stage .bg-stone-950,.rg-pdp-stage .bg-stone-900,.rg-account-hub .bg-stone-950,.rg-account-hub .bg-stone-900,
+.rg-checkout-shell .bg-stone-950,.rg-checkout-shell .bg-stone-900,.rg-customer-shell .bg-stone-950,.rg-customer-shell .bg-stone-900{
+  background:#fff8ef!important;
+}
+.rg-customer-overlay{background:rgba(40,6,15,.68)!important;backdrop-filter:blur(12px)}
+
+@media(max-width:640px){
+  .rg-app-frame{min-height:100dvh;box-shadow:none!important}
+  .rg-approved-home .rg-editorial-hero{min-height:500px;border-radius:26px}
+  .rg-approved-home .rg-editorial-image{max-height:260px}
+  .rg-approved-home .rg-home-header{gap:10px}
+  .rg-approved-home .rg-location-pill{max-width:56%}
+  .rg-approved-boutique-hero{border-radius:26px}
+}

@@ -1,6 +1,6 @@
 # Phase 6 — QA, Release Validation & Android Readiness
 
-Status: IN PROGRESS
+Status: IMPLEMENTATION COMPLETE — MANUAL DEVICE ACCEPTANCE PENDING
 
 ## Scope
 - [x] Review build, type-check and Android CI pipeline
@@ -9,7 +9,7 @@ Status: IN PROGRESS
 - [x] Complete final UI consistency pass (Phases 1–5 shared design-system migration complete)
 - [x] Confirm latest completed Phase 5 CI baseline (run #114 successful)
 - [x] Resolve known validation findings
-- [ ] Close Phase 6
+- [x] Close Phase 6 implementation work
 
 ## Release checklist
 - [x] TypeScript check (latest completed baseline successful)
@@ -37,3 +37,6 @@ Latest Phase 6 CI validation completed successfully: GitHub Actions run #118. Th
 
 ## Current checkpoint
 Release documentation is now aligned with the actual RoldyGoldy product scope. The CI workflow already performs the automated type, web build, Android sync and debug APK assembly gates. The automated release candidate is prepared. Remaining release acceptance is the latest queued CI confirmation plus a physical-device installation and critical-flow smoke test before treating a production release as customer-ready.
+
+## Phase 6 implementation exit record
+All automated engineering and release-readiness tasks in Phase 6 are complete. Multiple completed CI runs through run #120 are successful. Runs #121 and #122 are the latest documentation-triggered validations and are still in progress at this checkpoint. Physical-device installation and customer smoke testing remain external/manual acceptance gates and are explicitly not claimed as completed.

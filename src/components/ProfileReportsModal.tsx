@@ -106,8 +106,8 @@ export const ProfileReportsModal: React.FC<ProfileReportsModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-xs p-0 sm:p-4">
-      <div className="w-full max-w-2xl rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
+    <div className="rg-customer-overlay fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div className="w-full max-w-2xl rg-customer-shell flex flex-col max-h-[94vh] sm:max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
         <div className="bg-stone-950 px-5 py-3.5 border-b border-stone-800 flex items-center justify-between">

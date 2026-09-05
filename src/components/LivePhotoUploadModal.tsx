@@ -443,7 +443,7 @@ export const LivePhotoUploadModal: React.FC<LivePhotoUploadModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/85 backdrop-blur-md p-0 sm:p-4 animate-in fade-in">
-      <div className="w-full max-w-lg rg-sheet border border-amber-500/30 rounded-t-[28px] sm:rounded-[28px] shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
+      <div className="w-full max-w-lg rg-feature-shell flex flex-col max-h-[92vh] sm:max-h-[88vh] overflow-hidden animate-in fade-in slide-in-from-bottom duration-300">
         
         {/* Header */}
         <div className="rg-glass px-5 py-3.5 border-b border-stone-800 flex items-center justify-between">

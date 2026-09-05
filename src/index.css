@@ -198,3 +198,42 @@ button:focus-visible, a:focus-visible {
 .rg-product-grid-new{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rg-product-card-new{position:relative;overflow:hidden;border-radius:20px;background:#350914;border:1px solid rgba(240,195,90,.13)}.rg-product-image-new{position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;background:#20050b}.rg-product-image-new img{width:100%;height:100%;object-fit:cover}.rg-product-image-new span{position:absolute;left:9px;bottom:9px;padding:5px 7px;border-radius:999px;background:#1d5d3ccc;color:#eaffdc;font-size:8px;font-weight:900}.rg-save-new{position:absolute;right:9px;top:9px;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#24070ebd;color:#f3e1d7}.rg-save-new svg{width:16px}.rg-save-new.saved{color:#ff7994}.rg-product-info-new{padding:12px}.rg-product-info-new small{display:block;color:var(--rg-gold);font-size:9px;font-weight:800}.rg-product-info-new h3{margin:4px 0 10px;color:var(--rg-cream);font-size:13px;line-height:1.25}.rg-product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.rg-product-bottom strong{display:block;color:var(--rg-gold-2);font-size:13px}.rg-product-bottom small{text-decoration:line-through;color:#947975;font-weight:500;font-size:9px}.rg-product-bottom>button{width:32px;height:32px;display:grid;place-items:center;border-radius:11px;background:var(--rg-gold);color:#29070e}
 .rg-home-assurance{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;padding:16px 6px 4px;color:#b89d95;font-size:9px;font-weight:700}.rg-home-assurance i{width:3px;height:3px;border-radius:50%;background:var(--rg-gold)}
 @media(max-width:700px){.rg-home-header{align-items:center}.rg-home-header h1{font-size:30px}.rg-location-pill{max-width:48%}.rg-editorial-hero{min-height:390px;grid-template-columns:1fr}.rg-editorial-copy{padding:25px}.rg-editorial-image{position:absolute;inset:0;opacity:.34;border:0}.rg-editorial-copy{background:linear-gradient(90deg,#350914eF 0%,#350914b8 70%,#35091455)}.rg-feature-grid{grid-template-columns:1fr}.rg-feature-card{min-height:104px}.rg-product-grid-new{gap:10px}}
+
+
+/* =========================================================
+   PHASE 2 — ROLDYGOLDY DESIGN FOUNDATION
+   Tokens + reusable primitives. New screens should use these
+   instead of creating one-off colours, radii and button styles.
+   ========================================================= */
+:root{
+  --rg-bg:#23070e;--rg-bg-elevated:#310914;--rg-surface:#3b0a16;--rg-surface-2:#4a0d1c;
+  --rg-line:rgba(255,226,154,.14);--rg-line-strong:rgba(240,195,90,.34);
+  --rg-text:#fff8ea;--rg-text-soft:#ead7cb;--rg-text-muted:#b99d97;
+  --rg-success:#8bd39a;--rg-warning:#f0c35a;--rg-danger:#ff8299;
+  --rg-radius-xs:10px;--rg-radius-sm:14px;--rg-radius-md:18px;--rg-radius-lg:24px;--rg-radius-xl:30px;
+  --rg-space-1:4px;--rg-space-2:8px;--rg-space-3:12px;--rg-space-4:16px;--rg-space-5:20px;--rg-space-6:24px;--rg-space-8:32px;
+  --rg-shadow-card:0 18px 44px rgba(0,0,0,.22);--rg-shadow-float:0 28px 90px rgba(0,0,0,.5);
+}
+.rg-eyebrow{margin:0 0 4px;color:var(--rg-gold);font-size:9px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+.rg-screen-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--rg-line);background:rgba(35,7,14,.82);backdrop-filter:blur(18px)}
+.rg-screen-header h1{margin:0;color:var(--rg-text);font:700 clamp(20px,5vw,30px)/1.05 Georgia,serif}
+.rg-icon-button,.rg-modal-close{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.035);border:1px solid var(--rg-line);color:var(--rg-gold-2)}
+.rg-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:var(--rg-radius-sm);font-size:12px;font-weight:900;transition:transform .18s ease,filter .18s ease,opacity .18s ease}
+.rg-btn:active{transform:scale(.98)}.rg-btn:disabled{opacity:.5;cursor:not-allowed}
+.rg-btn-sm{min-height:36px;padding:0 12px}.rg-btn-md{min-height:44px;padding:0 16px}.rg-btn-lg{min-height:52px;padding:0 20px;font-size:13px}
+.rg-btn-primary{background:linear-gradient(135deg,#f9dc8a,#e5a92f);color:#26070e;box-shadow:0 12px 26px rgba(231,169,46,.16)}
+.rg-btn-secondary{background:rgba(240,195,90,.07);border:1px solid var(--rg-line-strong);color:var(--rg-gold-2)}
+.rg-btn-ghost{background:transparent;color:var(--rg-text-soft)}.rg-btn-danger{background:rgba(255,90,120,.1);border:1px solid rgba(255,130,153,.24);color:#ff9aac}
+.rg-btn:hover:not(:disabled){filter:brightness(1.05);transform:translateY(-1px)}
+.rg-search-field{display:flex;align-items:center;gap:9px;min-height:46px;padding:0 14px;border-radius:var(--rg-radius-md);background:rgba(20,4,9,.6);border:1px solid var(--rg-line);color:var(--rg-gold)}
+.rg-search-field input{min-width:0;flex:1;background:transparent!important;border:0!important;box-shadow:none!important;color:var(--rg-text)}
+.rg-modal-shell{position:fixed;inset:0;z-index:100;display:flex;align-items:flex-end;justify-content:center;padding:0;background:rgba(0,0,0,.76);backdrop-filter:blur(10px)}
+.rg-modal-card{position:relative;width:100%;max-width:680px;max-height:92dvh;overflow:auto;background:linear-gradient(180deg,#430b18,#23070e);border:1px solid var(--rg-line-strong);border-radius:var(--rg-radius-xl) var(--rg-radius-xl) 0 0;box-shadow:var(--rg-shadow-float)}
+.rg-modal-close{position:sticky;z-index:2;top:12px;left:calc(100% - 52px);margin:-48px 12px 8px auto;background:#28070ee8}
+.rg-state{padding:34px 22px;border:1px dashed var(--rg-line-strong);border-radius:var(--rg-radius-lg);text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(240,195,90,.035));color:var(--rg-text)}
+.rg-state h3{margin:10px 0 5px;font:700 20px Georgia,serif}.rg-state p{margin:0;color:var(--rg-text-muted);font-size:12px;line-height:1.6}
+.rg-spinner{width:15px;height:15px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;animation:rg-spin .75s linear infinite}.rg-spinner-lg{width:30px;height:30px;color:var(--rg-gold)}
+@keyframes rg-spin{to{transform:rotate(360deg)}}
+.rg-focus-ring:focus-visible{outline:2px solid var(--rg-gold);outline-offset:3px}
+@media(min-width:641px){.rg-modal-shell{align-items:center;padding:20px}.rg-modal-card{border-radius:var(--rg-radius-xl)}}
+@media(prefers-reduced-motion:reduce){.rg-spinner{animation:none}}

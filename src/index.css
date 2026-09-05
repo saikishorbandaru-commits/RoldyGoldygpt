@@ -483,3 +483,15 @@ button,input,select,textarea{font:inherit}
   .rg-approved-home .rg-location-pill{max-width:56%}
   .rg-approved-boutique-hero{border-radius:26px}
 }
+
+.rg-approved-tour{
+  background:
+    radial-gradient(circle at 15% 12%,rgba(232,184,79,.20),transparent 18rem),
+    linear-gradient(145deg,#26060e,#651126 60%,#2b0710)!important;
+}
+.rg-approved-tour .rg-surface{
+  background:rgba(255,247,232,.95)!important;border-color:rgba(232,184,79,.45)!important;
+}
+.rg-approved-tour .rg-surface .text-stone-300,
+.rg-approved-tour .rg-surface .text-stone-400{color:#76575d!important}
+.rg-approved-tour .rg-surface .text-stone-100{color:#24060d!important}

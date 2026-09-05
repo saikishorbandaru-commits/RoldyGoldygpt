@@ -140,9 +140,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-stone-950 min-h-[calc(100vh-60px)] pb-24 animate-in fade-in duration-300">
+    <div className="flex-1 flex flex-col bg-stone-950 min-h-[calc(100vh-60px)] pb-24 animate-in fade-in duration-300 rg-account-hub">
       {/* Top Header */}
-      <div className="sticky top-0 z-30 bg-stone-950/95 backdrop-blur-md px-4 py-3.5 border-b border-stone-800 flex items-center justify-between">
+      <div className="sticky top-0 z-30 rg-account-header px-4 py-3.5 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
             onClick={() => {
@@ -191,7 +191,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
       </div>
 
       {/* Main Content Area */}
-      <div className="p-4 max-w-2xl mx-auto w-full space-y-4">
+      <div className="p-4 max-w-2xl mx-auto w-full space-y-4 rg-account-content">
         
         {/* Section */}
         {/* 1. MAIN OVERVIEW HUB (No side-scrolling required!)      */}
@@ -200,7 +200,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
           <div className="space-y-4">
             
             {/* Patron Profile Summary Card */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-stone-900 via-stone-900 to-amber-950/40 border border-amber-500/30 rounded-3xl p-4 sm:p-5 shadow-xl">
+            <div className="relative overflow-hidden rg-account-hero p-4 sm:p-5">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3.5">
                   <div className="relative group shrink-0">

@@ -1,6 +1,6 @@
 # Phase 6 — QA, Release Validation & Android Readiness
 
-Status: IMPLEMENTATION COMPLETE — MANUAL DEVICE ACCEPTANCE PENDING
+Status: REOPENED — REAL DEVICE BUG FIX CYCLE
 
 ## Scope
 - [x] Review build, type-check and Android CI pipeline
@@ -40,3 +40,6 @@ Release documentation is now aligned with the actual RoldyGoldy product scope. T
 
 ## Phase 6 implementation exit record
 All automated engineering and release-readiness tasks in Phase 6 are complete. Multiple completed CI runs through run #120 are successful. Runs #121 and #122 are the latest documentation-triggered validations and are still in progress at this checkpoint. Physical-device installation and customer smoke testing remain external/manual acceptance gates and are explicitly not claimed as completed.
+
+## Real-device bug cycle
+User-reported device issues reopened Phase 6. Current fixes address responsive sizing/safe areas, layout stability and exchange photo verification being overly strict about normal indoor lighting. Phase 6 must not be re-closed until the rebuilt APK is tested on the reporting device and the remaining recording findings are resolved.

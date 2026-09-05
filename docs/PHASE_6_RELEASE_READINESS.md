@@ -41,5 +41,8 @@ Release documentation is now aligned with the actual RoldyGoldy product scope. T
 ## Phase 6 implementation exit record
 All automated engineering and release-readiness tasks in Phase 6 are complete. Multiple completed CI runs through run #120 are successful. Runs #121 and #122 are the latest documentation-triggered validations and are still in progress at this checkpoint. Physical-device installation and customer smoke testing remain external/manual acceptance gates and are explicitly not claimed as completed.
 
+## UI parity completion pass
+The approved showcase parity layer has now been extended to transactional drawers and customer modals: cart, wishlist, checkout, bargaining, Trial @Home, location selection, order success and live order tracking. These flows now share the same cream paper surfaces, burgundy accents, gold primary actions and responsive mobile treatment as the rebuilt core screens.
+
 ## Real-device bug cycle
 User-reported device issues reopened Phase 6. Current fixes address responsive sizing/safe areas, layout stability and exchange photo verification being overly strict about normal indoor lighting. Phase 6 must not be re-closed until the rebuilt APK is tested on the reporting device and the remaining recording findings are resolved.
